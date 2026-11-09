@@ -15,11 +15,9 @@ import { useFileActions, useFileSelectors } from "@editor/contexts/FileContext";
 import i18n from "@editor/i18n";
 import { useSaveStoredFile } from "@editor/hooks/useSaveStoredFile";
 import { useSaveButton } from "@editor/components/shared/workbenchBar/useSaveButton";
-import {
-  saveTargetLabel,
-  sharedSaveTarget,
-} from "@editor/services/saveTargets";
+import { sharedSaveTarget } from "@editor/services/saveTargets";
 import type { FileId } from "@editor/types/file";
+import "@editor/components/shared/SaveMenu.css";
 
 /**
  * Nearest scrolling ancestor - in the right rail that is the tool panel's
@@ -73,13 +71,10 @@ function ReviewStepContent<TParams = unknown>({
     (operation.outputFileIds ?? []) as FileId[],
   );
   // Results inherit their source's home, so Save sends them back there too.
-  const savesToTarget =
+  const savesHome =
     outputStubs.length > 0 &&
-    outputStubs.every((stub) => saver.targetFor(stub));
+    outputStubs.every((stub) => saver.planFor(stub) !== null);
   const oneTarget = sharedSaveTarget(outputStubs, saver.targetFor);
-  const saveLabel = oneTarget
-    ? saveTargetLabel(oneTarget, outputStubs)
-    : terminology.download;
   const saveButton = useSaveButton({
     saver,
     targets: outputStubs,
@@ -92,6 +87,19 @@ function ReviewStepContent<TParams = unknown>({
       })(),
     fileFor: async (stub) => selectors.getFile(stub.id),
   });
+  const onlyPlan =
+    outputStubs.length === 1 ? saver.planFor(outputStubs[0]) : null;
+  const saveLabel = oneTarget
+    ? (saveButton.label ?? terminology.download)
+    : onlyPlan === "copy"
+      ? t("saveFile.menu.copy", "Save a copy next to it")
+      : onlyPlan === "ask"
+        ? t("saveFile.result.ask", "Save…")
+        : terminology.download;
+  const saveTooltip =
+    saveButton.label && saveButton.label !== saveLabel
+      ? saveButton.label
+      : undefined;
 
   const handleUndo = async () => {
     try {
@@ -110,7 +118,7 @@ function ReviewStepContent<TParams = unknown>({
 
   const handleDownload = async () => {
     if (!operation.downloadUrl) return;
-    if (savesToTarget) {
+    if (savesHome) {
       for (const stub of outputStubs) {
         const outcome = await saver.saveStoredFile(
           stub,
@@ -213,27 +221,35 @@ function ReviewStepContent<TParams = unknown>({
         </Tooltip>
       )}
       {operation.downloadUrl && !saveButton.menu && (
-        <Button
-          data-testid="download-result-button"
-          leftSection={<Icon name={oneTarget?.icon ?? icons.download} />}
-          fullWidth
-          style={{ marginBottom: "1rem" }}
-          onClick={handleDownload}
-        >
-          {saveLabel}
-        </Button>
-      )}
-      {operation.downloadUrl && saveButton.menu && (
-        <Button.Group style={{ marginBottom: "1rem", width: "100%" }}>
+        <Tooltip position="left" content={saveTooltip} disabled={!saveTooltip}>
           <Button
             data-testid="download-result-button"
             leftSection={<Icon name={oneTarget?.icon ?? icons.download} />}
-            style={{ flex: 1, minWidth: 0 }}
+            fullWidth
+            style={{ marginBottom: "1rem" }}
             onClick={handleDownload}
           >
             {saveLabel}
           </Button>
-          <Menu shadow="md" width={270} position="bottom-end">
+        </Tooltip>
+      )}
+      {operation.downloadUrl && saveButton.menu && (
+        <Button.Group style={{ marginBottom: "1rem", width: "100%" }}>
+          <Tooltip
+            position="left"
+            content={saveTooltip}
+            disabled={!saveTooltip}
+          >
+            <Button
+              data-testid="download-result-button"
+              leftSection={<Icon name={oneTarget?.icon ?? icons.download} />}
+              style={{ flex: 1, minWidth: 0 }}
+              onClick={handleDownload}
+            >
+              {saveLabel}
+            </Button>
+          </Tooltip>
+          <Menu shadow="md" position="bottom-end">
             <Menu.Target>
               <Button
                 data-testid="download-result-menu"
@@ -247,16 +263,16 @@ function ReviewStepContent<TParams = unknown>({
                 <Icon name="chevron-down" />
               </Button>
             </Menu.Target>
-            <Menu.Dropdown>
+            <Menu.Dropdown className="save-menu">
               {saveButton.menu.map((item) => (
                 <Menu.Item
                   key={item.key}
                   leftSection={<Icon name={item.icon} size="1rem" />}
                   onClick={item.onClick}
                 >
-                  {item.label}
+                  <span className="save-menu__text">{item.label}</span>
                   {item.description && (
-                    <Text size="xs" c="dimmed">
+                    <Text size="xs" c="dimmed" className="save-menu__text">
                       {item.description}
                     </Text>
                   )}
