@@ -124,6 +124,7 @@ export interface FileItemProps {
   isToolSkipped?: boolean;
   thumbnailUrl?: string;
   isEncrypted?: boolean;
+  isRightsManaged?: boolean;
   onClick: (fileId: FileId) => void;
   onEyeClick: (fileId: FileId, e: React.MouseEvent) => void;
   /** Policies that have run on this file — rendered as small shield badges. */
@@ -224,6 +225,7 @@ export const FileItem = React.memo(function FileItem({
   isToolSkipped = false,
   dataUnavailable,
   isDamaged = false,
+  isRightsManaged = false,
   onRepair,
   thumbnailUrl,
   isEncrypted,
@@ -251,6 +253,10 @@ export const FileItem = React.memo(function FileItem({
   hasVersionHistory = false,
 }: FileItemProps) {
   const { t } = useTranslation();
+  const rightsManagedLabel = t(
+    "rightsManagedPdf.title",
+    "Protected by Microsoft Purview",
+  );
   const oneDriveBadgeLabel = oneDriveUnsaved
     ? t("oneDriveSave.status.unsaved", "Changes not saved to OneDrive yet")
     : t("oneDriveSave.fromOneDrive", "From OneDrive");
@@ -384,7 +390,9 @@ export const FileItem = React.memo(function FileItem({
             )}
           </span>
           <span className="file-sidebar-file-meta-row">
-            <span className="file-sidebar-file-meta">
+            <span
+              className={`file-sidebar-file-meta${primaryLabel ? " labelled" : ""}`}
+            >
               {primaryLabel ? (
                 <>
                   {primaryLabel}
@@ -447,6 +455,18 @@ export const FileItem = React.memo(function FileItem({
                   {oneDriveUnsaved && (
                     <span className="file-sidebar-cloud-badge-dot" />
                   )}
+                </span>
+              </Tooltip>
+            )}
+            {isRightsManaged && (
+              <Tooltip label={rightsManagedLabel} withArrow position="top">
+                <span
+                  className="file-sidebar-cloud-badge"
+                  data-no-select
+                  data-testid="rights-managed-badge"
+                  aria-label={rightsManagedLabel}
+                >
+                  <Icon name="shield" size={"0.85rem"} />
                 </span>
               </Tooltip>
             )}

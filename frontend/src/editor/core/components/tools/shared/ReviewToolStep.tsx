@@ -13,6 +13,12 @@ import { useFileActionIcons } from "@editor/hooks/useFileActionIcons";
 import { saveOperationResults } from "@editor/services/operationResultsSaveService";
 import { useFileActions, useFileSelectors } from "@editor/contexts/FileContext";
 import i18n from "@editor/i18n";
+import {
+  getOpenedRightsManagedPdf,
+  getRightsManagedThumbnail,
+  rightsManagedSaveBlocked,
+} from "@editor/services/rightsManagedPdf";
+import { useRightsManagedPdfRevision } from "@editor/hooks/useRightsManagedPdf";
 import { useSaveStoredFile } from "@editor/hooks/useSaveStoredFile";
 import { useSaveButton } from "@editor/components/shared/workbenchBar/useSaveButton";
 import { sharedSaveTarget } from "@editor/services/saveTargets";
@@ -110,11 +116,16 @@ function ReviewStepContent<TParams = unknown>({
     }
   };
 
+  useRightsManagedPdfRevision();
   const previewFiles =
     operation.files?.map((file, index) => ({
       file,
-      thumbnail: operation.thumbnails[index],
+      thumbnail: getRightsManagedThumbnail(file) ?? operation.thumbnails[index],
     })) || [];
+  const rightsManagedOutput =
+    operation.files?.some((file) => getOpenedRightsManagedPdf(file)) ?? false;
+  const copyBlocked =
+    operation.files?.some((file) => rightsManagedSaveBlocked(file)) ?? false;
 
   const handleDownload = async () => {
     if (!operation.downloadUrl) return;
@@ -254,6 +265,7 @@ function ReviewStepContent<TParams = unknown>({
               <Button
                 data-testid="download-result-menu"
                 px="sm"
+                disabled={copyBlocked}
                 style={{
                   borderInlineStart:
                     "1px solid color-mix(in srgb, currentColor 35%, transparent)",
@@ -283,7 +295,7 @@ function ReviewStepContent<TParams = unknown>({
         </Button.Group>
       )}
 
-      <SuggestedToolsSection />
+      <SuggestedToolsSection rightsManaged={rightsManagedOutput} />
     </Stack>
   );
 }

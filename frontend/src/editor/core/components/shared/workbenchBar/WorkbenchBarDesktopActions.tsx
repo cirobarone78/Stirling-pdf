@@ -32,6 +32,7 @@ export default function WorkbenchBarDesktopActions({
   saveMenu,
   onPrint,
   printDisabledReason,
+  downloadDisabledReason,
   onExport,
   onClose,
   enforcingProgress,
@@ -39,6 +40,7 @@ export default function WorkbenchBarDesktopActions({
   const { t } = useTranslation();
   const [saveMenuOpen, setSaveMenuOpen] = useState(false);
   const exportDisabled = actionsDisabled || policyEnforcing;
+  const saveDisabled = exportDisabled || Boolean(downloadDisabledReason);
   const closeLabel =
     currentView === "fileEditor" || currentView === "pageEditor"
       ? t("workbenchBar.closeAll", "Close All")
@@ -87,7 +89,7 @@ export default function WorkbenchBarDesktopActions({
               hover={false}
               className="workbench-bar-action-icon"
               onClick={() => onExport()}
-              disabled={exportDisabled}
+              disabled={saveDisabled}
               aria-label={downloadLabel}
             >
               <span className="workbench-bar-unsaved-anchor">
@@ -97,7 +99,7 @@ export default function WorkbenchBarDesktopActions({
                 )}
               </span>
             </ActionIcon>,
-            tooltipFor(downloadLabel),
+            tooltipFor(downloadDisabledReason ?? downloadLabel),
           )}
           {saveMenu && (
             <Tooltip
@@ -122,7 +124,7 @@ export default function WorkbenchBarDesktopActions({
                       variant="tertiary"
                       hover={false}
                       className="workbench-bar-action-icon"
-                      disabled={exportDisabled}
+                      disabled={saveDisabled}
                       aria-label={t("saveFile.menu.more", "More save options")}
                     >
                       <Icon name="chevron-down" size="1rem" />
@@ -160,12 +162,14 @@ export default function WorkbenchBarDesktopActions({
             hover={false}
             className="workbench-bar-action-icon"
             onClick={() => onExport(true)}
-            disabled={exportDisabled}
+            disabled={saveDisabled}
             aria-label={t("workbenchBar.saveAs", "Save As")}
           >
             <Icon name={saveAsIconName} size="1rem" />
           </ActionIcon>,
-          tooltipFor(t("workbenchBar.saveAs", "Save As")),
+          tooltipFor(
+            downloadDisabledReason ?? t("workbenchBar.saveAs", "Save As"),
+          ),
         )}
 
       {/* Separator: export group | close */}

@@ -21,11 +21,13 @@ export default function WorkbenchBarMobileActions({
   saveMenu,
   onPrint,
   printDisabledReason,
+  downloadDisabledReason,
   onExport,
   onClose,
 }: WorkbenchBarActionsProps) {
   const { t } = useTranslation();
   const exportDisabled = actionsDisabled || policyEnforcing;
+  const saveDisabled = exportDisabled || Boolean(downloadDisabledReason);
   const showPrint = currentView === "viewer";
   const showFileActions = showsFileActions;
 
@@ -70,8 +72,9 @@ export default function WorkbenchBarMobileActions({
                 <span className="workbench-bar-menu-unsaved-dot" />
               )
             }
-            disabled={exportDisabled}
+            disabled={saveDisabled}
             onClick={() => void onExport()}
+            title={downloadDisabledReason}
           >
             <span className="save-menu__text">{downloadLabel}</span>
           </Menu.Item>
@@ -81,7 +84,7 @@ export default function WorkbenchBarMobileActions({
             <Menu.Item
               key={item.key}
               leftSection={<Icon name={item.icon} size="1.1rem" />}
-              disabled={exportDisabled}
+              disabled={saveDisabled}
               onClick={item.onClick}
             >
               <span className="save-menu__text">{item.label}</span>
@@ -95,8 +98,9 @@ export default function WorkbenchBarMobileActions({
         {showFileActions && !saveMenu && saveAsIconName && (
           <Menu.Item
             leftSection={<Icon name={saveAsIconName} size="1.1rem" />}
-            disabled={exportDisabled}
+            disabled={saveDisabled}
             onClick={() => void onExport(true)}
+            title={downloadDisabledReason}
           >
             {t("workbenchBar.saveAs", "Save As")}
           </Menu.Item>
