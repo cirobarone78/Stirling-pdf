@@ -19,6 +19,13 @@ import {
   type ScanHintProps,
 } from "@editor/tools/pdfTextEditor/components/ScanHint";
 import type { EditorStore } from "@editor/tools/pdfTextEditor/store/EditorStore";
+import { useScanFontMatch } from "@editor/tools/pdfTextEditor/hooks/useScanFontMatch";
+import {
+  scanBlockMisaligned,
+  scanBlockOffInk,
+  scanTypingDropped,
+} from "@editor/tools/pdfTextEditor/commands/scanTextEdit";
+import { ScanFontMatchModal } from "@editor/tools/pdfTextEditor/components/inspector/ScanFontMatchModal";
 import type {
   EditorViewState,
   LoadProgress,
@@ -80,7 +87,12 @@ export function EditorSidebar({
     if (hasSelection) setTab("selected");
   }, [hasSelection]);
 
-  const fontNote = useSelectedFontNote(state, selection);
+  const fontNote = useSelectedFontNote(
+    state,
+    selection,
+    selectedScanNote(store, state, selection),
+  );
+  const scanFontMatch = useScanFontMatch(store, state, selection);
 
   const editorDocument = store.document;
   const reviewingAccessibility = useMemo(
@@ -165,6 +177,7 @@ export function EditorSidebar({
                 selection={selection}
                 geometry={geometry}
                 fontNote={fontNote}
+                scanFontMatch={scanFontMatch}
                 canGroup={canGroup}
                 canUngroup={canUngroup}
                 onGroup={onGroup}
@@ -210,6 +223,7 @@ export function EditorSidebar({
           </Tabs.Panel>
         </Box>
       </LanguagesInUse.Provider>
+      {scanFontMatch && <ScanFontMatchModal match={scanFontMatch} />}
     </Tabs>
   );
 }
@@ -240,9 +254,33 @@ function NothingSelected(props: ScanHintProps) {
   );
 }
 
+type ScanNote = "misaligned" | "offInk" | "dropsTyping" | null;
+
+function selectedScanNote(
+  store: EditorStore,
+  state: EditorViewState,
+  selection: SelectionState,
+): ScanNote {
+  const doc = store.document;
+  if (!doc) return null;
+  const picked = new Set(selection.runIds);
+  const runs = state.pages.flatMap((page) =>
+    page.runs.flatMap((r) => {
+      if (!picked.has(r.id)) return [];
+      const run = doc.page(page.pageIndex).findRun(r.id);
+      return run ? [run] : [];
+    }),
+  );
+  if (runs.some((run) => scanBlockMisaligned(doc, run))) return "misaligned";
+  if (runs.some((run) => scanBlockOffInk(doc, run))) return "offInk";
+  if (runs.some((run) => scanTypingDropped(run))) return "dropsTyping";
+  return null;
+}
+
 function useSelectedFontNote(
   state: EditorViewState,
   selection: SelectionState,
+  scanNote: ScanNote,
 ): string | null {
   const { t } = useTranslation();
   return useMemo(() => {
@@ -250,10 +288,25 @@ function useSelectedFontNote(
     if (!note) return null;
     switch (note.kind) {
       case "scanned":
-        return t(
-          "pdfTextEditor.inspector.scannedText",
-          "Scanned text · changed words are covered and redrawn in a matching font.",
-        );
+        if (scanNote === "misaligned")
+          return t(
+            "pdfTextEditor.inspector.scannedTextMisaligned",
+            "Scanned text · its recognised words do not line up with the scan, so this block cannot be edited or deleted.",
+          );
+        if (scanNote === "offInk")
+          return t(
+            "pdfTextEditor.inspector.scannedTextOffInk",
+            "Scanned text · its recognised words sit off the scanned words, so this block cannot be edited. Run OCR again.",
+          );
+        return scanNote === "dropsTyping"
+          ? t(
+              "pdfTextEditor.inspector.scannedTextNoFont",
+              "Scanned text · typed words in this script cannot be drawn yet, so they are not kept. Deleting words still works.",
+            )
+          : t(
+              "pdfTextEditor.inspector.scannedText",
+              "Scanned text · changed words are covered and redrawn in a matching font.",
+            );
       case "embeddedUnknown":
         return t(
           "pdfTextEditor.inspector.fontEmbedded",
@@ -272,7 +325,7 @@ function useSelectedFontNote(
           { name: note.name, glyphs: note.glyphs, fallback: note.fallback },
         );
     }
-  }, [state.pages, selection.runIds, t]);
+  }, [state.pages, selection.runIds, scanNote, t]);
 }
 
 function EmptySidebar({
