@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Stack } from "@mantine/core";
+import { Menu, Stack, Text } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { Button } from "@editor/ui/Button";
 import { Icon } from "@editor/ui/Icon";
@@ -13,6 +13,11 @@ import { useFileActionIcons } from "@editor/hooks/useFileActionIcons";
 import { saveOperationResults } from "@editor/services/operationResultsSaveService";
 import { useFileActions, useFileSelectors } from "@editor/contexts/FileContext";
 import i18n from "@editor/i18n";
+import { useSaveStoredFile } from "@editor/hooks/useSaveStoredFile";
+import { useSaveButton } from "@editor/components/shared/workbenchBar/useSaveButton";
+import { sharedSaveTarget } from "@editor/services/saveTargets";
+import type { FileId } from "@editor/types/file";
+import "@editor/components/shared/SaveMenu.css";
 
 /**
  * Nearest scrolling ancestor - in the right rail that is the tool panel's
@@ -61,6 +66,40 @@ function ReviewStepContent<TParams = unknown>({
   const stepRef = useRef<HTMLDivElement>(null);
   const { actions: fileActions } = useFileActions();
   const selectors = useFileSelectors();
+  const saver = useSaveStoredFile();
+  const outputStubs = selectors.getStirlingFileStubs(
+    (operation.outputFileIds ?? []) as FileId[],
+  );
+  // Results inherit their source's home, so Save sends them back there too.
+  const savesHome =
+    outputStubs.length > 0 &&
+    outputStubs.every((stub) => saver.planFor(stub) !== null);
+  const oneTarget = sharedSaveTarget(outputStubs, saver.targetFor);
+  const saveButton = useSaveButton({
+    saver,
+    targets: outputStubs,
+    singleFile: outputStubs.length === 1,
+    savesToDisk: Boolean(icons.saveAs),
+    onSaveLocalCopy: () =>
+      void (async () => {
+        for (const stub of outputStubs)
+          await saver.saveLocalCopy(stub, selectors.getFile(stub.id));
+      })(),
+    fileFor: async (stub) => selectors.getFile(stub.id),
+  });
+  const onlyPlan =
+    outputStubs.length === 1 ? saver.planFor(outputStubs[0]) : null;
+  const saveLabel = oneTarget
+    ? (saveButton.label ?? terminology.download)
+    : onlyPlan === "copy"
+      ? t("saveFile.menu.copy", "Save a copy next to it")
+      : onlyPlan === "ask"
+        ? t("saveFile.result.ask", "Save…")
+        : terminology.download;
+  const saveTooltip =
+    saveButton.label && saveButton.label !== saveLabel
+      ? saveButton.label
+      : undefined;
 
   const handleUndo = async () => {
     try {
@@ -79,6 +118,16 @@ function ReviewStepContent<TParams = unknown>({
 
   const handleDownload = async () => {
     if (!operation.downloadUrl) return;
+    if (savesHome) {
+      for (const stub of outputStubs) {
+        const outcome = await saver.saveStoredFile(
+          stub,
+          selectors.getFile(stub.id),
+        );
+        if (outcome !== "saved") break;
+      }
+      return;
+    }
     try {
       await saveOperationResults({
         downloadUrl: operation.downloadUrl,
@@ -171,16 +220,67 @@ function ReviewStepContent<TParams = unknown>({
           </Button>
         </Tooltip>
       )}
-      {operation.downloadUrl && (
-        <Button
-          data-testid="download-result-button"
-          leftSection={<Icon name={icons.download} />}
-          fullWidth
-          style={{ marginBottom: "1rem" }}
-          onClick={handleDownload}
-        >
-          {terminology.download}
-        </Button>
+      {operation.downloadUrl && !saveButton.menu && (
+        <Tooltip position="left" content={saveTooltip} disabled={!saveTooltip}>
+          <Button
+            data-testid="download-result-button"
+            leftSection={<Icon name={oneTarget?.icon ?? icons.download} />}
+            fullWidth
+            style={{ marginBottom: "1rem" }}
+            onClick={handleDownload}
+          >
+            {saveLabel}
+          </Button>
+        </Tooltip>
+      )}
+      {operation.downloadUrl && saveButton.menu && (
+        <Button.Group style={{ marginBottom: "1rem", width: "100%" }}>
+          <Tooltip
+            position="left"
+            content={saveTooltip}
+            disabled={!saveTooltip}
+          >
+            <Button
+              data-testid="download-result-button"
+              leftSection={<Icon name={oneTarget?.icon ?? icons.download} />}
+              style={{ flex: 1, minWidth: 0 }}
+              onClick={handleDownload}
+            >
+              {saveLabel}
+            </Button>
+          </Tooltip>
+          <Menu shadow="md" position="bottom-end">
+            <Menu.Target>
+              <Button
+                data-testid="download-result-menu"
+                px="sm"
+                style={{
+                  borderInlineStart:
+                    "1px solid color-mix(in srgb, currentColor 35%, transparent)",
+                }}
+                aria-label={t("saveFile.menu.more", "More save options")}
+              >
+                <Icon name="chevron-down" />
+              </Button>
+            </Menu.Target>
+            <Menu.Dropdown className="save-menu">
+              {saveButton.menu.map((item) => (
+                <Menu.Item
+                  key={item.key}
+                  leftSection={<Icon name={item.icon} size="1rem" />}
+                  onClick={item.onClick}
+                >
+                  <span className="save-menu__text">{item.label}</span>
+                  {item.description && (
+                    <Text size="xs" c="dimmed" className="save-menu__text">
+                      {item.description}
+                    </Text>
+                  )}
+                </Menu.Item>
+              ))}
+            </Menu.Dropdown>
+          </Menu>
+        </Button.Group>
       )}
 
       <SuggestedToolsSection />
