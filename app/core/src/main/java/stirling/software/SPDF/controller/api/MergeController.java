@@ -1,20 +1,20 @@
 package stirling.software.SPDF.controller.api;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
-import org.apache.pdfbox.pdmodel.PDDocumentInformation;
-import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.common.PDMetadata;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 import org.apache.pdfbox.pdmodel.interactive.documentnavigation.outline.PDDocumentOutline;
 import org.apache.pdfbox.pdmodel.interactive.documentnavigation.outline.PDOutlineItem;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
@@ -22,6 +22,8 @@ import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 import org.apache.pdfbox.pdmodel.interactive.form.PDSignatureField;
 import org.apache.xmpbox.XMPMetadata;
 import org.apache.xmpbox.schema.XMPBasicSchema;
+import org.jspecify.annotations.NonNull;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import stirling.software.SPDF.config.swagger.StandardPdfResponse;
 import stirling.software.SPDF.model.api.general.MergePdfsRequest;
+import stirling.software.SPDF.utils.text.TextEncodingHelper;
 import stirling.software.common.annotations.AutoJobPostMapping;
 import stirling.software.common.annotations.api.GeneralApi;
 import stirling.software.common.enumeration.ResourceWeight;
@@ -43,14 +46,7 @@ import stirling.software.common.model.tool.ToolArity;
 import stirling.software.common.model.tool.ToolFormat;
 import stirling.software.common.model.tool.ToolIO;
 import stirling.software.common.service.CustomPDFDocumentFactory;
-import stirling.software.common.util.ExceptionUtils;
-import stirling.software.common.util.GeneralUtils;
-import stirling.software.common.util.PdfErrorUtils;
-import stirling.software.common.util.PdfUtils;
-import stirling.software.common.util.TempFile;
-import stirling.software.common.util.TempFileManager;
-import stirling.software.common.util.WebResponseUtils;
-import stirling.software.common.util.XmpUtils;
+import stirling.software.common.util.*;
 import stirling.software.jpdfium.PdfDocument;
 import stirling.software.jpdfium.PdfMerge;
 import stirling.software.jpdfium.doc.Bookmark;
@@ -63,6 +59,7 @@ import stirling.software.jpdfium.doc.PdfBookmarkEditor.BookmarkTree;
 public class MergeController {
     private final CustomPDFDocumentFactory pdfDocumentFactory;
     private final TempFileManager tempFileManager;
+    private static final String TOC_FONT_PATH = "static/fonts/NotoSans-Regular.ttf";
 
     public PDDocument mergeDocuments(List<PDDocument> documents) throws IOException {
         PDDocument mergedDoc = pdfDocumentFactory.createNewDocument();
@@ -254,6 +251,7 @@ public class MergeController {
 
         boolean removeCertSign = Boolean.TRUE.equals(request.getRemoveCertSign());
         boolean generateToc = request.isGenerateToc();
+        boolean generateTocPage = request.isGenerateTocPage();
 
         MultipartFile[] files = request.getFileInput();
         if (files == null) {
@@ -295,6 +293,11 @@ public class MergeController {
                     ExceptionUtils.logException("PDF pre-validate", e);
                     invalidIndexes.add(index);
                 }
+            }
+
+            if (generateTocPage) {
+                File tocDocument = generateToc(toFileWithPageCount(files));
+                inputPaths.addFirst(tocDocument.toPath());
             }
 
             int[] pageCounts;
@@ -384,6 +387,198 @@ public class MergeController {
 
         return WebResponseUtils.pdfFileToWebResponse(outputTempFile, mergedFileName);
     }
+
+    private MultipartFileWithPdfPageCount[] toFileWithPageCount(MultipartFile[] files)
+            throws IOException {
+        List<MultipartFileWithPdfPageCount> result = new ArrayList<>(files.length);
+        for (MultipartFile file : files) {
+            try (PdfDocument pdf =
+                    PdfDocument.open(tempFileManager.convertMultipartFileToFile(file))) {
+                result.add(new MultipartFileWithPdfPageCount(file, pdf.pageCount()));
+            } catch (IOException e) {
+                log.error("Unable to open file as PDF: {}", e.getMessage());
+                throw e;
+            }
+        }
+        return result.toArray(MultipartFileWithPdfPageCount[]::new);
+    }
+
+    private File generateToc(MultipartFileWithPdfPageCount[] files) throws IOException {
+        File tocPage = tempFileManager.createTempFile(".pdf");
+
+        int filesToGenerate = (files.length / 32) + 1;
+        int totalPages = filesToGenerate + 1;
+
+        try (PDDocument document = new PDDocument()) {
+            for (int i = 0; i < filesToGenerate; i++) {
+                totalPages +=
+                        addTocPage(
+                                Arrays.copyOfRange(
+                                        files, (i * 32), Math.min((i * 32) + 31, files.length)),
+                                document,
+                                totalPages,
+                                i == 0);
+            }
+
+            try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+                document.save(baos);
+
+                Files.write(tocPage.toPath(), baos.toByteArray());
+            }
+        }
+
+        return tocPage;
+    }
+
+    private static int addTocPage(
+            MultipartFileWithPdfPageCount[] files,
+            PDDocument document,
+            int startPage,
+            boolean generateTitle)
+            throws IOException {
+        PDPage blankPage = new PDPage(PDRectangle.A4);
+        float pageWidth = PDRectangle.A4.getWidth();
+        float pageHeight = PDRectangle.A4.getHeight();
+
+        PDFont contentFont;
+        try (InputStream fontStream = new ClassPathResource(TOC_FONT_PATH).getInputStream()) {
+            contentFont = PDType0Font.load(document, fontStream);
+        }
+
+        int contentFontSize = 10;
+        int totalPages = 0;
+
+        try (PDPageContentStream cs =
+                new PDPageContentStream(
+                        document, blankPage, PDPageContentStream.AppendMode.APPEND, false, false)) {
+
+            if (generateTitle) {
+                addTocTitle(cs, pageWidth, pageHeight);
+            }
+
+            float tocContentStartHeight = pageHeight - 130;
+            float lineHeight = 20;
+            int tocContentPadding = 80;
+
+            String space = " ";
+            String dot = ".";
+
+            for (int i = 0; i < files.length; i++) {
+                cs.beginText();
+                MultipartFile multipartFile = files[i].file;
+                cs.newLineAtOffset(tocContentPadding, tocContentStartHeight - (i * lineHeight));
+
+                float target = pageWidth - tocContentPadding;
+                int currentDocumentPageStart = startPage + totalPages;
+                float pageCountWidth =
+                        contentFont.getStringWidth(String.valueOf(currentDocumentPageStart))
+                                / 1000
+                                * contentFontSize;
+
+                String entryName =
+                        fitTextToWidth(
+                                replaceUnsupportedCharacters(
+                                        contentFont, getTocTitle(multipartFile, i)),
+                                contentFont,
+                                contentFontSize,
+                                target - tocContentPadding,
+                                true);
+
+                float spaceWidth = contentFont.getStringWidth(space) / 1000 * contentFontSize;
+
+                float dotWidth = contentFont.getStringWidth(dot) / 1000 * contentFontSize;
+                float numberMargin = dotWidth * 2;
+
+                float end = target - pageCountWidth - spaceWidth - numberMargin;
+                float start =
+                        tocContentPadding
+                                + contentFont.getStringWidth(entryName) / 1000 * contentFontSize;
+                StringBuilder dots = generateDots(contentFont, contentFontSize, start, end);
+
+                cs.setFont(contentFont, contentFontSize);
+                cs.showText(entryName + space + dots);
+
+                cs.newLineAtOffset(target - tocContentPadding - pageCountWidth, 0);
+                cs.showText(String.valueOf(currentDocumentPageStart));
+                cs.endText();
+
+                totalPages += files[i].pageCount();
+            }
+        }
+
+        document.addPage(blankPage);
+        return totalPages;
+    }
+
+    private static void addTocTitle(PDPageContentStream cs, float pageWidth, float pageHeight)
+            throws IOException {
+        PDType1Font titleFont = new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD);
+        int titleFontSize = 16;
+
+        cs.beginText();
+        cs.setFont(titleFont, titleFontSize);
+        String title = "Contents";
+        float centeredTitle =
+                pageWidth / 2 - (titleFont.getStringWidth(title) / 1000f * titleFontSize) / 2;
+        cs.newLineAtOffset(centeredTitle, pageHeight - 70);
+        cs.showText(title);
+        cs.endText();
+    }
+
+    private static @NonNull StringBuilder generateDots(
+            PDFont contentFont, int contentFontSize, float start, float end) throws IOException {
+        StringBuilder dots = new StringBuilder();
+        String dot = ".";
+
+        float dotWidth = contentFont.getStringWidth(dot) / 1000 * contentFontSize;
+        float j = start;
+        while (j < end) {
+            dots.append(dot);
+            j += dotWidth;
+        }
+
+        return dots;
+    }
+
+    public static String fitTextToWidth(
+            String text, PDFont font, float fontSize, float maxWidthPt, boolean withEllipsis)
+            throws IOException {
+        if (text == null || text.isEmpty()) {
+            return text;
+        }
+
+        if (getTextWidth(text, font, fontSize) <= maxWidthPt) {
+            return text;
+        }
+
+        String suffix = withEllipsis ? "…" : "";
+        float suffixWidth = getTextWidth(suffix, font, fontSize);
+        float targetWidth = maxWidthPt - suffixWidth;
+
+        if (targetWidth <= 0) {
+            return suffix;
+        }
+
+        int end = text.length();
+        while (end > 0 && getTextWidth(text.substring(0, end), font, fontSize) > targetWidth) {
+            end--;
+        }
+
+        String cut = text.substring(0, end);
+
+        int lastSpace = cut.lastIndexOf(' ');
+        if (lastSpace > end / 2) {
+            cut = cut.substring(0, lastSpace);
+        }
+
+        return cut.trim() + suffix;
+    }
+
+    private static float getTextWidth(String text, PDFont font, float fontSize) throws IOException {
+        return (font.getStringWidth(text) / 1000f) * fontSize;
+    }
+
+    private record MultipartFileWithPdfPageCount(MultipartFile file, int pageCount) {}
 
     private boolean isImageFile(MultipartFile file) {
         String contentType = file.getContentType();
@@ -481,12 +676,7 @@ public class MergeController {
 
         if (generateToc) {
             for (int i = 0; i < files.length; i++) {
-                String filename = files[i].getOriginalFilename();
-                String title = GeneralUtils.removeExtension(filename);
-                if (title == null || title.isBlank()) {
-                    title = "Document " + (i + 1);
-                }
-                builder.add(title, pageOffsets[i]);
+                builder.add(getTocTitle(files[i], i), pageOffsets[i]);
             }
         }
 
@@ -528,5 +718,31 @@ public class MergeController {
                     "Source bookmark traversal hit {}-node cap; remaining bookmarks dropped",
                     maxNodes);
         }
+    }
+
+    private static String getTocTitle(MultipartFile file, int index) {
+        String title = GeneralUtils.removeExtension(file.getOriginalFilename());
+        if (title == null || title.isBlank()) {
+            return "Document " + (index + 1);
+        }
+        return title;
+    }
+
+    private static String replaceUnsupportedCharacters(PDFont font, String text) {
+        if (text == null || text.isEmpty()) {
+            return "";
+        }
+        StringBuilder result = new StringBuilder();
+        text.codePoints()
+                .forEach(
+                        codePoint -> {
+                            String character = Character.toString(codePoint);
+                            result.append(
+                                    TextEncodingHelper.fontSupportsCharacter(font, character)
+                                            ? character
+                                            : "?");
+                        });
+
+        return result.toString();
     }
 }
