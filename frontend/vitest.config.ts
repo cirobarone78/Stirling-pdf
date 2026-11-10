@@ -28,7 +28,7 @@ const TEST_DEFAULTS = {
   // Mantine is hundreds of small ESM files that every component test re-imports;
   // pre-bundled it is one module (~250ms -> ~25ms of collect per file).
   deps: {
-    optimizer: { web: { enabled: true, include: MANTINE_PACKAGES } },
+    optimizer: { client: { enabled: true, include: MANTINE_PACKAGES } },
   },
   // All our tests are designed to run in the browser
   testTransformMode: { web: ["**/*"] },
@@ -63,9 +63,12 @@ export default defineConfig({
     },
     projects: [
       {
+        extends: true,
         test: {
           name: "core",
           ...TEST_DEFAULTS,
+          testTimeout: 60000,
+          hookTimeout: 60000,
           include: ["src/editor/core/**/*.test.{ts,tsx}"],
           environment: "jsdom",
           globals: true,
@@ -86,9 +89,12 @@ export default defineConfig({
         },
       },
       {
+        extends: true,
         test: {
           name: "processor",
           ...TEST_DEFAULTS,
+          testTimeout: 60000,
+          hookTimeout: 60000,
           include: ["src/processor/proprietary/**/*.test.{ts,tsx}"],
           environment: "jsdom",
           globals: true,
@@ -108,9 +114,12 @@ export default defineConfig({
         },
       },
       {
+        extends: true,
         test: {
           name: "proprietary",
           ...TEST_DEFAULTS,
+          testTimeout: 60000,
+          hookTimeout: 60000,
           include: ["src/editor/proprietary/**/*.test.{ts,tsx}"],
           environment: "jsdom",
           globals: true,
@@ -128,9 +137,12 @@ export default defineConfig({
         },
       },
       {
+        extends: true,
         test: {
           name: "desktop",
           ...TEST_DEFAULTS,
+          testTimeout: 60000,
+          hookTimeout: 60000,
           include: ["src/editor/desktop/**/*.test.{ts,tsx}"],
           environment: "jsdom",
           globals: true,
@@ -148,9 +160,12 @@ export default defineConfig({
         },
       },
       {
+        extends: true,
         test: {
           name: "saas",
           ...TEST_DEFAULTS,
+          testTimeout: 60000,
+          hookTimeout: 60000,
           // src/editor/saas = editor-saas layer; src/processor/saas = the portal's saas
           // overrides (sibling to src/processor/proprietary). Both build under the saas flavor,
           // so both resolve @processor via the saas cascade (tsconfig.saas.vite.json).

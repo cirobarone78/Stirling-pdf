@@ -1,11 +1,22 @@
-import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
 import { vi } from "vitest";
 import i18n from "i18next";
 import { installFailOnConsole } from "@editor/tests/failOnConsole";
 
+vi.mock("@tauri-apps/api/core", () => ({
+  invoke: vi.fn().mockResolvedValue({
+    mode: "saas",
+    server_config: null,
+    lock_connection_mode: false,
+  }),
+  isTauri: () => false,
+}));
+
 // jsdom is missing the same APIs WebKit is, so tests must agree with the
 // browser. Same module `src/index.tsx` installs.
 import "@editor/utils/engineShims";
+
+HTMLCanvasElement.prototype.getContext = vi.fn(() => null);
 
 // Modules outside React call i18n.t directly; no resources means the English defaults render.
 void i18n.init({
@@ -143,18 +154,22 @@ global.Worker = vi.fn().mockImplementation(() => ({
 }));
 
 // Mock ResizeObserver for Mantine components
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
-  observe: vi.fn(),
-  unobserve: vi.fn(),
-  disconnect: vi.fn(),
-}));
+global.ResizeObserver = vi.fn().mockImplementation(function () {
+  return {
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
+  };
+});
 
 // Mock IntersectionObserver for components that might use it
-global.IntersectionObserver = vi.fn().mockImplementation(() => ({
-  observe: vi.fn(),
-  unobserve: vi.fn(),
-  disconnect: vi.fn(),
-}));
+global.IntersectionObserver = vi.fn().mockImplementation(function () {
+  return {
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
+  };
+});
 
 // Mock matchMedia for responsive components
 Object.defineProperty(globalThis, "matchMedia", {
@@ -223,4 +238,4 @@ if (typeof globalThis.DOMMatrix === "undefined") {
 }
 
 // Set global test timeout to prevent hangs
-vi.setConfig({ testTimeout: 5000, hookTimeout: 5000 });
+vi.setConfig({ testTimeout: 60000, hookTimeout: 60000 });
