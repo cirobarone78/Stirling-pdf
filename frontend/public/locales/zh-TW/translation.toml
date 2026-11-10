@@ -1328,6 +1328,10 @@ label = "監控資料夾目錄"
 description = "新使用者的預設語言（例如：en_US、es_ES）"
 label = "預設語系"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "最大檔案上傳大小（例如：100MB、1GB）"
 label = "檔案上傳限制"
@@ -2969,6 +2973,7 @@ loadError = "無法載入使用者清單"
 noTeam = "無團隊"
 noUsers = "找不到其他使用者。"
 placeholder = "選擇使用者..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}}（您）"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "設定"
 [extractPages.tooltip]
 description = "將選取的頁面擷取成新的 PDF，並保留順序。"
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "在檔案編輯器中開啟"
 viewInViewer = "在檢視器中檢視"
@@ -4657,7 +4673,6 @@ closeFile = "關閉檔案"
 
 [fileEditor]
 closedFile = "已關閉 {{name}}"
-couldNotSave = "無法儲存 {{name}}"
 filesReordered_one = "檔案已重新排序"
 filesReordered_other = "{{count}} 個檔案已重新排序"
 loadedFromStorage_one = "已從儲存空間載入 {{count}} 個檔案"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "明天重設"
 thisPeriod = "此計費期間"
 
 [payment]
+annually = "Annually"
 billingPeriod = "計費週期"
 cancelTeamChange = "保留目前方案"
 canCloseWindow = "您現在可以關閉此視窗。"
@@ -7157,11 +7173,14 @@ title = "調整 Team 方案"
 
 [payment.capacityStage]
 adjustmentNote = "確認前，Stripe 會顯示確切費用、按比例計算的調整金額，以及下次帳單日期。如有可用的已儲存付款方式，將使用該付款方式。"
+billingLabel = "Billing"
 continue = "繼續付款"
 currencyAtCheckout = "Stripe 會在結帳時確認最終金額和付款貨幣。"
+custom = "Custom"
 customLabel = "使用者人數"
 dueToday = "今日應付金額"
 enterpriseQuote = "取得企業報價"
+enterUsers = "Enter a number of users."
 estimatedTotal = "預估總計"
 lineItem = "Team · {{price}}{{period}}，每 {{block}} 位使用者"
 minimumForCurrentUsers = "目前有 {{users}} 位使用者，因此方案至少須涵蓋 {{minimum}} 位。"
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "現有帳號將保留。在增加人數額度或釋�
 overCapacityTitle = "伺服器的使用者人數超過方案額度"
 perMonth = "/月"
 perYear = "/年"
+planName = "Stirling Team"
 reductionNote = "調降後的人數額度將於下次續訂時生效。在此之前，仍可使用目前的額度。現有使用者將保留；若變更生效時人數超過額度，將無法新增使用者。"
 renewalNote = "續訂費用為 {{total}}{{period}}。可隨時在 [用量與帳務] 取消。"
 reviewChange = "在 Stripe 中檢視變更"
-roundsTo = "進位至 {{users}} 位"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "涵蓋所有受邀使用者，以每 {{users}} 位使用者為一個單位。"
 subheadingAdd = "目前方案涵蓋 {{current}} 位使用者。請選擇新的總人數。"
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "使用者"
 userTotal = "{{users}} 位使用者"
 
@@ -7261,12 +7284,15 @@ widget = "表單欄位並非頁面文字，因此無法在此編輯"
 
 [pdfTextEditor.commands]
 edit = "編輯"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "將 {{count}} 個文字片段合併成段落"
 mergeRuns_other = "將 {{count}} 個文字片段合併成段落"
 setColour = "設定 {{run}} 的色彩"
 setOutline = "設定 {{run}} 的外框"
+tagPageContent = "Auto-tag page"
 typeInto = "輸入到 {{run}}"
 ungroupParagraph = "取消段落 {{run}} 的群組"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "換行 {{run}}"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "新增標籤"
 artifactText = "裝飾性"
 cannotChange = "無法變更此圖片的無障礙設定。"
 cannotRetag = "無法變更此文字的標籤。"
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}}（自訂標籤）"
 decorativeInfo = "螢幕閱讀器會略過裝飾性圖片。請將其用於邊框、背景和其他不承載資訊的圖片。"
 decorativeLabel = "裝飾性圖片"
@@ -7430,22 +7457,31 @@ encrypted = "無法編輯加密檔案中的標籤"
 heading = "無障礙"
 innerTagLabel = "標籤 {{number}}"
 innerTags = "此文字中的標籤"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "缺少描述"
 mixedContent = "圖片包含其他內容"
+mixedTags = "Mixed"
 needsDescriptionBadge = "無描述"
 nextImage = "下一張圖片"
 notFigure = "標記為文字的一部分"
 removeTag = "移除標籤"
 saveFailed = "無法儲存您的無障礙變更，因此檔案未儲存。請復原這些變更後再試一次。"
 selectedText = "選取的文字"
+tagging = "Tagging pages"
 tagLabel = "標籤"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "無法在此讀取"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "無法編輯此檔案的標籤"
 untaggableImages = "無法在此標記"
 untaggedBadge = "未標記"
 untaggedDocument = "文件沒有標籤"
 untaggedImage = "無法在此標記"
 untaggedImages = "未標記的圖片"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "沒有文字的標題"
@@ -7504,6 +7540,23 @@ tableHead = "表頭"
 tableHeader = "表格標頭"
 tableRow = "表格列"
 title = "標題"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "編輯器動作"
@@ -7935,8 +7988,6 @@ triggerImport = "匯入時執行"
 [policies.enforcement]
 applying = "正在套用 {{names}}"
 applyingProgress = "正在套用 {{names}}（{{done}} / {{total}}）"
-exportFailureBody = "無法套用安全性政策。檔案已照原樣匯出。"
-exportFailureTitle = "未強制執行即匯出"
 failureBody = "有 {{failures}} 個檔案無法套用部分政策，檔案總數為 {{total}} 個。"
 failureTitle = "未完全強制執行即匯出"
 printPolicyAppliedBody = "已更新此 PDF 以符合政策。請檢視變更後再重新列印。"
@@ -9142,6 +9193,130 @@ status = "狀態"
 time = "時間"
 user = "使用者"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "此檢視發生未預期的錯誤。請再試一次，或從側邊欄選擇其他區段。"
 retry = "再試一次"
@@ -9293,6 +9468,7 @@ title = "目前無法檢閱"
 [portal.home.download]
 back = "返回"
 body = "下載桌面應用程式或自架伺服器。"
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "完成"
 guide = "開啟 {{name}} 指南"
 openInBrowser = "改在瀏覽器中開啟"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "Email 收件"
 
 [portal.procurement]
-subtitle = "讓您的團隊完成評估、簽約並導入。所有文件集中在一處。"
 title = "採購"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "無法載入協議。請再試一次。"
 loading = "正在載入協議..."
 ref = "參照 {{ref}} · {{version}}"
 requestChanges = "要求變更"
-scrollHint = "捲動以審閱"
 signatory = "簽署人姓名"
 signatoryPlaceholder = "全名"
 signatoryTitle = "簽署人職稱"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "例如 總法律顧問"
 signError = "無法記錄您的簽署。請再試一次。"
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "附加項目"
 addressLine1 = "地址第 1 行"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "地址第 2 行"
 addressLine2Placeholder = "套房、樓層、建築物"
 back = "返回"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "企業名稱"
 businessNamePlaceholder = "您的公司"
 city = "城市"
 cityPlaceholder = "San Francisco"
 completeRequired = "請先以有效的電子郵件完成必填欄位（標示 *），再產生報價。"
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "聯絡電子郵件"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "聯絡人姓名"
 contactNamePlaceholder = "Jane Doe"
 continue = "繼續"
 done = "完成"
+editUsage = "Edit usage"
 eula = "我已閱讀並同意 Stirling Enterprise EULA。它規範由此報價產生的協議。"
 generate = "產生報價"
 indemnification = "增強型 IP 保護"
 indemnificationSub = "將我們的 IP 防禦延伸至專利索賠。基礎版權、商標與營業秘密賠償已免費包含。"
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "企業報價"
 paperFor = "準備對象"
 pdfSize = "PDF 大小"
@@ -10506,9 +10690,13 @@ posture_regulated = "受監管"
 posture_regulatedSub = "所有類別 — 合規、保留、擷取"
 qbr = "季度業務檢討"
 qbrSub = "您的 SE 每季檢視使用情況與 roadmap"
+raiseUsage = "Raise estimated usage"
 region = "州 / 地區"
 regionPlaceholder = "California"
-running = "{{annual}} / 年 · {{years}} 年 {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "您的團隊，以及您預期每年處理的 PDFs。"
 s1Title = "您會處理多少量？"
 s2Sub = "較長期限會降低費率；您的服務等級會決定支援。"
@@ -10547,6 +10735,19 @@ volumePlaceholder = "例如 1,000,000"
 years_one = "{{count}} 年"
 years_other = "{{count}} 年"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "企業協議"
 agreementSub = "MSA、Order Form 和 DPA 合併為一份簽署文件。"
@@ -10557,6 +10758,8 @@ invoice = "發票"
 invoiceSub = "您的第一張訂閱發票。"
 laterInvoice = "接受後可用"
 laterQuote = "報價發出後可用"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "報價"
 quoteSub = "您的逐項企業報價。"
 sla = "SLA 附件"
@@ -10573,15 +10776,12 @@ title = "發生錯誤"
 [portal.procurement.hero]
 barAria = "第 {{current}} 階段，共 {{total}} 階段"
 ctaAgreement = "檢閱並簽署協議"
-ctaExploring = "設定您的試用"
 ctaQuote = "檢閱您的報價"
 ctaReviewQuote = "審閱報價"
 ctaTrial = "建立您的報價"
-documents = "文件"
 eyebrow = "企業版"
 eyebrowCompany = "{{company}} 企業版"
 inviteTeammates = "邀請隊友"
-licenseKey = "授權金鑰"
 liveSub = "您的組織已佈建，授權已啟用。"
 liveTitle = "您已在 Stirling Enterprise 上線"
 next = "下一步：{{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "目前尚無法產生離線授權檔 — 請稍後再試。"
 downloadOffline = "下載離線授權 (.lic)"
 hint = "將此金鑰貼到自架執行個體以啟用，或保留作為記錄。請妥善保管。"
 label = "您的授權金鑰"
-subtitle = "使用此金鑰啟用自行託管的執行個體，或保留作為記錄。"
-title = "您的授權金鑰"
 trialFileHint = "這是您的試用授權檔案。協議就緒後，請回來再次下載 — 與線上授權金鑰不同，.lic 檔案不會自行更新。"
 
 [portal.procurement.link]
 cta = "連結帳戶"
 description = "採購流程會在您連結的 Stirling 帳戶上執行：我們會用它來佈建試用、為報價定價並開始計費。連結帳戶即可開始。"
-eyebrow = "企業版"
 title = "連結您的帳戶以開始"
 
 [portal.procurement.live]
 description = "您的訂閱已啟用，授權已核發。您的團隊已完成佈建，計費也已開始。"
-eyebrow = "上線"
 title = "您已在 Stirling Enterprise 上線"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "目前尚無法下載報價 PDF — 請稍後再試。"
 
 [portal.procurement.payment]
 description = "您的報價已被接受，授權也已啟用 — 您的團隊可以立即開始。準備好時支付第一張發票；您可以在這裡付款或下載，不需要 email。"
-downloadAgreement = "下載已簽署協議"
 downloadInvoice = "下載發票"
-eyebrow = "付款"
-title = "訂閱已建立"
 viewInvoice = "檢視並支付發票"
 
 [portal.procurement.review]
 acceptCta = "接受報價"
 annual = "年度費用（第 1 年）"
 downloadCta = "下載報價"
+oneTime = "one-time"
 poNumber = "採購單：{{po}}"
 renewal = "期限結束後以 {{amount}}/年續約（+{{pct}}% CPI）"
 tcv = "{{years}} 年期，預先全額支付：{{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "延長會增加 7 天，並通知您的解決方案工程師。"
 bodyMaxed = "您已用完所有延長次數 — 如果需要更多時間，請聯絡您的解決方案工程師。"
-cancel = "取消試用"
 extend = "延長 7 天"
 maxed = "已達上限"
 subtitle = "您的免費試用持續到 {{date}}。不需要卡片。"
 title = "Enterprise 試用"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "政策執行與團隊編輯器中需要處理的所有項目。"
@@ -11811,6 +12012,13 @@ title = "清理 PDF"
 [sanitizePdf]
 tags = "清理,安全,無害,移除威脅"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "調整大小,調整,縮放,頁面大小,調整頁面大小,縮放頁面,變更大小,調整大小,放大,縮小頁面,符合頁面,A4,letter size"
 title = "調整頁面大小/比例"
@@ -11993,6 +12201,13 @@ apiKeys = "API 金鑰"
 apiKeysDescription = "用於從指令碼和整合呼叫 Stirling API 的個人金鑰。"
 title = "開發者"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "自動解壓縮 API 回應"
 autoUnzipFileLimit = "自動解壓縮檔案上限"
@@ -12135,15 +12350,24 @@ title = "法律文件"
 backendDescription = "與此伺服器一起封裝的後端相依套件授權。"
 backendLabel = "後端授權"
 backendTitle = "後端第三方授權"
+clearSearch = "Clear search"
 empty = "找不到相依套件。"
 frontendDescription = "封裝到 release build 中的前端相依套件授權。"
 frontendLabel = "前端授權"
 frontendTitle = "前端第三方授權"
 license = "授權"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "清單會直接從 release bundle 或後端 endpoint 顯示在 UI 中。"
 listTitle = "已封裝相依套件"
 loadError = "無法載入第三方授權"
 module = "模組"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "版本"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "待處理"
 remove = "移除"
 roleColumn = "角色"
 title = "團隊成員"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "置中"

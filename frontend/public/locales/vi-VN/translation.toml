@@ -1328,6 +1328,10 @@ label = "Thư mục được theo dõi"
 description = "Ngôn ngữ mặc định cho người dùng mới (ví dụ: en_US, es_ES)"
 label = "Ngôn ngữ mặc định"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "Kích thước tải lên tối đa (ví dụ: 100MB, 1GB)"
 label = "Giới hạn tải lên tệp"
@@ -2969,6 +2973,7 @@ loadError = "Không tải được danh sách người dùng"
 noTeam = "Không có Nhóm"
 noUsers = "Không tìm thấy người dùng nào khác."
 placeholder = "Chọn người dùng..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (Bạn)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "Cài đặt"
 [extractPages.tooltip]
 description = "Trích xuất các trang đã chọn vào một PDF mới, giữ nguyên thứ tự."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "Mở trong trình chỉnh sửa tệp"
 viewInViewer = "Xem trong trình xem"
@@ -4657,7 +4673,6 @@ closeFile = "Đóng tệp"
 
 [fileEditor]
 closedFile = "Đã đóng {{name}}"
-couldNotSave = "Không thể lưu {{name}}"
 filesReordered_one = "Tệp đã được sắp xếp lại"
 filesReordered_other = "{{count}} tệp đã được sắp xếp lại"
 loadedFromStorage_one = "Đã tải {{count}} tệp từ bộ nhớ"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "Đặt lại vào ngày mai"
 thisPeriod = "Kỳ thanh toán này"
 
 [payment]
+annually = "Annually"
 billingPeriod = "Kỳ thanh toán"
 cancelTeamChange = "Giữ gói hiện tại"
 canCloseWindow = "Bạn có thể đóng cửa sổ này."
@@ -7157,11 +7173,14 @@ title = "Điều chỉnh gói Team"
 
 [payment.capacityStage]
 adjustmentNote = "Stripe sẽ hiển thị khoản phí chính xác, mọi khoản tính theo tỷ lệ và ngày thanh toán tiếp theo của bạn trước khi bạn xác nhận. Phương thức thanh toán đã lưu của bạn sẽ được sử dụng nếu có."
+billingLabel = "Billing"
 continue = "Tiếp tục đến thanh toán"
 currencyAtCheckout = "Stripe xác nhận số tiền cuối cùng và đơn vị tiền tệ thanh toán khi thanh toán."
+custom = "Custom"
 customLabel = "Số người dùng"
 dueToday = "Đến hạn hôm nay"
 enterpriseQuote = "Nhận báo giá doanh nghiệp"
+enterUsers = "Enter a number of users."
 estimatedTotal = "Tổng ước tính"
 lineItem = "Team · {{price}}{{period}} mỗi {{block}} người dùng"
 minimumForCurrentUsers = "Bạn có {{users}} người dùng, nên gói phải bao phủ ít nhất {{minimum}}."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "Các tài khoản hiện có vẫn được giữ ngu
 overCapacityTitle = "Máy chủ của bạn có nhiều người dùng hơn mức gói của bạn bao phủ"
 perMonth = "/tháng"
 perYear = "/năm"
+planName = "Stirling Team"
 reductionNote = "Dung lượng thấp hơn bắt đầu từ lần gia hạn tiếp theo của bạn. Cho đến lúc đó, bạn có thể sử dụng hạn mức hiện tại. Người dùng hiện có vẫn ở lại; người dùng mới bị chặn nếu bạn vượt quá dung lượng khi thay đổi có hiệu lực."
 renewalNote = "Gia hạn với {{total}}{{period}}. Hủy bất cứ lúc nào trong Sử dụng & Thanh toán."
 reviewChange = "Xem lại thay đổi trong Stripe"
-roundsTo = "làm tròn thành {{users}}"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "Bao phủ mọi người bạn mời, theo các khối {{users}} người dùng."
 subheadingAdd = "Gói của bạn hiện bao phủ {{current}} người dùng. Chọn tổng mới."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "Người dùng"
 userTotal = "{{users}} người dùng"
 
@@ -7261,12 +7284,15 @@ widget = "Trường biểu mẫu - không phải văn bản trang, nên không t
 
 [pdfTextEditor.commands]
 edit = "Chỉnh sửa"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "Gộp {{count}} run vào một đoạn văn"
 mergeRuns_other = "Gộp {{count}} run vào một đoạn văn"
 setColour = "Đặt màu cho {{run}}"
 setOutline = "Đặt viền cho {{run}}"
+tagPageContent = "Auto-tag page"
 typeInto = "Nhập vào {{run}}"
 ungroupParagraph = "Bỏ nhóm đoạn văn {{run}}"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "Ngắt dòng {{run}}"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "Thêm thẻ"
 artifactText = "Trang trí"
 cannotChange = "Không thể thay đổi trợ năng của hình ảnh này."
 cannotRetag = "Không thể thay đổi thẻ của văn bản này."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (thẻ tùy chỉnh)"
 decorativeInfo = "Trình đọc màn hình bỏ qua hình ảnh trang trí. Dùng cho đường viền, nền và các hình ảnh khác không chứa thông tin."
 decorativeLabel = "Hình ảnh trang trí"
@@ -7430,22 +7457,31 @@ encrypted = "Không thể chỉnh sửa thẻ trong tệp được mã hóa"
 heading = "Trợ năng"
 innerTagLabel = "Thẻ {{number}}"
 innerTags = "Thẻ trong văn bản này"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "Thiếu mô tả"
 mixedContent = "Hình bao gồm nội dung khác"
+mixedTags = "Mixed"
 needsDescriptionBadge = "Không có mô tả"
 nextImage = "Hình ảnh tiếp theo"
 notFigure = "Được gắn thẻ là một phần của văn bản"
 removeTag = "Xóa thẻ"
 saveFailed = "Không thể lưu các thay đổi trợ năng của bạn, vì vậy tệp chưa được lưu. Hãy hoàn tác chúng và thử lại."
 selectedText = "Văn bản đã chọn"
+tagging = "Tagging pages"
 tagLabel = "Thẻ"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "Không thể đọc ở đây"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "Không thể chỉnh sửa thẻ của tệp này"
 untaggableImages = "Không thể gắn thẻ ở đây"
 untaggedBadge = "Chưa gắn thẻ"
 untaggedDocument = "Tài liệu không có thẻ"
 untaggedImage = "Không thể gắn thẻ ở đây"
 untaggedImages = "Hình ảnh chưa gắn thẻ"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "Đề mục không có văn bản"
@@ -7504,6 +7540,23 @@ tableHead = "Đầu bảng"
 tableHeader = "Tiêu đề bảng"
 tableRow = "Hàng bảng"
 title = "Tiêu đề"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Hành động trình chỉnh sửa"
@@ -7935,8 +7988,6 @@ triggerImport = "Chạy khi nhập"
 [policies.enforcement]
 applying = "Đang áp dụng {{names}}"
 applyingProgress = "Đang áp dụng {{names}} ({{done}} trong {{total}})"
-exportFailureBody = "Không thể áp dụng các chính sách bảo mật. Các tệp đã được xuất nguyên trạng."
-exportFailureTitle = "Đã xuất mà không thực thi"
 failureBody = "Không thể áp dụng một số chính sách cho {{failures}} trong tổng số {{total}} tệp."
 failureTitle = "Đã xuất mà không thực thi đầy đủ"
 printPolicyAppliedBody = "PDF này đã được cập nhật để đáp ứng một chính sách. Hãy xem lại các thay đổi, rồi in lại."
@@ -9142,6 +9193,130 @@ status = "Trạng thái"
 time = "Thời gian"
 user = "Người dùng"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "Chế độ xem này gặp lỗi không mong muốn. Hãy thử lại hoặc chọn phần khác từ thanh bên."
 retry = "Thử lại"
@@ -9293,6 +9468,7 @@ title = "Không có gì để xem xét"
 [portal.home.download]
 back = "Quay lại"
 body = "Tải xuống ứng dụng desktop hoặc tự lưu trữ máy chủ."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "Xong"
 guide = "Mở hướng dẫn {{name}}"
 openInBrowser = "Mở trong trình duyệt thay thế"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "Nhận Email"
 
 [portal.procurement]
-subtitle = "Giúp đội ngũ của bạn được đánh giá, ký hợp đồng và triển khai. Mọi tài liệu ở cùng một nơi."
 title = "Mua sắm"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "Không thể tải thỏa thuận. Vui lòng thử lại."
 loading = "Đang tải thỏa thuận..."
 ref = "Tham chiếu {{ref}} · {{version}}"
 requestChanges = "Yêu cầu thay đổi"
-scrollHint = "Cuộn để xem lại"
 signatory = "Tên người ký"
 signatoryPlaceholder = "Họ và tên"
 signatoryTitle = "Chức danh người ký"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "ví dụ: General Counsel"
 signError = "Không thể ghi nhận chữ ký của bạn. Vui lòng thử lại."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "Tiện ích bổ sung"
 addressLine1 = "Địa chỉ dòng 1"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "Địa chỉ dòng 2"
 addressLine2Placeholder = "Suite, tầng, tòa nhà"
 back = "Quay lại"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "Tên doanh nghiệp"
 businessNamePlaceholder = "Công ty của bạn"
 city = "Thành phố"
 cityPlaceholder = "San Francisco"
 completeRequired = "Vui lòng hoàn tất các trường bắt buộc (đánh dấu *) với email hợp lệ trước khi tạo báo giá."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "Email liên hệ"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "Tên liên hệ"
 contactNamePlaceholder = "Jane Doe"
 continue = "Tiếp tục"
 done = "Xong"
+editUsage = "Edit usage"
 eula = "Tôi đã đọc và đồng ý với Stirling Enterprise EULA. EULA này điều chỉnh thỏa thuận được tạo từ báo giá này."
 generate = "Tạo báo giá"
 indemnification = "Bảo vệ IP nâng cao"
 indemnificationSub = "Mở rộng phạm vi bảo vệ IP của chúng tôi cho các khiếu nại bằng sáng chế. Bồi thường cơ bản về bản quyền, nhãn hiệu và bí mật thương mại được bao gồm miễn phí."
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Báo giá Enterprise"
 paperFor = "Chuẩn bị cho"
 pdfSize = "Kích thước PDF"
@@ -10506,9 +10690,13 @@ posture_regulated = "Được quản lý theo quy định"
 posture_regulatedSub = "Mọi danh mục — Tuân thủ, Lưu giữ, Nạp dữ liệu"
 qbr = "Đánh giá kinh doanh hàng quý"
 qbrSub = "SE của bạn xem xét việc sử dụng và lộ trình mỗi quý"
+raiseUsage = "Raise estimated usage"
 region = "Tiểu bang / vùng"
 regionPlaceholder = "California"
-running = "{{annual}} / năm · {{years}} năm {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "Đội ngũ của bạn và số PDF bạn dự kiến xử lý mỗi năm."
 s1Title = "Bạn sẽ xử lý bao nhiêu?"
 s2Sub = "Thời hạn dài hơn được giảm giá; cấp dịch vụ của bạn xác định hỗ trợ."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "ví dụ: 1.000.000"
 years_one = "{{count}} năm"
 years_other = "{{count}} năm"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Thỏa thuận Enterprise"
 agreementSub = "MSA, Order Form và DPA trong một chữ ký."
@@ -10557,6 +10758,8 @@ invoice = "Hóa đơn"
 invoiceSub = "Hóa đơn đăng ký đầu tiên của bạn."
 laterInvoice = "Có sẵn sau khi bạn chấp nhận"
 laterQuote = "Có sẵn khi báo giá của bạn được phát hành"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "Báo giá"
 quoteSub = "Báo giá enterprise chi tiết của bạn."
 sla = "Phụ lục SLA"
@@ -10573,15 +10776,12 @@ title = "Đã xảy ra lỗi"
 [portal.procurement.hero]
 barAria = "Giai đoạn {{current}} trong {{total}}"
 ctaAgreement = "Xem lại & ký thỏa thuận"
-ctaExploring = "Thiết lập bản dùng thử của bạn"
 ctaQuote = "Xem lại báo giá của bạn"
 ctaReviewQuote = "Xem lại báo giá"
 ctaTrial = "Tạo báo giá của bạn"
-documents = "Tài liệu"
 eyebrow = "Doanh nghiệp"
 eyebrowCompany = "{{company}} Doanh nghiệp"
 inviteTeammates = "Mời đồng đội"
-licenseKey = "Khóa giấy phép"
 liveSub = "Tổ chức của bạn đã được cấp phát và giấy phép của bạn đang hoạt động."
 liveTitle = "Bạn đang chạy Stirling Enterprise"
 next = "Tiếp theo: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "Chưa thể tạo file giấy phép offline — vui lòng thử
 downloadOffline = "Tải xuống giấy phép offline (.lic)"
 hint = "Dán khóa này vào một phiên bản tự host để kích hoạt, hoặc lưu lại cho hồ sơ của bạn. Hãy giữ an toàn."
 label = "Khóa giấy phép của bạn"
-subtitle = "Kích hoạt một phiên bản self-hosted bằng khóa này, hoặc giữ lại để lưu hồ sơ."
-title = "Khóa giấy phép của bạn"
 trialFileHint = "Đây là file giấy phép dùng thử của bạn. Khi thỏa thuận của bạn đã hoàn tất, hãy quay lại và tải xuống lần nữa — khác với khóa giấy phép trực tuyến, file .lic sẽ không tự cập nhật."
 
 [portal.procurement.link]
 cta = "Liên kết tài khoản"
 description = "Mua sắm chạy trên tài khoản Stirling được liên kết của bạn: đó là cách chúng tôi cấp phát bản dùng thử, định giá báo giá và bắt đầu lập hóa đơn. Liên kết một tài khoản để bắt đầu."
-eyebrow = "Doanh nghiệp"
 title = "Liên kết tài khoản của bạn để bắt đầu"
 
 [portal.procurement.live]
 description = "Đăng ký của bạn đang hoạt động và giấy phép của bạn đã được cấp. Đội ngũ của bạn đã được cấp phát và việc lập hóa đơn đã bắt đầu."
-eyebrow = "Hoạt động"
 title = "Bạn đã hoạt động trên Stirling Enterprise"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "Chưa thể tải xuống PDF báo giá — vui lòng thử l�
 
 [portal.procurement.payment]
 description = "Báo giá của bạn đã được chấp nhận và giấy phép của bạn đã hoạt động — đội ngũ của bạn có thể bắt đầu ngay. Thanh toán hóa đơn đầu tiên khi bạn sẵn sàng; bạn có thể thanh toán hoặc tải xuống tại đây, không cần email."
-downloadAgreement = "Tải xuống thỏa thuận đã ký"
 downloadInvoice = "Tải xuống hóa đơn"
-eyebrow = "Thanh toán"
-title = "Đã tạo đăng ký"
 viewInvoice = "Xem & thanh toán hóa đơn"
 
 [portal.procurement.review]
 acceptCta = "Chấp nhận báo giá"
 annual = "Phí hằng năm (năm 1)"
 downloadCta = "Tải xuống báo giá"
+oneTime = "one-time"
 poNumber = "Đơn đặt hàng: {{po}}"
 renewal = "Gia hạn ở mức {{amount}}/năm sau thời hạn (+{{pct}}% CPI)"
 tcv = "Thời hạn {{years}} năm, trả trước toàn bộ: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "Gia hạn sẽ thêm 7 ngày và thông báo cho kỹ sư giải pháp của bạn."
 bodyMaxed = "Bạn đã dùng hết mọi lần gia hạn — hãy trao đổi với kỹ sư giải pháp nếu bạn cần thêm thời gian."
-cancel = "Hủy dùng thử"
 extend = "Gia hạn 7 ngày"
 maxed = "Đã đạt giới hạn"
 subtitle = "Bản dùng thử miễn phí của bạn kéo dài đến {{date}}. Không cần thẻ."
 title = "Dùng thử Enterprise"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "Mọi nội dung từ các lần chạy chính sách và trình chỉnh sửa của nhóm bạn cần bạn chú ý."
@@ -11811,6 +12012,13 @@ title = "Làm sạch PDF"
 [sanitizePdf]
 tags = "làm sạch,bảo mật,an toàn,loại bỏ mối đe dọa"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "đổi kích thước,điều chỉnh,tỷ lệ,kích thước trang,đổi kích thước trang,scale page,thay đổi kích thước,điều chỉnh kích thước,phóng to,thu nhỏ trang,vừa với trang,A4,letter size"
 title = "Điều chỉnh tỷ lệ trang"
@@ -11993,6 +12201,13 @@ apiKeys = "Khóa API"
 apiKeysDescription = "Khóa cá nhân để gọi Stirling API từ script và tích hợp."
 title = "Nhà phát triển"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "Tự động giải nén phản hồi API"
 autoUnzipFileLimit = "Giới hạn tệp tự động giải nén"
@@ -12135,15 +12350,24 @@ title = "Tài liệu pháp lý"
 backendDescription = "Giấy phép cho các phụ thuộc backend được đóng gói với server này."
 backendLabel = "Giấy phép Backend"
 backendTitle = "Giấy phép bên thứ ba Backend"
+clearSearch = "Clear search"
 empty = "Không tìm thấy phụ thuộc nào."
 frontendDescription = "Giấy phép cho các phụ thuộc frontend được đóng gói vào bản dựng phát hành."
 frontendLabel = "Giấy phép Frontend"
 frontendTitle = "Giấy phép bên thứ ba Frontend"
 license = "Giấy phép"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "Danh sách được hiển thị trực tiếp trong UI từ gói phát hành hoặc endpoint backend."
 listTitle = "Phụ thuộc được đóng gói"
 loadError = "Không tải được giấy phép bên thứ ba"
 module = "Module"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "Phiên bản"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "Đang chờ"
 remove = "Xóa"
 roleColumn = "Vai trò"
 title = "Thành viên nhóm"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "Giữa"

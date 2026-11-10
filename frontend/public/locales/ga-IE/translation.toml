@@ -1328,6 +1328,10 @@ label = "Comhadlanna Fillteán Breathnaithe"
 description = "An teanga réamhshocraithe d’úsáideoirí nua (m.sh., en_US, es_ES)"
 label = "Teanga Réamhshocraithe"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "Méid uasta uaslódála comhaid (m.sh., 100MB, 1GB)"
 label = "Teorainn Uaslódála Comhaid"
@@ -2969,6 +2973,7 @@ loadError = "Theip ar úsáideoirí a lódáil"
 noTeam = "Gan Foireann"
 noUsers = "Níor aimsíodh aon úsáideoirí eile."
 placeholder = "Roghnaigh úsáideoirí..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (Tusa)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "Socruithe"
 [extractPages.tooltip]
 description = "Baineann sé na leathanaigh roghnaithe isteach i PDF nua, ag coinneáil an ord."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "Oscail san Eagarthóir Comhad"
 viewInViewer = "Féach san Amharcán"
@@ -4657,7 +4673,6 @@ closeFile = "Dún comhad"
 
 [fileEditor]
 closedFile = "Dúnadh {{name}}"
-couldNotSave = "Níorbh fhéidir {{name}} a shábháil"
 filesReordered_one = "Athordaíodh comhad"
 filesReordered_other = "Athordaíodh {{count}} chomhad"
 loadedFromStorage_one = "Luchtaíodh {{count}} chomhad ón stóráil"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "Athshocraítear amárach"
 thisPeriod = "An tréimhse bhilleála seo"
 
 [payment]
+annually = "Annually"
 billingPeriod = "Tréimhse bhilleála"
 cancelTeamChange = "Coinnigh an plean reatha"
 canCloseWindow = "Is féidir leat an fhuinneog seo a dhúnadh anois."
@@ -7157,11 +7173,14 @@ title = "Coigeartaigh plean Foirne"
 
 [payment.capacityStage]
 adjustmentNote = "Taispeánfaidh Stripe an muirear cruinn, aon phrótáiliú agus do chéad dáta billeála eile sula ndeimhníonn tú. Úsáidfear do mhodh íocaíochta sábháilte má tá sé ar fáil."
+billingLabel = "Billing"
 continue = "Lean ar aghaidh chuig íocaíocht"
 currencyAtCheckout = "Deimhníonn Stripe an méid deiridh agus an t-airgeadra íocaíochta ag an tseiceáil amach."
+custom = "Custom"
 customLabel = "Líon úsáideoirí"
 dueToday = "Le híoc inniu"
 enterpriseQuote = "Faigh luachan fiontair"
+enterUsers = "Enter a number of users."
 estimatedTotal = "Iomlán measta"
 lineItem = "Foireann · {{price}}{{period}} in aghaidh gach {{block}} úsáideoir"
 minimumForCurrentUsers = "Tá {{users}} úsáideoir agat, mar sin caithfidh an plean {{minimum}} ar a laghad a chlúdach."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "Fanann cuntais reatha i bhfeidhm. Cuirtear bac ar ús
 overCapacityTitle = "Tá níos mó úsáideoirí ar do fhreastalaí ná mar a chlúdaíonn do phlean"
 perMonth = "/mí"
 perYear = "/bl"
+planName = "Stirling Team"
 reductionNote = "Tosaíonn an acmhainn níos ísle ag do chéad athnuachan eile. Go dtí sin, is féidir leat do liúntas reatha a úsáid. Fanann úsáideoirí reatha; cuirtear bac ar úsáideoirí nua má tá tú thar acmhainn nuair a thiocfaidh an t-athrú i bhfeidhm."
 renewalNote = "Athnuann sé ar {{total}}{{period}}. Cealaigh am ar bith in Úsáid & Billeáil."
 reviewChange = "Athbhreithnigh athrú in Stripe"
-roundsTo = "slánaíonn go {{users}}"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "Clúdaíonn sé gach duine a thugann tú cuireadh dóibh, i mbloic de {{users}} úsáideoir."
 subheadingAdd = "Clúdaíonn do phlean {{current}} úsáideoir inniu. Roghnaigh an t-iomlán nua."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "Úsáideoirí"
 userTotal = "{{users}} úsáideoir"
 
@@ -7261,12 +7284,15 @@ widget = "Réimse foirme - ní téacs leathanaigh é, mar sin ní féidir é a c
 
 [pdfTextEditor.commands]
 edit = "Eagar"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "Cumaisc {{count}} rith i mír"
 mergeRuns_other = "Cumaisc {{count}} rith i mír"
 setColour = "Socraigh dath ar {{run}}"
 setOutline = "Socraigh imlíne ar {{run}}"
+tagPageContent = "Auto-tag page"
 typeInto = "Clóscríobh isteach i {{run}}"
 ungroupParagraph = "Díghrúpáil mír {{run}}"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "Timfhill {{run}}"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "Cuir clib leis"
 artifactText = "Maisiúil"
 cannotChange = "Ní féidir inrochtaineacht na híomhá seo a athrú."
 cannotRetag = "Ní féidir clib an téacs seo a athrú."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (clib shaincheaptha)"
 decorativeInfo = "Scipeálann léitheoirí scáileáin íomhánna maisiúla. Úsáid í le haghaidh teorainneacha, cúlraí agus íomhánna eile nach n-iompraíonn aon fhaisnéis."
 decorativeLabel = "Íomhá mhaisiúil"
@@ -7430,22 +7457,31 @@ encrypted = "Ní féidir clibeanna a chur in eagar i gcomhad criptithe"
 heading = "Inrochtaineacht"
 innerTagLabel = "Clib {{number}}"
 innerTags = "Clibeanna sa téacs seo"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "Cur síos ar iarraidh"
 mixedContent = "Tá ábhar eile san fhíor"
+mixedTags = "Mixed"
 needsDescriptionBadge = "Gan cur síos"
 nextImage = "An chéad íomhá eile"
 notFigure = "Clibáilte mar chuid den téacs"
 removeTag = "Bain clib"
 saveFailed = "Níorbh fhéidir do chuid athruithe inrochtaineachta a shábháil, mar sin níor sábháladh an comhad. Cealaigh iad agus bain triail eile as."
 selectedText = "Téacs roghnaithe"
+tagging = "Tagging pages"
 tagLabel = "Clib"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "Ní féidir é a léamh anseo"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "Ní féidir clibeanna an chomhaid seo a chur in eagar"
 untaggableImages = "Ní féidir iad a chlibeáil anseo"
 untaggedBadge = "Gan chlib"
 untaggedDocument = "Níl aon chlibeanna sa doiciméad"
 untaggedImage = "Ní féidir é a chlibeáil anseo"
 untaggedImages = "Íomhánna gan chlib"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "Ceannteideal gan téacs"
@@ -7504,6 +7540,23 @@ tableHead = "Ceann tábla"
 tableHeader = "Ceanntásc tábla"
 tableRow = "Ró tábla"
 title = "Teideal"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Gníomhartha eagarthóra"
@@ -7935,8 +7988,6 @@ triggerImport = "Ritheann ar iompórtáil"
 [policies.enforcement]
 applying = "Á chur {{names}} i bhfeidhm"
 applyingProgress = "Á chur {{names}} i bhfeidhm ({{done}} as {{total}})"
-exportFailureBody = "Níorbh fhéidir na beartais slándála a chur i bhfeidhm. Easpórtáladh na comhaid mar a bhí."
-exportFailureTitle = "Easpórtáladh gan fhorfheidhmiú"
 failureBody = "Níorbh fhéidir roinnt polasaithe a chur i bhfeidhm ar {{failures}} as {{total}} comhad."
 failureTitle = "Easpórtáladh gan fhorfheidhmiú iomlán"
 printPolicyAppliedBody = "Nuashonraíodh an PDF seo chun beartas a chomhlíonadh. Athbhreithnigh na hathruithe, ansin priontáil arís."
@@ -9142,6 +9193,130 @@ status = "Stádas"
 time = "Am"
 user = "Úsáideoir"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "Bhuail an radharc seo earráid gan choinne. Bain triail eile as, nó roghnaigh rannán eile ón mbarra taoibh."
 retry = "Bain triail eile as"
@@ -9293,6 +9468,7 @@ title = "Níl aon rud le hathbhreithniú"
 [portal.home.download]
 back = "Siar"
 body = "Íoslódáil an aip deisce nó féin-óstáil an freastalaí."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "Déanta"
 guide = "Oscail treoir {{name}}"
 openInBrowser = "Oscail sa bhrabhsálaí ina ionad"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "Iontógáil ríomhphoist"
 
 [portal.procurement]
-subtitle = "Faigh do fhoireann measúnaithe, conraithe agus ionduchtaithe. Gach cáipéis in aon áit amháin."
 title = "Soláthar"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "Níorbh fhéidir an comhaontú a lódáil. Bain triail eile as."
 loading = "An comhaontú á lódáil..."
 ref = "Tag {{ref}} · {{version}}"
 requestChanges = "Iarr athruithe"
-scrollHint = "Scrollaigh le hathbhreithniú"
 signatory = "Ainm an tsínitheora"
 signatoryPlaceholder = "Ainm iomlán"
 signatoryTitle = "Teideal an tsínitheora"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "m.sh. Abhcóide Ginearálta"
 signError = "Níorbh fhéidir do shíniú a thaifeadadh. Bain triail eile as."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "Breiseáin"
 addressLine1 = "Seoladh líne 1"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "Seoladh líne 2"
 addressLine2Placeholder = "Svuít, urlár, foirgneamh"
 back = "Ar ais"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "Ainm gnó"
 businessNamePlaceholder = "Do chuideachta"
 city = "Cathair"
 cityPlaceholder = "San Francisco"
 completeRequired = "Comhlánaigh na réimsí riachtanacha (marcáilte *) le ríomhphost bailí sula ngintear an luachan."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "Ríomhphost teagmhála"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "Ainm teagmhála"
 contactNamePlaceholder = "Jane Doe"
 continue = "Lean ar aghaidh"
 done = "Déanta"
+editUsage = "Edit usage"
 eula = "Tá Stirling Enterprise EULA léite agam agus aontaím leis. Rialaíonn sé an comhaontú a ghintear ón luachan seo."
 generate = "Gin luachan"
 indemnification = "Cosaint IP fheabhsaithe"
 indemnificationSub = "Síneann sé ár gcosaint IP chuig éilimh phaitinne. Tá slánaíocht bhunlíne maidir le cóipcheart, trádmharc agus rúin trádála san áireamh saor in aisce."
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Luachan fiontair"
 paperFor = "Ullmhaithe do"
 pdfSize = "Méid PDF"
@@ -10506,9 +10690,13 @@ posture_regulated = "Rialáilte"
 posture_regulatedSub = "Gach catagóir — Comhlíonadh, Coinneáil, Iontógáil"
 qbr = "Athbhreithnithe gnó ráithiúla"
 qbrSub = "Déanann do SE athbhreithniú ar úsáid agus treochlár gach ráithe"
+raiseUsage = "Raise estimated usage"
 region = "Stát / réigiún"
 regionPlaceholder = "California"
-running = "{{annual}} / bl · {{years}} bl {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "D’fhoireann, agus na PDFs a bhfuil súil agat a rith gach bliain."
 s1Title = "Cé mhéad a phróiseálfaidh tú?"
 s2Sub = "Lascainíonn téarmaí níos faide an ráta; socraíonn do leibhéal seirbhíse an tacaíocht."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "m.sh. 1,000,000"
 years_one = "{{count}} bhliain"
 years_other = "{{count}} bliana"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Comhaontú Fiontair"
 agreementSub = "MSA, Foirm Ordaithe agus DPA in aon síniú amháin."
@@ -10557,6 +10758,8 @@ invoice = "Sonrasc"
 invoiceSub = "Do chéad sonrasc síntiúis."
 laterInvoice = "Ar fáil tar éis duit glacadh leis"
 laterQuote = "Ar fáil nuair a eisítear do luachan"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "Luachan"
 quoteSub = "Do luachan fiontair mionsonraithe."
 sla = "Iarscríbhinn SLA"
@@ -10573,15 +10776,12 @@ title = "Chuaigh rud éigin mícheart"
 [portal.procurement.hero]
 barAria = "Céim {{current}} as {{total}}"
 ctaAgreement = "Athbhreithnigh & sínigh comhaontú"
-ctaExploring = "Socraigh do thriail"
 ctaQuote = "Athbhreithnigh do luachan"
 ctaReviewQuote = "Athbhreithnigh luachan"
 ctaTrial = "Tóg do luachan"
-documents = "Doiciméid"
 eyebrow = "Fiontar"
 eyebrowCompany = "{{company}} Fiontar"
 inviteTeammates = "Tabhair cuireadh do chomhpháirtithe foirne"
-licenseKey = "Eochair cheadúnais"
 liveSub = "Tá d'eagraíocht soláthraithe agus tá do cheadúnas gníomhach."
 liveTitle = "Tá tú beo ar Stirling Enterprise"
 next = "Ar aghaidh: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "Níorbh fhéidir an comhad ceadúnais as líne a ghiniúint fó
 downloadOffline = "Íoslódáil ceadúnas as líne (.lic)"
 hint = "Greamaigh an eochair seo isteach in instance self-hosted chun é a ghníomhachtú, nó coinnigh í do do thaifid. Coinnigh slán í."
 label = "D’eochair cheadúnais"
-subtitle = "Gníomhachtaigh ásc féin-óstáilte leis an eochair seo, nó coinnigh í do do thaifid."
-title = "D'eochair cheadúnais"
 trialFileHint = "Seo do chomhad ceadúnais trialach. Nuair a bheidh do chomhaontú i bhfeidhm, tar ar ais agus íoslódáil arís é — murab ionann agus an eochair cheadúnais ar líne, ní nuashonróidh an comhad .lic é féin."
 
 [portal.procurement.link]
 cta = "Nasc cuntas"
 description = "Ritheann soláthar ar do chuntas Stirling nasctha: sin mar a sholáthraímid an triail, a phraghsálaimid do luachan, agus a thosaímid billeáil. Nasc cuntas chun tosú."
-eyebrow = "Fiontar"
 title = "Nasc do chuntas chun tosú"
 
 [portal.procurement.live]
 description = "Tá do shíntiús gníomhach agus tá do cheadúnas eisithe. Tá d’fhoireann soláthraithe agus tá billeáil tosaithe."
-eyebrow = "Beo"
 title = "Tá tú beo ar Stirling Enterprise"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "Níorbh fhéidir an PDF luachana a íoslódáil fós — bain t
 
 [portal.procurement.payment]
 description = "Glacadh le do luachan agus tá do cheadúnas gníomhach cheana — is féidir le d’fhoireann tosú láithreach. Íoc an chéad sonrasc nuair atá tú réidh; is féidir leat é a íoc nó a íoslódáil anseo, gan ríomhphost de dhíth."
-downloadAgreement = "Íoslódáil comhaontú sínithe"
 downloadInvoice = "Íoslódáil sonrasc"
-eyebrow = "Íocaíocht"
-title = "Cruthaíodh síntiús"
 viewInvoice = "Féach & íoc sonrasc"
 
 [portal.procurement.review]
 acceptCta = "Glac le luachan"
 annual = "Táille bhliantúil (bliain 1)"
 downloadCta = "Íoslódáil luachan"
+oneTime = "one-time"
 poNumber = "Ordú ceannaigh: {{po}}"
 renewal = "Athnuachan ag {{amount}}/bliain tar éis an téarma (+{{pct}}% CPI)"
 tcv = "Téarma {{years}} bliana, íoctha ina iomláine roimh ré: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "Cuireann síneadh 7 lá leis agus cuireann sé d’innealtóir réiteach ar an eolas."
 bodyMaxed = "Tá do shíntí ar fad úsáidte agat — labhair le d’innealtóir réiteach má tá níos mó ama uait."
-cancel = "Cealaigh triail"
 extend = "Sín 7 lá"
 maxed = "Uasmhéadaithe"
 subtitle = "Maireann do thriail saor in aisce go dtí {{date}}. Níl cárta de dhíth."
 title = "Triail Enterprise"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "Aon rud ó rithí do bheartais agus ó eagarthóirí d’fhoirne a bhfuil d’aird ag teastáil uaidh."
@@ -11811,6 +12012,13 @@ title = "PDF sláintíocht"
 [sanitizePdf]
 tags = "glan, slán, sábháilte, bain bagairtí"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "athraigh méid,coigeartaigh,scála,méid leathanaigh,athraigh méid leathanaigh,scálaigh leathanach,athraigh méid,coigeartaigh méid,méadaigh,crap leathanach,oiriúnaigh don leathanach,A4,letter size"
 title = "Coigeartaigh scála an leathanaigh"
@@ -11993,6 +12201,13 @@ apiKeys = "Eochracha API"
 apiKeysDescription = "Eochracha pearsanta chun glaoch ar an Stirling API ó scripteanna agus comhtháthuithe."
 title = "Forbróir"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "Dífhuascailt uathoibríoch freagraí API"
 autoUnzipFileLimit = "Teorainn chomhaid dífhuascailte uathoibríoch"
@@ -12135,15 +12350,24 @@ title = "Doiciméid Dhlíthiúla"
 backendDescription = "Ceadúnais do spleáchais backend atá cuachta leis an bhfreastalaí seo."
 backendLabel = "Ceadúnais Backend"
 backendTitle = "Ceadúnais Backend 3rd Party"
+clearSearch = "Clear search"
 empty = "Níor aimsíodh aon spleáchais."
 frontendDescription = "Ceadúnais do spleáchais frontend atá cuachta sa release build."
 frontendLabel = "Ceadúnais Frontend"
 frontendTitle = "Ceadúnais Frontend 3rd Party"
 license = "Ceadúnas"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "Taispeántar an liosta go díreach san UI ón release bundle nó ón backend endpoint."
 listTitle = "Spleáchais chuachta"
 loadError = "Theip ar lódáil ceadúnais tríú páirtí"
 module = "Modúl"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "Leagan"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "Ar feitheamh"
 remove = "Bain"
 roleColumn = "Ról"
 title = "Baill Foirne"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "Lár"

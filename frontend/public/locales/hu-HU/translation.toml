@@ -1328,6 +1328,10 @@ label = "Figyelt mappák könyvtárai"
 description = "Az új felhasználók alapértelmezett nyelve (pl. en_US, es_ES)"
 label = "Alapértelmezett területi beállítás"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "Maximális fájlméret feltöltéskor (pl. 100MB, 1GB)"
 label = "Fájlfeltöltési korlát"
@@ -2969,6 +2973,7 @@ loadError = "A felhasználók betöltése sikertelen"
 noTeam = "Nincs csapat"
 noUsers = "Nem található más felhasználó."
 placeholder = "Felhasználók kiválasztása..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (Ön)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "Beállítások"
 [extractPages.tooltip]
 description = "A kiválasztott oldalakat új PDF-be emeli át, az eredeti sorrendet megtartva."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "Megnyitás a fájlszerkesztőben"
 viewInViewer = "Megtekintés a megjelenítőben"
@@ -4657,7 +4673,6 @@ closeFile = "Fájl bezárása"
 
 [fileEditor]
 closedFile = "{{name}} bezárva"
-couldNotSave = "Nem sikerült menteni: {{name}}"
 filesReordered_one = "Fájl átrendezve"
 filesReordered_other = "{{count}} fájl átrendezve"
 loadedFromStorage_one = "{{count}} fájl betöltve a tárhelyről"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "Holnap visszaáll"
 thisPeriod = "Ez a számlázási időszak"
 
 [payment]
+annually = "Annually"
 billingPeriod = "Számlázási időszak"
 cancelTeamChange = "Jelenlegi csomag megtartása"
 canCloseWindow = "Most bezárhatja ezt az ablakot."
@@ -7157,11 +7173,14 @@ title = "Team csomag módosítása"
 
 [payment.capacityStage]
 adjustmentNote = "A Stripe megjeleníti a pontos díjat, az esetleges időarányos tételeket és a következő számlázási dátumot, mielőtt megerősíted. Ha elérhető, a mentett fizetési módod lesz használva."
+billingLabel = "Billing"
 continue = "Tovább a fizetéshez"
 currencyAtCheckout = "A Stripe a végső összeget és a fizetési pénznemet a fizetéskor erősíti meg."
+custom = "Custom"
 customLabel = "Felhasználók száma"
 dueToday = "Ma esedékes"
 enterpriseQuote = "Vállalati ajánlat kérése"
+enterUsers = "Enter a number of users."
 estimatedTotal = "Becsült végösszeg"
 lineItem = "Team · {{price}}{{period}} / {{block}} felhasználó"
 minimumForCurrentUsers = "{{users}} felhasználód van, ezért a csomagnak legalább {{minimum}} felhasználót kell lefednie."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "A meglévő fiókok megmaradnak. Felhasználók hozz�
 overCapacityTitle = "A szervereden több felhasználó van, mint amennyit a csomagod lefed"
 perMonth = "/hó"
 perYear = "/év"
+planName = "Stirling Team"
 reductionNote = "Az alacsonyabb kapacitás a következő megújításkor lép életbe. Addig használhatod a jelenlegi keretedet. A meglévő felhasználók megmaradnak; az új felhasználók le lesznek tiltva, ha a változás életbe lépésekor túlléped a kapacitást."
 renewalNote = "Megújul ezen az áron: {{total}}{{period}}. Bármikor lemondható a Használat és számlázás alatt."
 reviewChange = "Módosítás áttekintése a Stripe-ban"
-roundsTo = "{{users}} felhasználóra kerekítve"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "Minden meghívottat lefed, {{users}} felhasználós blokkokban."
 subheadingAdd = "A csomagod ma {{current}} felhasználót fed le. Válaszd ki az új összesített számot."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "Felhasználók"
 userTotal = "{{users}} felhasználó"
 
@@ -7261,12 +7284,15 @@ widget = "Űrlapmező – nem oldalszöveg, ezért itt nem szerkeszthető"
 
 [pdfTextEditor.commands]
 edit = "Szerkesztés"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "{{count}} szövegrész egyesítése bekezdéssé"
 mergeRuns_other = "{{count}} szövegrész egyesítése bekezdéssé"
 setColour = "Szín beállítása ezen: {{run}}"
 setOutline = "Körvonal beállítása ezen: {{run}}"
+tagPageContent = "Auto-tag page"
 typeInto = "Gépelés ide: {{run}}"
 ungroupParagraph = "{{run}} bekezdés csoportbontása"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "Sortörés alkalmazása ezen: {{run}}"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "Címke hozzáadása"
 artifactText = "Dekoratív"
 cannotChange = "A kép akadálymentességi beállításai nem módosíthatók."
 cannotRetag = "Ennek a szövegnek a címkéje nem módosítható."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (egyéni címke)"
 decorativeInfo = "A képernyőolvasók kihagyják a dekoratív képeket. Használja szegélyekhez, hátterekhez és más, információt nem hordozó képekhez."
 decorativeLabel = "Dekoratív kép"
@@ -7430,22 +7457,31 @@ encrypted = "A címkék nem szerkeszthetők titkosított fájlban"
 heading = "Akadálymentesség"
 innerTagLabel = "Címke {{number}}"
 innerTags = "Címkék ebben a szövegben"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "Hiányzó leírások"
 mixedContent = "Az ábra más tartalmat is tartalmaz"
+mixedTags = "Mixed"
 needsDescriptionBadge = "Nincs leírás"
 nextImage = "Következő kép"
 notFigure = "A szöveg részeként címkézve"
 removeTag = "Címke eltávolítása"
 saveFailed = "Az akadálymentességi módosításokat nem sikerült menteni, ezért a fájl nem lett mentve. Vonja vissza őket, és próbálja újra."
 selectedText = "Kijelölt szöveg"
+tagging = "Tagging pages"
 tagLabel = "Címke"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "Itt nem olvasható"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "A fájl címkéi nem szerkeszthetők"
 untaggableImages = "Itt nem címkézhető"
 untaggedBadge = "Nincs címkézve"
 untaggedDocument = "A dokumentumnak nincsenek címkéi"
 untaggedImage = "Itt nem címkézhető"
 untaggedImages = "Címkézetlen képek"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "Címsor szöveg nélkül"
@@ -7504,6 +7540,23 @@ tableHead = "Táblázat fejléce"
 tableHeader = "Táblázatfejléc"
 tableRow = "Táblázatsor"
 title = "Cím"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Szerkesztési műveletek"
@@ -7935,8 +7988,6 @@ triggerImport = "Importáláskor fut"
 [policies.enforcement]
 applying = "A(z) {{names}} alkalmazása"
 applyingProgress = "A(z) {{names}} alkalmazása ({{done}} / {{total}})"
-exportFailureBody = "A biztonsági házirendeket nem sikerült alkalmazni. A fájlok változtatás nélkül lettek exportálva."
-exportFailureTitle = "Exportálva érvényesítés nélkül"
 failureBody = "Néhány szabályzatot nem sikerült alkalmazni {{failures}} fájlra az összesen {{total}} fájlból."
 failureTitle = "Exportálva teljes érvényesítés nélkül"
 printPolicyAppliedBody = "Ez a PDF frissítve lett, hogy megfeleljen egy házirendnek. Tekintse át a változtatásokat, majd nyomtasson újra."
@@ -9142,6 +9193,130 @@ status = "Állapot"
 time = "Idő"
 user = "Felhasználó"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "Ez a nézet váratlan hibába ütközött. Próbálja újra, vagy válasszon másik szakaszt az oldalsávból."
 retry = "Próbálja újra"
@@ -9293,6 +9468,7 @@ title = "Nincs áttekintendő elem"
 [portal.home.download]
 back = "Vissza"
 body = "Töltse le az asztali alkalmazást, vagy üzemeltesse saját maga a szervert."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "Kész"
 guide = "A(z) {{name}} útmutató megnyitása"
 openInBrowser = "Megnyitás inkább böngészőben"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "E-mail fogadás"
 
 [portal.procurement]
-subtitle = "Értékelje, szerződtesse és vezesse be csapatát. Minden dokumentum egy helyen."
 title = "Beszerzés"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "Nem sikerült betölteni a megállapodást. Kérjük, próbálja ú
 loading = "Megállapodás betöltése..."
 ref = "Hiv. {{ref}} · {{version}}"
 requestChanges = "Módosítások kérése"
-scrollHint = "Görgessen az áttekintéshez"
 signatory = "Aláíró neve"
 signatoryPlaceholder = "Teljes név"
 signatoryTitle = "Aláíró beosztása"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "pl. vezető jogtanácsos"
 signError = "Nem sikerült rögzíteni az aláírását. Kérjük, próbálja újra."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "Kiegészítők"
 addressLine1 = "Cím 1. sora"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "Cím 2. sora"
 addressLine2Placeholder = "Lakosztály, emelet, épület"
 back = "Vissza"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "Cégnév"
 businessNamePlaceholder = "Az Ön cége"
 city = "Város"
 cityPlaceholder = "San Francisco"
 completeRequired = "Kérjük, töltse ki a kötelező mezőket (*-gal jelölve) érvényes e-mail-címmel az ajánlat létrehozása előtt."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "Kapcsolattartó e-mail-címe"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "Kapcsolattartó neve"
 contactNamePlaceholder = "Jane Doe"
 continue = "Folytatás"
 done = "Kész"
+editUsage = "Edit usage"
 eula = "Elolvastam és elfogadom a Stirling Enterprise EULA feltételeit. Ez szabályozza az ajánlatból létrehozott megállapodást."
 generate = "Ajánlat generálása"
 indemnification = "Fokozott szellemitulajdon-védelem"
 indemnificationSub = "Kiterjeszti IP-védelmünket a szabadalmi igényekre. Az alap szerzői jogi, védjegy- és üzletititok-kártalanítás ingyenesen benne van."
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Enterprise ajánlat"
 paperFor = "Készült számára"
 pdfSize = "PDF mérete"
@@ -10506,9 +10690,13 @@ posture_regulated = "Szabályozott"
 posture_regulatedSub = "Minden kategória — Megfelelőség, Megőrzés, Bevitel"
 qbr = "Negyedéves üzleti áttekintések"
 qbrSub = "Az Ön SE-je negyedévente áttekinti a használatot és az ütemtervet"
+raiseUsage = "Raise estimated usage"
 region = "Állam / régió"
 regionPlaceholder = "California"
-running = "{{annual}} / év · {{years}} éves {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "Az Ön csapata és az évente várhatóan futtatott PDF-ek."
 s1Title = "Mennyit fog feldolgozni?"
 s2Sub = "A hosszabb időtartamok kedvezményt adnak; a szolgáltatási szint határozza meg a támogatást."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "pl. 1 000 000"
 years_one = "{{count}} év"
 years_other = "{{count}} év"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Enterprise-megállapodás"
 agreementSub = "MSA, Order Form és DPA egyetlen aláírásban."
@@ -10557,6 +10758,8 @@ invoice = "Számla"
 invoiceSub = "Az első előfizetési számlája."
 laterInvoice = "Elfogadás után érhető el"
 laterQuote = "Az ajánlat kiadása után érhető el"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "Ajánlat"
 quoteSub = "Tételes Enterprise ajánlata."
 sla = "SLA melléklet"
@@ -10573,15 +10776,12 @@ title = "Valami hiba történt"
 [portal.procurement.hero]
 barAria = "{{current}}. szakasz / {{total}}"
 ctaAgreement = "Megállapodás áttekintése és aláírása"
-ctaExploring = "Próbaidőszak beállítása"
 ctaQuote = "Ajánlat áttekintése"
 ctaReviewQuote = "Ajánlat áttekintése"
 ctaTrial = "Ajánlat összeállítása"
-documents = "Dokumentumok"
 eyebrow = "Enterprise"
 eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Csapattársak meghívása"
-licenseKey = "Licenckulcs"
 liveSub = "Szervezete kiépítve, licence aktív."
 liveTitle = "Élőben van a Stirling Enterprise-on"
 next = "Következő: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "Még nem sikerült létrehozni az offline licencfájlt — kér
 downloadOffline = "Offline licenc letöltése (.lic)"
 hint = "Illessze be ezt a kulcsot egy self-hosted példányba az aktiváláshoz, vagy őrizze meg a nyilvántartásához. Tartsa biztonságban."
 label = "Az Ön licenckulcsa"
-subtitle = "Aktiváljon egy saját üzemeltetésű példányt ezzel a kulccsal, vagy őrizze meg a nyilvántartásához."
-title = "Az Ön licenckulcsa"
 trialFileHint = "Ez az Ön próba licencfájlja. Miután a megállapodás létrejött, térjen vissza, és töltse le újra — az online licenckulccsal ellentétben a .lic fájl nem frissül magától."
 
 [portal.procurement.link]
 cta = "Fiók összekapcsolása"
 description = "A beszerzés az összekapcsolt Stirling-fiókján fut: így hozzuk létre a próbaidőszakot, árazzuk be az ajánlatát és indítjuk el a számlázást. A kezdéshez kapcsoljon össze egy fiókot."
-eyebrow = "Enterprise"
 title = "Kapcsolja össze fiókját a kezdéshez"
 
 [portal.procurement.live]
 description = "Az előfizetése aktív, és a licence ki lett állítva. A csapata létrehozva, és a számlázás elindult."
-eyebrow = "Élő"
 title = "Élőben van a Stirling Enterprise-on"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "Még nem sikerült letölteni az ajánlat PDF-et — kérjük, 
 
 [portal.procurement.payment]
 description = "Az ajánlatát elfogadtuk, és a licence már aktív — a csapata azonnal kezdhet. Fizesse ki az első számlát, amikor készen áll; itt fizetheti ki vagy töltheti le, email nélkül."
-downloadAgreement = "Aláírt megállapodás letöltése"
 downloadInvoice = "Számla letöltése"
-eyebrow = "Fizetés"
-title = "Előfizetés létrehozva"
 viewInvoice = "Számla megtekintése és fizetése"
 
 [portal.procurement.review]
 acceptCta = "Ajánlat elfogadása"
 annual = "Éves díj (1. év)"
 downloadCta = "Ajánlat letöltése"
+oneTime = "one-time"
 poNumber = "Beszerzési megrendelés: {{po}}"
 renewal = "A futamidő után {{amount}}/év áron újul meg (+{{pct}}% CPI)"
 tcv = "{{years}} éves futamidő, előre teljes egészében fizetve: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "A hosszabbítás 7 napot ad hozzá, és értesíti a solutions engineer-jét."
 bodyMaxed = "Felhasználta az összes hosszabbítást — beszéljen a solutions engineer-jével, ha több időre van szüksége."
-cancel = "Próbaidőszak lemondása"
 extend = "7 nappal meghosszabbítás"
 maxed = "Elérte a maximumot"
 subtitle = "Az ingyenes próbaidőszak {{date}} dátumig tart. Kártya nem szükséges."
 title = "Enterprise próbaidőszak"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "Minden, ami a szabályzatfuttatásokból és a csapat szerkesztőitől figyelmet igényel."
@@ -11811,6 +12012,13 @@ title = "PDF tisztítása"
 [sanitizePdf]
 tags = "tisztítás,biztonság,védelem,veszélyek eltávolítása"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "átméretezés,igazítás,méretezés,oldalméret,oldal átméretezése,oldal méretezése,méret módosítása,méret igazítása,nagyítás,oldal kicsinyítése,oldalhoz igazítás,A4,letter méret"
 title = "Oldalméret beállítása"
@@ -11993,6 +12201,13 @@ apiKeys = "API-kulcsok"
 apiKeysDescription = "Személyes kulcsok a Stirling API szkriptekből és integrációkból történő hívásához."
 title = "Fejlesztő"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "API válaszok automatikus kicsomagolása"
 autoUnzipFileLimit = "Automatikus kicsomagolás fájlkorlátja"
@@ -12135,15 +12350,24 @@ title = "Jogi dokumentumok"
 backendDescription = "A szerverrel csomagolt backend függőségek licencei."
 backendLabel = "Backend licencek"
 backendTitle = "Backend harmadik féltől származó licencek"
+clearSearch = "Clear search"
 empty = "Nem találhatók függőségek."
 frontendDescription = "A release buildbe csomagolt frontend függőségek licencei."
 frontendLabel = "Frontend licencek"
 frontendTitle = "Frontend harmadik féltől származó licencek"
 license = "Licenc"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "A lista közvetlenül az UI-ban jelenik meg a release bundle-ből vagy a backend endpointból."
 listTitle = "Csomagolt függőségek"
 loadError = "Nem sikerült betölteni a harmadik féltől származó licenceket"
 module = "Modul"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "Verzió"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "Függőben"
 remove = "Eltávolítás"
 roleColumn = "Szerep"
 title = "Csapattagok"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "Középre"

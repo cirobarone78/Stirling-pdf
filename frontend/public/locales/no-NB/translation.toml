@@ -1328,6 +1328,10 @@ label = "Kataloger for overvåkede mapper"
 description = "Standardspråk for nye brukere (f.eks. en_US, es_ES)"
 label = "Standard lokalitet"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "Maksimal filopplastingsstørrelse (f.eks. 100MB, 1GB)"
 label = "Grense for filopplasting"
@@ -2969,6 +2973,7 @@ loadError = "Kunne ikke laste brukere"
 noTeam = "Ingen team"
 noUsers = "Ingen andre brukere funnet."
 placeholder = "Velg brukere ..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (Du)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "Innstillinger"
 [extractPages.tooltip]
 description = "Ekstraherer de valgte sidene til en ny PDF og bevarer rekkefølgen."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "Åpne i filredigerer"
 viewInViewer = "Vis i fremviser"
@@ -4657,7 +4673,6 @@ closeFile = "Lukk fil"
 
 [fileEditor]
 closedFile = "Lukket {{name}}"
-couldNotSave = "Kunne ikke lagre {{name}}"
 filesReordered_one = "Fil omorganisert"
 filesReordered_other = "{{count}} filer omorganisert"
 loadedFromStorage_one = "Lastet {{count}} fil fra lagring"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "Tilbakestilles i morgen"
 thisPeriod = "Denne faktureringsperioden"
 
 [payment]
+annually = "Annually"
 billingPeriod = "Faktureringsperiode"
 cancelTeamChange = "Behold gjeldende plan"
 canCloseWindow = "Du kan nå lukke dette vinduet."
@@ -7157,11 +7173,14 @@ title = "Juster Team-plan"
 
 [payment.capacityStage]
 adjustmentNote = "Stripe viser nøyaktig kostnad, eventuelle forholdsmessige justeringer og neste faktureringsdato før du bekrefter. Den lagrede betalingsmåten din brukes hvis den er tilgjengelig."
+billingLabel = "Billing"
 continue = "Fortsett til betaling"
 currencyAtCheckout = "Stripe bekrefter det endelige beløpet og betalingsvalutaen i kassen."
+custom = "Custom"
 customLabel = "Antall brukere"
 dueToday = "Forfaller i dag"
 enterpriseQuote = "Få et bedriftstilbud"
+enterUsers = "Enter a number of users."
 estimatedTotal = "Estimert total"
 lineItem = "Team · {{price}}{{period}} per {{block}} brukere"
 minimumForCurrentUsers = "Du har {{users}} brukere, så planen må dekke minst {{minimum}}."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "Eksisterende kontoer forblir på plass. Det er blokke
 overCapacityTitle = "Serveren din har flere brukere enn planen din dekker"
 perMonth = "/mnd"
 perYear = "/år"
+planName = "Stirling Team"
 reductionNote = "Den lavere kapasiteten starter ved neste fornyelse. Inntil da kan du bruke den gjeldende kvoten din. Eksisterende brukere blir værende; nye brukere blokkeres hvis du er over kapasitet når endringen trer i kraft."
 renewalNote = "Fornyes til {{total}}{{period}}. Avbryt når som helst i Bruk og fakturering."
 reviewChange = "Se gjennom endring i Stripe"
-roundsTo = "avrundes til {{users}}"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "Dekker alle du inviterer, i blokker på {{users}} brukere."
 subheadingAdd = "Planen din dekker {{current}} brukere i dag. Velg den nye totalen."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "Brukere"
 userTotal = "{{users}} brukere"
 
@@ -7261,12 +7284,15 @@ widget = "Skjemafelt – ikke sidetekst, så det kan ikke redigeres her"
 
 [pdfTextEditor.commands]
 edit = "Rediger"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "Slå sammen {{count}} run til et avsnitt"
 mergeRuns_other = "Slå sammen {{count}} runs til et avsnitt"
 setColour = "Angi farge på {{run}}"
 setOutline = "Angi outline på {{run}}"
+tagPageContent = "Auto-tag page"
 typeInto = "Skriv i {{run}}"
 ungroupParagraph = "Del opp avsnitt {{run}}"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "Bryt {{run}}"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "Legg til tagg"
 artifactText = "Dekorativ"
 cannotChange = "Tilgjengeligheten for dette bildet kan ikke endres."
 cannotRetag = "Taggen for denne teksten kan ikke endres."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (egendefinert tagg)"
 decorativeInfo = "Skjermlesere hopper over dekorative bilder. Bruk det for rammer, bakgrunner og andre bilder som ikke inneholder informasjon."
 decorativeLabel = "Dekorativt bilde"
@@ -7430,22 +7457,31 @@ encrypted = "Tagger kan ikke redigeres i en kryptert fil"
 heading = "Tilgjengelighet"
 innerTagLabel = "Tagg {{number}}"
 innerTags = "Tagger i denne teksten"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "Manglende beskrivelser"
 mixedContent = "Figur inneholder annet innhold"
+mixedTags = "Mixed"
 needsDescriptionBadge = "Ingen beskrivelse"
 nextImage = "Neste bilde"
 notFigure = "Tagget som del av teksten"
 removeTag = "Fjern tagg"
 saveFailed = "Tilgjengelighetsendringene dine kunne ikke lagres, så filen ble ikke lagret. Angre dem og prøv igjen."
 selectedText = "Valgt tekst"
+tagging = "Tagging pages"
 tagLabel = "Tagg"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "Kan ikke leses her"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "Taggene i denne filen kan ikke redigeres"
 untaggableImages = "Kan ikke tagges her"
 untaggedBadge = "Ikke tagget"
 untaggedDocument = "Dokumentet har ingen tagger"
 untaggedImage = "Kan ikke tagges her"
 untaggedImages = "Utaggede bilder"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "Overskrift uten tekst"
@@ -7504,6 +7540,23 @@ tableHead = "Tabellhode"
 tableHeader = "Tabelloverskrift"
 tableRow = "Tabellrad"
 title = "Tittel"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Redigeringshandlinger"
@@ -7935,8 +7988,6 @@ triggerImport = "Kjører ved import"
 [policies.enforcement]
 applying = "Tar i bruk {{names}}"
 applyingProgress = "Tar i bruk {{names}} ({{done}} av {{total}})"
-exportFailureBody = "Sikkerhetspolicyer kunne ikke tas i bruk. Filene ble eksportert som de er."
-exportFailureTitle = "Eksportert uten håndheving"
 failureBody = "Noen retningslinjer kunne ikke brukes på {{failures}} av {{total}} fil(er)."
 failureTitle = "Eksportert uten full håndheving"
 printPolicyAppliedBody = "Denne PDF-en ble oppdatert for å oppfylle en policy. Gå gjennom endringene, og skriv deretter ut på nytt."
@@ -9142,6 +9193,130 @@ status = "Status"
 time = "Tid"
 user = "Bruker"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "Denne visningen traff en uventet feil. Prøv igjen, eller velg en annen seksjon fra sidefeltet."
 retry = "Prøv igjen"
@@ -9293,6 +9468,7 @@ title = "Ingenting å gjennomgå"
 [portal.home.download]
 back = "Tilbake"
 body = "Last ned skrivebordsappen eller selvhost serveren."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "Ferdig"
 guide = "Åpne {{name}}-veiledningen"
 openInBrowser = "Åpne i nettleseren i stedet"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "E-postinntak"
 
 [portal.procurement]
-subtitle = "Få teamet evaluert, kontraktsfestet og onboardet. Alle dokumenter på ett sted."
 title = "Innkjøp"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "Kunne ikke laste avtalen. Prøv igjen."
 loading = "Laster avtalen..."
 ref = "Ref {{ref}} · {{version}}"
 requestChanges = "Be om endringer"
-scrollHint = "Rull for å gjennomgå"
 signatory = "Signatarnavn"
 signatoryPlaceholder = "Fullt navn"
 signatoryTitle = "Signatartittel"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "f.eks. juridisk direktør"
 signError = "Kunne ikke registrere signaturen din. Prøv igjen."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "Tillegg"
 addressLine1 = "Adresselinje 1"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "Adresselinje 2"
 addressLine2Placeholder = "Suite, etasje, bygning"
 back = "Tilbake"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "Bedriftsnavn"
 businessNamePlaceholder = "Bedriften din"
 city = "By"
 cityPlaceholder = "San Francisco"
 completeRequired = "Fyll ut de obligatoriske feltene (merket *) med en gyldig e-post før du genererer tilbudet."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "Kontakt-e-post"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "Kontaktnavn"
 contactNamePlaceholder = "Jane Doe"
 continue = "Fortsett"
 done = "Ferdig"
+editUsage = "Edit usage"
 eula = "Jeg har lest og godtar Stirling Enterprise EULA. Den styrer avtalen som genereres fra dette tilbudet."
 generate = "Generer tilbud"
 indemnification = "Utvidet IP-beskyttelse"
 indemnificationSub = "Utvider vårt IP-forsvar til patentkrav. Grunnleggende skadesløsholdelse for opphavsrett, varemerker og forretningshemmeligheter er inkludert gratis."
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Enterprise-tilbud"
 paperFor = "Utarbeidet for"
 pdfSize = "PDF-størrelse"
@@ -10506,9 +10690,13 @@ posture_regulated = "Regulert"
 posture_regulatedSub = "Hver kategori — samsvar, oppbevaring, inntak"
 qbr = "Kvartalsvise forretningsgjennomganger"
 qbrSub = "Din SE gjennomgår bruk og veikart hvert kvartal"
+raiseUsage = "Raise estimated usage"
 region = "Stat / region"
 regionPlaceholder = "California"
-running = "{{annual}} / år · {{years}} år {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "Teamet ditt, og PDF-ene du forventer å kjøre hvert år."
 s1Title = "Hvor mye vil du behandle?"
 s2Sub = "Lengre perioder gir rabatt på satsen; servicenivået ditt bestemmer support."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "f.eks. 1,000,000"
 years_one = "{{count}} år"
 years_other = "{{count}} år"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Enterprise-avtale"
 agreementSub = "MSA, bestillingsskjema og DPA i én signatur."
@@ -10557,6 +10758,8 @@ invoice = "Faktura"
 invoiceSub = "Din første abonnementsfaktura."
 laterInvoice = "Tilgjengelig etter at du godtar"
 laterQuote = "Tilgjengelig når tilbudet ditt er utstedt"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "Tilbud"
 quoteSub = "Ditt spesifiserte Enterprise-tilbud."
 sla = "SLA-vedlegg"
@@ -10573,15 +10776,12 @@ title = "Noe gikk galt"
 [portal.procurement.hero]
 barAria = "Trinn {{current}} av {{total}}"
 ctaAgreement = "Se gjennom og signer avtale"
-ctaExploring = "Sett opp prøveperioden din"
 ctaQuote = "Se gjennom tilbudet ditt"
 ctaReviewQuote = "Gå gjennom tilbud"
 ctaTrial = "Bygg tilbudet ditt"
-documents = "Dokumenter"
 eyebrow = "Enterprise"
 eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Inviter teammedlemmer"
-licenseKey = "Lisensnøkkel"
 liveSub = "Organisasjonen din er klargjort, og lisensen din er aktiv."
 liveTitle = "Du er live på Stirling Enterprise"
 next = "Neste: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "Kunne ikke generere offline-lisensfilen ennå — prøv igjen o
 downloadOffline = "Last ned offline-lisens (.lic)"
 hint = "Lim inn denne nøkkelen i en selvdriftet instans for å aktivere den, eller behold den for arkivet ditt. Oppbevar den trygt."
 label = "Lisensnøkkelen din"
-subtitle = "Aktiver en selvhostet instans med denne nøkkelen, eller behold den for arkivet ditt."
-title = "Lisensnøkkelen din"
 trialFileHint = "Dette er prøvelisensfilen din. Når avtalen din er på plass, kom tilbake og last den ned igjen — i motsetning til den nettbaserte lisensnøkkelen oppdateres ikke .lic-filen av seg selv."
 
 [portal.procurement.link]
 cta = "Koble til konto"
 description = "Innkjøp kjører på den tilkoblede Stirling-kontoen din: det er slik vi klargjør prøveperioden, priser tilbudet ditt og starter fakturering. Koble til en konto for å starte."
-eyebrow = "Enterprise"
 title = "Koble til kontoen din for å begynne"
 
 [portal.procurement.live]
 description = "Abonnementet ditt er aktivt og lisensen din er utstedt. Teamet ditt er klargjort, og fakturering har startet."
-eyebrow = "I drift"
 title = "Du er i drift på Stirling Enterprise"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "Kunne ikke laste ned tilbuds-PDF-en ennå — prøv igjen om et
 
 [portal.procurement.payment]
 description = "Tilbudet ditt er akseptert og lisensen din er allerede aktiv — teamet ditt kan starte med én gang. Betal den første fakturaen når du er klar; du kan betale eller laste den ned her, ingen e-post nødvendig."
-downloadAgreement = "Last ned signert avtale"
 downloadInvoice = "Last ned faktura"
-eyebrow = "Betaling"
-title = "Abonnement opprettet"
 viewInvoice = "Vis og betal faktura"
 
 [portal.procurement.review]
 acceptCta = "Godta tilbud"
 annual = "Årsavgift (år 1)"
 downloadCta = "Last ned tilbud"
+oneTime = "one-time"
 poNumber = "Innkjøpsordre: {{po}}"
 renewal = "Fornyes til {{amount}}/år etter perioden (+{{pct}} % KPI)"
 tcv = "{{years}}-års periode, betalt i sin helhet på forhånd: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "du@company.com"
 [portal.procurement.trial]
 body = "Forlengelse legger til 7 dager og varsler løsningsingeniøren din."
 bodyMaxed = "Du har brukt alle forlengelsene dine — snakk med løsningsingeniøren din hvis du trenger mer tid."
-cancel = "Avbryt prøveperiode"
 extend = "Forleng 7 dager"
 maxed = "Maksimert"
 subtitle = "Den gratis prøveperioden din varer til {{date}}. Ingen kort kreves."
 title = "Enterprise-prøveperiode"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "Alt fra policykjøringene dine og teamets redigeringsverktøy som trenger din oppmerksomhet."
@@ -11811,6 +12012,13 @@ title = "Rensker PDF"
 [sanitizePdf]
 tags = "rydde opp,sikker,trygg,fjern trusler"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "endre størrelse,juster,skaler,sidestørrelse,endre sidestørrelse,skaler side,endre størrelse,juster størrelse,forstørr,krymp side,tilpass til side,A4,letter size"
 title = "Juster side-skala"
@@ -11993,6 +12201,13 @@ apiKeys = "API-nøkler"
 apiKeysDescription = "Personlige nøkler for å kalle Stirling API fra skript og integrasjoner."
 title = "Utvikler"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "Pakk ut API-svar automatisk"
 autoUnzipFileLimit = "Grense for auto-utpakking av filer"
@@ -12135,15 +12350,24 @@ title = "Juridiske dokumenter"
 backendDescription = "Lisenser for backend-avhengigheter som er pakket med denne serveren."
 backendLabel = "Backend-lisenser"
 backendTitle = "Backend-tredjepartslisenser"
+clearSearch = "Clear search"
 empty = "Ingen avhengigheter funnet."
 frontendDescription = "Lisenser for frontend-avhengigheter som er pakket inn i release-builden."
 frontendLabel = "Frontend-lisenser"
 frontendTitle = "Frontend-tredjepartslisenser"
 license = "Lisens"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "Listen vises direkte i UI fra release-pakken eller backend-endpointet."
 listTitle = "Pakkede avhengigheter"
 loadError = "Kunne ikke laste tredjepartslisenser"
 module = "Modul"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "Versjon"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "Avventer"
 remove = "Fjern"
 roleColumn = "Rolle"
 title = "Teammedlemmer"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "Sentrert"

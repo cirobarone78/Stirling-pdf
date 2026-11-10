@@ -1328,6 +1328,10 @@ label = "ལྟ་སྲུང་བྱས་པའི་ཡིག་ཁུག�
 description = "བེད་སྤྱོད་པ་གསར་པའི་ཆེད་དུ་སྔོན་སྒྲིག་སྐད་ཡིག་(དཔེར་ན། en_US, es_ES)"
 label = "སྔོན་སྒྲིག ས་ཁུལ།"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "ཆེས་མཐོ་བའི་ཡིག་ཆ་ཡར་བསྐུར་ཚད་(དཔེར་ན། 100MB, 1GB)"
 label = "File Upload ཚད་གཞི།"
@@ -2969,6 +2973,7 @@ loadError = "མི་སྣ་འཇུག་མ་ཐུབ"
 noTeam = "ཚོགས་མིང་མེད"
 noUsers = "མི་སྣ་གཞན་མ་རྙེད།"
 placeholder = "མི་སྣ་འདེམས..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (ཁྱེད)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "སྒྲིག་སྟངས།"
 [extractPages.tooltip]
 description = "འདེམས་སྒྲུག་བྱས་པའི་ཤོག་ངོས་དེ་ཚོ་PDFགསར་པར་བཏོན་ནས་གོ་རིམ་སྲུང་སྐྱོབ་བྱེད།"
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "ཡིག་ཆ་ཞུན་དག་ཆས་ནང་ཁ་ཕྱེ"
 viewInViewer = "མཐོང་ཆས་ནང་ལྟ"
@@ -4657,7 +4673,6 @@ closeFile = "ཡིག་ཆ་ཁ་རྒྱག"
 
 [fileEditor]
 closedFile = "{{name}} སྒོ་བརྒྱབ་ཟིན"
-couldNotSave = "{{name}} ཉར་མ་ཐུབ"
 filesReordered_one = "ཡིག་ཆའི་གོ་རིམ་བསྐྱར་སྒྲིག་བྱས"
 filesReordered_other = "ཡིག་ཆ {{count}} ཡི་གོ་རིམ་བསྐྱར་སྒྲིག་བྱས"
 loadedFromStorage_one = "ཉར་སྣོད་ནས་ཡིག་ཆ {{count}} བླངས"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "སང་ཉིན་བསྐྱར་སྒྲིག"
 thisPeriod = "རྩིས་སྤྲོད་དུས་ཡུན་འདི"
 
 [payment]
+annually = "Annually"
 billingPeriod = "རྩིས་སྤྲོད་དུས་ཡུན"
 cancelTeamChange = "ད་ལྟའི་འཆར་གཞི་ཉར"
 canCloseWindow = "ཁྱོད་ཀྱིས་ད་ལྟ་སྒེའུ་ཁུང་འདི་ཁ་རྒྱག་ཐུབ།"
@@ -7157,11 +7173,14 @@ title = "Team འཆར་གཞི་སྙོམས་སྒྲིག"
 
 [payment.capacityStage]
 adjustmentNote = "Stripe ཡིས་ཁྱེད་ཀྱིས་གཏན་འཁེལ་མ་བྱས་གོང་གླ་དངོས། prorations གང་ཡོད། རྩིས་སྤྲོད་ཚེས་གྲངས་རྗེས་མ་བཅས་སྟོན་གྱི་རེད། ཡོད་ན་ཁྱེད་ཀྱི་ཉར་ཡོད་སྤྲོད་ཐབས་སྤྱོད་གྱི་རེད།"
+billingLabel = "Billing"
 continue = "སྤྲོད་པར་མུ་མཐུད"
 currencyAtCheckout = "checkout སྐབས་ Stripe ཡིས་མཐའ་མའི་གྲངས་འབོར་དང་སྤྲོད་དངུལ་རིགས་གཏན་འཁེལ་བྱེད།"
+custom = "Custom"
 customLabel = "སྤྱོད་མཁན་གྲངས"
 dueToday = "དེ་རིང་སྤྲོད་དགོས"
 enterpriseQuote = "enterprise quote ལེན"
+enterUsers = "Enter a number of users."
 estimatedTotal = "སྔོན་རྩིས་ཁྱོན"
 lineItem = "Team · སྤྱོད་མཁན་ {{block}} རེར་ {{price}}{{period}}"
 minimumForCurrentUsers = "ཁྱེད་ལ་སྤྱོད་མཁན་ {{users}} ཡོད་པས། འཆར་གཞིས་ཉུང་མཐར་ {{minimum}} ཁེབས་དགོས།"
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "ད་ཡོད་རྩིས་ཐོ་དེ་�
 overCapacityTitle = "ཁྱེད་ཀྱི་ཞབས་ཞུ་ཆས་ལ་འཆར་གཞིས་ཁེབས་པ་ལས་མང་བའི་སྤྱོད་མཁན་ཡོད"
 perMonth = "/ཟླ"
 perYear = "/ལོ"
+planName = "Stirling Team"
 reductionNote = "ཤོང་ཚད་དམའ་བ་དེ་ཁྱེད་ཀྱི་བསྐྱར་གསོ་རྗེས་མར་འགོ་ཚུགས། དེ་བར་ཁྱེད་ཀྱི་ད་ལྟའི་ཆོག་ཚད་སྤྱོད་ཆོག ད་ཡོད་སྤྱོད་མཁན་གནས། འགྱུར་བ་ནུས་སྐབས་ཁྱེད་ཤོང་ཚད་ལས་བརྒལ་ན་སྤྱོད་མཁན་གསར་པ་བཀག་ཡོད།"
 renewalNote = "{{total}}{{period}} ལ་བསྐྱར་གསོ། Usage & Billing ནང་དུས་ནམ་ཡང་དོར་ཆོག"
 reviewChange = "Stripe ནང་འགྱུར་བ་ཞིབ་ལྟ"
-roundsTo = "{{users}} ལ་སྒོར་སྒྲིལ"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "ཁྱེད་ཀྱིས་གདན་འདྲེན་བྱེད་པ་ཚང་མ་སྤྱོད་མཁན་ {{users}} ཡི་ཚན་པར་ཁེབས།"
 subheadingAdd = "ཁྱེད་ཀྱི་འཆར་གཞིས་དེ་རིང་སྤྱོད་མཁན་ {{current}} ཁེབས། ཁྱོན་གསར་པ་འདེམས།"
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "སྤྱོད་མཁན"
 userTotal = "སྤྱོད་མཁན་ {{users}}"
 
@@ -7261,12 +7284,15 @@ widget = "རེའུ་མིག་ས་ཁོངས - ཤོག་ངོས�
 
 [pdfTextEditor.commands]
 edit = "རྩོམ་སྒྲིག"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "run {{count}} དུམ་མཚམས་ཤིག་ཏུ་ཟླ་སྒྲིལ"
 mergeRuns_other = "runs {{count}} དུམ་མཚམས་ཤིག་ཏུ་ཟླ་སྒྲིལ"
 setColour = "{{run}} ལ་ཚོན་སྒྲིག"
 setOutline = "{{run}} ལ་ཕྱི་ཐིག་སྒྲིག"
+tagPageContent = "Auto-tag page"
 typeInto = "{{run}} ནང་ཡི་གེ་རྒྱག"
 ungroupParagraph = "དུམ་མཚམས་ {{run}} ཚོགས་དབྱེ"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "{{run}} ཕྲེང་བསྐྱར་སྒྲིག"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "མཚོན་རྟགས་སྣོན"
 artifactText = "མཛེས་བཟོ"
 cannotChange = "པར་རིས་འདིའི་འཛུལ་སྤྱོད་སྟབས་བདེ་བསྒྱུར་མི་ཐུབ།"
 cannotRetag = "ཡི་གེ་འདིའི་མཚོན་རྟགས་བསྒྱུར་མི་ཐུབ།"
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (རང་བཟོས་མཚོན་རྟགས)"
 decorativeInfo = "བརྙན་ཡོལ་ཀློག་ཆས་ཀྱིས་མཛེས་བཟོའི་པར་རིས་མཆོངས་འགྲོ། མཐའ་སྒྲོམ། རྒྱབ་ལྗོངས། ཆ་འཕྲིན་མེད་པའི་པར་རིས་གཞན་ལ་སྤྱོད།"
 decorativeLabel = "མཛེས་བཟོའི་པར་རིས"
@@ -7430,22 +7457,31 @@ encrypted = "གསང་སྡོམ་བྱས་པའི་ཡིག་ཆ�
 heading = "འཛུལ་སྤྱོད་སྟབས་བདེ"
 innerTagLabel = "མཚོན་རྟགས་ {{number}}"
 innerTags = "ཡི་གེ་འདིའི་ནང་གི་མཚོན་རྟགས"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "འགྲེལ་བཤད་ཆད་པ"
 mixedContent = "པར་རིས་ནང་ནང་དོན་གཞན་འདུས་ཡོད"
+mixedTags = "Mixed"
 needsDescriptionBadge = "འགྲེལ་བཤད་མེད"
 nextImage = "པར་རིས་རྗེས་མ"
 notFigure = "ཡི་གེའི་ཆ་ཤས་སུ་མཚོན་རྟགས་བཏགས་ཡོད"
 removeTag = "མཚོན་རྟགས་སུབ"
 saveFailed = "ཁྱེད་ཀྱི་འཛུལ་སྤྱོད་སྟབས་བདེའི་བཟོ་བཅོས་ཉར་ཚགས་མ་ཐུབ་པས། ཡིག་ཆ་ཉར་ཚགས་མ་བྱས། དེ་དག་ཕྱིར་བཤོལ་ནས་ཡང་བསྐྱར་ཚོད་ལྟ་བྱོས།"
 selectedText = "བདམས་པའི་ཡི་གེ"
+tagging = "Tagging pages"
 tagLabel = "མཚོན་རྟགས"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "འདིར་ཀློག་མི་ཐུབ"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "ཡིག་ཆ་འདིའི་མཚོན་རྟགས་རྩོམ་སྒྲིག་མི་ཐུབ"
 untaggableImages = "འདིར་མཚོན་རྟགས་བཏགས་མི་ཐུབ"
 untaggedBadge = "མཚོན་རྟགས་མ་བཏགས"
 untaggedDocument = "ཡིག་ཆར་མཚོན་རྟགས་མེད"
 untaggedImage = "འདིར་མཚོན་རྟགས་བཏགས་མི་ཐུབ"
 untaggedImages = "མཚོན་རྟགས་མ་བཏགས་པའི་པར་རིས"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "ཡི་གེ་མེད་པའི་ཁ་བྱང"
@@ -7504,6 +7540,23 @@ tableHead = "རེའུ་མིག་གི་མགོ"
 tableHeader = "རེའུ་མིག་གི་ཁ་བྱང"
 tableRow = "རེའུ་མིག་གི་ཕྲེང"
 title = "མཚན་བྱང"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Editor བྱ་སྤྱོད"
@@ -7935,8 +7988,6 @@ triggerImport = "ནང་འདྲེན་སྐབས་འཁོར་སྐ
 [policies.enforcement]
 applying = "{{names}} བཀོལ་སྤྱོད་བཞིན"
 applyingProgress = "{{names}} བཀོལ་སྤྱོད་བཞིན ({{done}}/{{total}})"
-exportFailureBody = "བདེ་འཇགས་སྲིད་བྱང་བཀོལ་སྤྱོད་ཐབས་མེད། ཡིག་ཆ་དེ་རྣམས་བསྒྱུར་བ་མེད་པར་ ཕྱིར་འདྲེན་བཟོ་བྱས།"
-exportFailureTitle = "བཀོལ་སྤྱོད་མེད་པར་ཕྱིར་འདྲེན་བཟོ།"
 failureBody = "ཡིག་ཆ་ {{total}} ནས་ {{failures}} ལ་སྲིད་ཇུས་ཁ་ཤས་སྤྱོད་མ་ཐུབ།"
 failureTitle = "བཀོལ་སྤྱོད་ཆ་ཚང་མེད་པར་ཕྱིར་འདྲེན་བཟོ།"
 printPolicyAppliedBody = "འདི་ PDF ཞིག་སྲིད་བྱང་གཅིག་ལ་འཚམ་པར་གསར་བཅོས་བྱས་ཟིན། བཟོ་བཅོས་ལ་བསྐྱར་ཞིབ་བྱས་ནས་ ཡང་བསྐྱར་དཔར་བྱེད།"
@@ -9142,6 +9193,130 @@ status = "གནས་ཚུལ"
 time = "དུས་ཚོད"
 user = "སྤྱོད་མཁན"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "མཐོང་ངོས་འདིར་མ་བསམ་པའི་ནོར་འཁྲུལ་ཞིག་བྱུང་། ཡང་བསྐྱར་ཚོད་ལྟ་བྱོས། ཡང་ན་ཟུར་གྱི་དཀར་ཆག་ནས་སྡེ་ཚན་གཞན་ཞིག་འདེམས།"
 retry = "ཡང་བསྐྱར་ཚོད་ལྟ་བྱོས"
@@ -9293,6 +9468,7 @@ title = "བསྐྱར་ཞིབ་བྱ་རྒྱུ་མེད།"
 [portal.home.download]
 back = "ཕྱིར་ལོག"
 body = "ཅོག་ངོས་ཉེར་སྤྱོད་ཕབ་ལེན་བྱོས། ཡང་ན server རང་གིས་གནས་སྡོད་བྱོས།"
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "ལེགས་གྲུབ"
 guide = "{{name}} ལམ་སྟོན་ཁ་ཕྱེ"
 openInBrowser = "དེའི་ཚབ་ཏུ་བཤེར་ཆས་ནང་ཁ་ཕྱེ"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "Email ལེན་འཇུག"
 
 [portal.procurement]
-subtitle = "ཁྱེད་ཀྱི་ཚོགས་པ་དཔྱད་ཞིབ། གན་རྒྱ་འཇོག་པ། དང་འགོ་འཛུགས་བྱེད། ཡིག་ཆ་ཡོངས་གནས་གཅིག་ཏུ།"
 title = "ཉོ་སྒྲུབ"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "གྲོས་མཐུན་འགེལ་མ་ཐུབ། ས
 loading = "གྲོས་མཐུན་འགེལ་བཞིན་པ..."
 ref = "Ref {{ref}} · {{version}}"
 requestChanges = "བསྒྱུར་བ་ཞུ་བ"
-scrollHint = "ཞིབ་བཤེར་ཆེད་འདྲིལ་སྒུལ་བྱེད"
 signatory = "མིང་རྟགས་འགོད་མཁན་གྱི་མིང"
 signatoryPlaceholder = "མིང་ཆ་ཚང"
 signatoryTitle = "མིང་རྟགས་འགོད་མཁན་གྱི་གོ་གནས"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "དཔེར་ན། ཁྲིམས་དོན�
 signError = "ཁྱེད་ཀྱི་མིང་རྟགས་ཟིན་ཐོར་འགོད་མ་ཐུབ། སླར་ཚོད་ལྟ་གནང་རོགས།"
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "ཁ་སྣོན"
 addressLine1 = "ཁ་བྱང་ཕྲེང་ 1"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "ཁ་བྱང་ཕྲེང་ 2"
 addressLine2Placeholder = "ཁང་མིག་། ཐོག་རྩེག ཁང་པ"
 back = "ཕྱིར་ལོག"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "ཚོང་ལས་མིང"
 businessNamePlaceholder = "ཁྱེད་ཀྱི་ཀུང་སི"
 city = "གྲོང་ཁྱེར"
 cityPlaceholder = "San Francisco"
 completeRequired = "རིན་གོང་འདྲེན་ཡིག་བཟོ་སྔོན། དགོས་ངེས་ཀྱི་ས་སྟོང་ (* རྟགས་ཅན) རྣམས་ནུས་ལྡན་གྱི email དང་བཅས་ཆ་ཚང་སྐོང་རོགས།"
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "འབྲེལ་གཏུག email"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "འབྲེལ་གཏུག་མིང"
 contactNamePlaceholder = "Jane Doe"
 continue = "མུ་མཐུད"
 done = "ལེགས་གྲུབ"
+editUsage = "Edit usage"
 eula = "ངས Stirling Enterprise EULA ཀློག་ཟིན་ཞིང་དེར་མོས་མཐུན་བྱེད། དེས་རིན་གོང་འདྲེན་ཡིག་འདི་ནས་བཟོས་པའི་གྲོས་མཐུན་ལ་སྟངས་འཛིན་བྱེད།"
 generate = "རིན་གོང་འདྲེན་ཡིག་བཟོ"
 indemnification = "IP སྲུང་སྐྱོབ་ཇེ་ལེགས"
 indemnificationSub = "ང་ཚོའི IP སྲུང་སྐྱོབ་དེ་པེ་ཊེན་ཊི་རེ་འདུན་བར་རྒྱ་བསྐྱེད་བྱེད། པར་དབང་། ཚོང་རྟགས། ཚོང་ལས་གསང་བའི་རྩ་བའི་གུན་གསབ་ནི་རིན་མེད་དུ་ཚུད་ཡོད།"
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "ཁེ་ལས་རིམ་པའི་རིན་གོང་འདྲེན་ཡིག"
 paperFor = "གྲ་སྒྲིག་བྱས་ཡུལ"
 pdfSize = "PDF ཆེ་ཆུང"
@@ -10506,9 +10690,13 @@ posture_regulated = "སྒྲིག་སྲོལ་འོག"
 posture_regulatedSub = "རིགས་ཚན་ཚང་མ — མཐུན་སྒྲུབ། ཉར་ཚགས། ནང་འཇུག"
 qbr = "དུས་ཚིགས་རེའི་ཚོང་ལས་ཞིབ་བཤེར"
 qbrSub = "ཁྱེད་ཀྱི SE ཡིས་དུས་ཚིགས་རེར་སྤྱོད་ཚུལ་དང་ལམ་དཀར་ཞིབ་བཤེར་བྱེད"
+raiseUsage = "Raise estimated usage"
 region = "མངའ་སྡེ / ས་ཁུལ"
 regionPlaceholder = "California"
-running = "{{annual}} / ལོ · {{years}}-ལོ {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "ཁྱེད་ཀྱི་ཚོགས་པ་དང་། ལོ་རེར་སྒྲུབ་རྒྱུར་རེ་བ་ཡོད་པའི PDF རྣམས།"
 s1Title = "ཁྱེད་ཀྱིས་ག་ཚོད་ལས་སྣོན་བྱེད་རྒྱུ་ཡིན།"
 s2Sub = "དུས་ཡུན་རིང་བས་རིན་ཚད་ལ་ཆག་ཡང་ཡོད། ཁྱེད་ཀྱི་ཞབས་ཞུའི་རིམ་པས་རམ་འདེགས་གཏན་འཁེལ་བྱེད།"
@@ -10547,6 +10735,19 @@ volumePlaceholder = "དཔེར་ན། 1,000,000"
 years_one = "ལོ་ {{count}}"
 years_other = "ལོ་ {{count}}"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "ཁེ་ལས་རིམ་པའི་གྲོས་མཐུན"
 agreementSub = "MSA, མངགས་ཐོ་དང DPA མིང་རྟགས་གཅིག་ནང་།"
@@ -10557,6 +10758,8 @@ invoice = "འཛིན་ཤོག"
 invoiceSub = "ཁྱེད་ཀྱི་དང་པོའི་མངགས་ཉོའི་འཛིན་ཤོག"
 laterInvoice = "ཁྱེད་ཀྱིས་ད स्वीकार་བྱས་རྗེས་ཐོབ་ཐུབ"
 laterQuote = "ཁྱེད་ཀྱི་རིན་གོང་འདྲེན་ཡིག་སྤྲད་རྗེས་ཐོབ་ཐུབ"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "རིན་གོང་འདྲེན་ཡིག"
 quoteSub = "ཁྱེད་ཀྱི་རྣམ་གྲངས་བགོས་པའི་ཁེ་ལས་རིམ་པའི་རིན་གོང་འདྲེན་ཡིག"
 sla = "SLA ཟུར་སྦྱར"
@@ -10573,15 +10776,12 @@ title = "གནད་དོན་ཞིག་བྱུང་སོང"
 [portal.procurement.hero]
 barAria = "གོ་རིམ་ {{current}} / {{total}}"
 ctaAgreement = "གྲོས་མཐུན་ཞིབ་བཤེར་དང་མིང་རྟགས་འགོད"
-ctaExploring = "ཁྱེད་ཀྱི་ཚོད་ལྟ་སྒྲིག་སྦྱོར"
 ctaQuote = "ཁྱེད་ཀྱི་རིན་གོང་འདྲེན་ཡིག་ཞིབ་བཤེར"
 ctaReviewQuote = "རིན་གོང་འདྲེན་ཡིག་ཞིབ་བཤེར"
 ctaTrial = "ཁྱེད་ཀྱི་རིན་གོང་འདྲེན་ཡིག་བཟོ"
-documents = "ཡིག་ཆ"
 eyebrow = "ཁེ་ལས་རིམ་པ"
 eyebrowCompany = "{{company}} ཁེ་ལས"
 inviteTeammates = "ཚོགས་གྲོགས་གདན་འདྲེན"
-licenseKey = "ཆོག་མཆན་ལྡེ་མིག"
 liveSub = "ཁྱེད་ཀྱི་ཚོགས་སྡེ་མཁོ་སྤྲོད་ཟིན་ཞིང་ཆོག་མཆན་ནུས་ལྡན་ཡིན།"
 liveTitle = "ཁྱེད་ Stirling Enterprise ཐོག་དངོས་སུ་སྤྱོད་བཞིན་ཡོད"
 next = "རྗེས་མ། {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "ད་ལྟ་དྲ་མེད་ཆོག་མཆན་ཡ
 downloadOffline = "དྲ་མེད་ཆོག་མཆན་ཕབ་ལེན (.lic)"
 hint = "ལྡེ་མིག་འདི་རང་སྐྱོང་དཔེ་མཚོན་ནང་སྦྱར་ནས་ནུས་སློང་བྱེད་ཆོག ཡང་ན་ཁྱེད་ཀྱི་ཟིན་ཐོའི་ཆེད་ཉར་ཆོག དེ་བདེ་འཇགས་སུ་ཉར་རོགས།"
 label = "ཁྱེད་ཀྱི་ཆོག་མཆན་ལྡེ་མིག"
-subtitle = "ལྡེ་མིག་འདིས་རང་སྐྱོང་དཔེ་མཚོན་ནུས་སློང་བྱེད་ཆོག ཡང་ན་ཁྱེད་ཀྱི་ཟིན་ཐོའི་ཆེད་ཉར་ཆོག"
-title = "ཁྱེད་ཀྱི་ཆོག་མཆན་ལྡེ་མིག"
 trialFileHint = "འདི་ནི་ཁྱེད་ཀྱི་ཚོད་སྤྱོད་ཆོག་མཆན་ཡིག་ཆ་ཡིན། གྲོས་མཐུན་གཏན་འཁེལ་བྱས་རྗེས། ཕྱིར་ལོག་ནས་ཡང་བསྐྱར་ཕབ་ལེན་བྱོས — དྲ་ཐོག་ཆོག་མཆན་ལྡེ་མིག་དང་མི་འདྲ་བར། .lic ཡིག་ཆ་རང་འགུལ་གྱིས་གསར་སྒྱུར་མི་བྱེད།"
 
 [portal.procurement.link]
 cta = "རྩིས་ཐོ་འབྲེལ་མཐུད"
 description = "ཉོ་སྒྲུབ་ནི་ཁྱེད་ཀྱི་འབྲེལ་མཐུད་བྱས་པའི Stirling རྩིས་ཐོ་ཐོག་འགྲོ་སྐྱོང་བྱེད། འདིས་ང་ཚོས་ཚོད་སྤྱོད་སྤྲོད་པ། གོང་འབོལ་རིན་གོང་རྩིས་པ། དང་རྩིས་བསྡུ་འགོ་འཛུགས་པའི་ཐབས་ཡིན། འགོ་འཛུགས་ཆེད་རྩིས་ཐོ་ཞིག་འབྲེལ་མཐུད་བྱོས།"
-eyebrow = "ཁེ་ལས"
 title = "འགོ་འཛུགས་ཆེད་ཁྱེད་ཀྱི་རྩིས་ཐོ་འབྲེལ་མཐུད་བྱོས"
 
 [portal.procurement.live]
 description = "ཁྱེད་ཀྱི་མངགས་ཉོ་འགུལ་སྤྱོད་ནང་ཡོད་ཅིང་ཆོག་མཆན་སྤྲད་ཟིན། ཁྱེད་ཀྱི་ཚོགས་པ་སྤྲོད་སྒྲིག་བྱས་ཟིན་ཞིང་རྩིས་བསྡུ་འགོ་ཚུགས་ཟིན།"
-eyebrow = "དངོས་སྤྱོད"
 title = "ཁྱེད་རང Stirling Enterprise ཐོག་དངོས་སྤྱོད་ལ་ཞུགས་ཟིན"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "ད་ལྟ་གོང་འབོལ PDF ཕབ་ལེན�
 
 [portal.procurement.payment]
 description = "ཁྱེད་ཀྱི་གོང་འབོལ་དང་ལེན་བྱས་ཟིན་ཞིང་ཆོག་མཆན་ཡང་ད་སྔ་ནས་འགུལ་སྤྱོད་ནང་ཡོད — ཁྱེད་ཀྱི་ཚོགས་པས་འཕྲལ་དུ་འགོ་འཛུགས་ཆོག གྲ་སྒྲིག་ཡོད་སྐབས་རྩིས་ཤོག་དང་པོ་སྤྲོད། འདི་ནས་སྤྲོད་པའམ་ཕབ་ལེན་བྱེད་ཆོག་ཅིང་། email མི་དགོས།"
-downloadAgreement = "མིང་རྟགས་བཀོད་པའི་གྲོས་མཐུན་ཕབ་ལེན"
 downloadInvoice = "རྩིས་ཤོག་ཕབ་ལེན"
-eyebrow = "དངུལ་སྤྲོད"
-title = "མངགས་ཉོ་བཟོས་ཟིན"
 viewInvoice = "རྩིས་ཤོག་ལྟ་བ་དང་སྤྲོད་པ"
 
 [portal.procurement.review]
 acceptCta = "གོང་འབོལ་དང་ལེན"
 annual = "ལོ་རེའི་རིན་གླ་། (ལོ་ 1)"
 downloadCta = "གོང་འབོལ་ཕབ་ལེན"
+oneTime = "one-time"
 poNumber = "ཉོ་སྒྲུབ་མངགས་ཐོ། {{po}}"
 renewal = "དུས་ཡུན་རྗེས་སུ {{amount}}/ལོ ཐོག་སླར་གསོ་བྱེད། (+{{pct}}% CPI)"
 tcv = "{{years}}-ལོའི་དུས་ཡུན། སྔོན་ནས་ཆ་ཚང་སྤྲད་པ། {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "དུས་འགྱངས་བྱས་ན་ཉིན་ 7 ཁ་སྣོན་བྱེད་ཅིང་ཁྱེད་ཀྱི་ཐབས་ལམ་བཟོ་འགོད་པར་བརྡ་ཐོ་གཏོང་།"
 bodyMaxed = "ཁྱེད་ཀྱིས་དུས་འགྱངས་ཚང་མ་སྤྱད་ཟིན — དུས་ཚོད་མང་བ་དགོས་ན་ཁྱེད་ཀྱི་ཐབས་ལམ་བཟོ་འགོད་པར་གྲོས་མོལ་བྱོས།"
-cancel = "ཚོད་སྤྱོད་འདོར"
 extend = "ཉིན་ 7 དུས་འགྱངས"
 maxed = "མཐོ་ཚད་ལ་སླེབས"
 subtitle = "ཁྱེད་ཀྱི་རིན་མེད་ཚོད་སྤྱོད {{date}} བར་འགྲོ སྤྱོད་བྱང་མི་དགོས།"
 title = "ཁེ་ལས་ཚོད་སྤྱོད"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "ཁྱེད་ཀྱི་སྲིད་ཇུས་འཁོར་སྐྱོད་དང་ཁྱེད་ཀྱི་རུ་ཁག་གི editor ནས་ཁྱེད་ཀྱི་དོ་སྣང་དགོས་པ་གང་ཡིན།"
@@ -11811,6 +12012,13 @@ title = "PDF གཙང་བཟོ་བྱེད་དགོས།"
 [sanitizePdf]
 tags = "གཙང་མ་དང་བདེ་འཇགས་དང་བདེ་འཇགས་དང་སེལ་བའི་ཉེན་ཁ།"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "ཆེ་ཆུང་བསྒྱུར,ལེགས་སྒྲིག,scale,ཤོག་ངོས་ཆེ་ཆུང,ཤོག་ངོས་ཆེ་ཆུང་བསྒྱུར,ཤོག་ངོས scale,ཆེ་ཆུང་བསྒྱུར,ཆེ་ཆུང་ལེགས་སྒྲིག,ཆེར་སྐྱེད,ཤོག་ངོས་ཆུང་དུ་གཏོང,ཤོག་ངོས་ལ་འཚམ,A4,letter size"
 title = "ཤོག་ངོས་གཞི་ཁྱོན་སྙོམ་སྒྲིག་བྱེད་པ།"
@@ -11993,6 +12201,13 @@ apiKeys = "APIལྡེ་མིག"
 apiKeysDescription = "scripts དང integrations ནས Stirling API འབོད་པའི་མི་སྒེར keys།"
 title = "གོང་འཕེལ་གཏོང་མཁན།"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "རང་འགུལ་གྱིས་APIལན་འདེབས།"
 autoUnzipFileLimit = "རང་འགུལ་གྱིས་ཡིག་ཚགས་ཚད་གཞི།"
@@ -12135,15 +12350,24 @@ title = "ཁྲིམས་མཐུན་ཡིག་ཆ"
 backendDescription = "server འདིར་མཉམ་སྡེབ་བྱས་པའི backend dependencies ཡི licenses།"
 backendLabel = "Backend ཆོག་མཆན"
 backendTitle = "Backend ཕྱོགས་གསུམ་པའི་ཆོག་མཆན"
+clearSearch = "Clear search"
 empty = "dependencies མ་རྙེད།"
 frontendDescription = "release build ནང་མཉམ་སྡེབ་བྱས་པའི frontend dependencies ཡི licenses།"
 frontendLabel = "Frontend ཆོག་མཆན"
 frontendTitle = "Frontend ཕྱོགས་གསུམ་པའི་ཆོག་མཆན"
 license = "ཆོག་མཆན"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "ཐོ་འདི release bundle ཡང་ན backend endpoint ནས UI ནང་ཐད་ཀར་སྟོན།"
 listTitle = "མཉམ་སྡེབ dependencies"
 loadError = "third-party licenses འཇུག་མ་ཐུབ"
 module = "དཔེ་དུམ"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "པར་གཞི"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "བསྒུག་བཞིན"
 remove = "སུབ"
 roleColumn = "ལས་འགན"
 title = "ཚོགས་མི"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "ལྟེ་བ"

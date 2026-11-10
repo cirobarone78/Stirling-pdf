@@ -1328,6 +1328,10 @@ label = "감시 폴더 디렉터리"
 description = "신규 사용자의 기본 언어(예: en_US, es_ES)"
 label = "기본 로케일"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "최대 파일 업로드 크기(예: 100MB, 1GB)"
 label = "파일 업로드 제한"
@@ -2969,6 +2973,7 @@ loadError = "사용자를 불러오지 못했습니다"
 noTeam = "팀 없음"
 noUsers = "다른 사용자를 찾을 수 없습니다."
 placeholder = "사용자 선택..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (본인)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "설정"
 [extractPages.tooltip]
 description = "선택한 페이지를 순서를 유지한 채 새 PDF로 추출합니다."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "파일 편집기에서 열기"
 viewInViewer = "뷰어에서 보기"
@@ -4657,7 +4673,6 @@ closeFile = "파일 닫기"
 
 [fileEditor]
 closedFile = "{{name}} 닫힘"
-couldNotSave = "{{name}}을(를) 저장할 수 없습니다"
 filesReordered_one = "파일 순서가 변경됨"
 filesReordered_other = "파일 {{count}}개의 순서가 변경됨"
 loadedFromStorage_one = "저장소에서 파일 {{count}}개를 불러왔습니다"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "내일 재설정"
 thisPeriod = "현재 청구 기간"
 
 [payment]
+annually = "Annually"
 billingPeriod = "청구 기간"
 cancelTeamChange = "현재 플랜 유지"
 canCloseWindow = "이제 이 창을 닫아도 됩니다."
@@ -7157,11 +7173,14 @@ title = "Team 플랜 조정"
 
 [payment.capacityStage]
 adjustmentNote = "확인하기 전에 Stripe에서 정확한 청구 금액, 일할 계산 및 다음 청구일을 표시합니다. 사용 가능한 경우 저장된 결제 수단이 사용됩니다."
+billingLabel = "Billing"
 continue = "결제로 계속"
 currencyAtCheckout = "Stripe가 결제 시 최종 금액과 결제 통화를 확인합니다."
+custom = "Custom"
 customLabel = "사용자 수"
 dueToday = "오늘 결제 금액"
 enterpriseQuote = "엔터프라이즈 견적 받기"
+enterUsers = "Enter a number of users."
 estimatedTotal = "예상 합계"
 lineItem = "Team · 사용자 {{block}}명당 {{price}}{{period}}"
 minimumForCurrentUsers = "사용자가 {{users}}명이므로 플랜은 최소 {{minimum}}명을 포함해야 합니다."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "기존 계정은 그대로 유지됩니다. 용량을
 overCapacityTitle = "서버의 사용자 수가 플랜에서 허용하는 수보다 많습니다"
 perMonth = "/월"
 perYear = "/년"
+planName = "Stirling Team"
 reductionNote = "더 낮은 용량은 다음 갱신 시 시작됩니다. 그때까지 현재 허용량을 사용할 수 있습니다. 기존 사용자는 유지되며, 변경 적용 시 용량을 초과한 경우 새 사용자는 차단됩니다."
 renewalNote = "{{total}}{{period}}에 갱신됩니다. 사용량 및 청구에서 언제든지 취소할 수 있습니다."
 reviewChange = "Stripe에서 변경 검토"
-roundsTo = "{{users}}명으로 반올림"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "초대한 모든 사용자를 {{users}}명 단위로 포함합니다."
 subheadingAdd = "현재 플랜은 사용자 {{current}}명을 포함합니다. 새 총계를 선택하세요."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "사용자"
 userTotal = "사용자 {{users}}명"
 
@@ -7261,12 +7284,15 @@ widget = "양식 필드 - 페이지 텍스트가 아니므로 여기에서 편�
 
 [pdfTextEditor.commands]
 edit = "편집"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "{{count}}개 run을 단락으로 병합"
 mergeRuns_other = "{{count}}개 run을 단락으로 병합"
 setColour = "{{run}}에 색상 설정"
 setOutline = "{{run}}에 윤곽선 설정"
+tagPageContent = "Auto-tag page"
 typeInto = "{{run}}에 입력"
 ungroupParagraph = "단락 {{run}} 그룹 해제"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "{{run}} 줄 바꿈"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "태그 추가"
 artifactText = "장식용"
 cannotChange = "이 이미지의 접근성은 변경할 수 없습니다."
 cannotRetag = "이 텍스트의 태그는 변경할 수 없습니다."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (사용자 지정 태그)"
 decorativeInfo = "스크린 리더는 장식용 이미지를 건너뜁니다. 테두리, 배경 및 정보를 담고 있지 않은 기타 이미지에 사용하세요."
 decorativeLabel = "장식용 이미지"
@@ -7430,22 +7457,31 @@ encrypted = "암호화된 파일에서는 태그를 편집할 수 없습니다"
 heading = "접근성"
 innerTagLabel = "태그 {{number}}"
 innerTags = "이 텍스트의 태그"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "누락된 설명"
 mixedContent = "그림에 다른 콘텐츠가 포함되어 있음"
+mixedTags = "Mixed"
 needsDescriptionBadge = "설명 없음"
 nextImage = "다음 이미지"
 notFigure = "텍스트의 일부로 태그됨"
 removeTag = "태그 제거"
 saveFailed = "접근성 변경 사항을 저장할 수 없어 파일이 저장되지 않았습니다. 변경 사항을 실행 취소하고 다시 시도하세요."
 selectedText = "선택한 텍스트"
+tagging = "Tagging pages"
 tagLabel = "태그"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "여기서 읽을 수 없음"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "이 파일의 태그는 편집할 수 없습니다"
 untaggableImages = "여기서 태그할 수 없음"
 untaggedBadge = "태그되지 않음"
 untaggedDocument = "문서에 태그가 없습니다"
 untaggedImage = "여기서 태그할 수 없음"
 untaggedImages = "태그되지 않은 이미지"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "텍스트가 없는 제목"
@@ -7504,6 +7540,23 @@ tableHead = "표 머리글"
 tableHeader = "표 헤더"
 tableRow = "표 행"
 title = "제목"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "편집기 작업"
@@ -7935,8 +7988,6 @@ triggerImport = "가져오기 시 실행"
 [policies.enforcement]
 applying = "{{names}} 적용 중"
 applyingProgress = "{{names}} 적용 중 ({{done}}/{{total}})"
-exportFailureBody = "보안 정책을 적용할 수 없습니다. 파일은 있는 그대로 내보냈습니다."
-exportFailureTitle = "정책 적용 없이 내보냄"
 failureBody = "일부 정책을 {{total}}개 파일 중 {{failures}}개에 적용할 수 없습니다."
 failureTitle = "완전한 정책 적용 없이 내보냄"
 printPolicyAppliedBody = "정책을 충족하도록 이 PDF가 업데이트되었습니다. 변경 사항을 확인한 후 다시 인쇄하세요."
@@ -9142,6 +9193,130 @@ status = "상태"
 time = "시간"
 user = "사용자"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "이 보기에서 예기치 않은 오류가 발생했습니다. 다시 시도하거나 사이드바에서 다른 섹션을 선택하세요."
 retry = "다시 시도"
@@ -9293,6 +9468,7 @@ title = "검토할 항목 없음"
 [portal.home.download]
 back = "뒤로"
 body = "데스크톱 앱을 다운로드하거나 서버를 자체 호스팅하세요."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "완료"
 guide = "{{name}} 가이드 열기"
 openInBrowser = "대신 브라우저에서 열기"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "Email 수신"
 
 [portal.procurement]
-subtitle = "팀 평가, 계약, 온보딩을 완료하세요. 모든 문서를 한곳에서 관리합니다."
 title = "조달"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "계약서를 불러올 수 없습니다. 다시 시도하세요."
 loading = "계약서를 불러오는 중..."
 ref = "참조 {{ref}} · {{version}}"
 requestChanges = "변경 요청"
-scrollHint = "검토하려면 스크롤"
 signatory = "서명자 이름"
 signatoryPlaceholder = "전체 이름"
 signatoryTitle = "서명자 직함"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "예: General Counsel"
 signError = "서명을 기록할 수 없습니다. 다시 시도하세요."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "추가 기능"
 addressLine1 = "주소 줄 1"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "주소 줄 2"
 addressLine2Placeholder = "스위트, 층, 건물"
 back = "뒤로"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "회사명"
 businessNamePlaceholder = "귀사"
 city = "시/군/구"
 cityPlaceholder = "San Francisco"
 completeRequired = "견적을 생성하기 전에 필수 필드(* 표시)를 유효한 이메일과 함께 완료하세요."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "연락처 이메일"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "연락처 이름"
 contactNamePlaceholder = "Jane Doe"
 continue = "계속"
 done = "완료"
+editUsage = "Edit usage"
 eula = "Stirling Enterprise EULA를 읽었으며 이에 동의합니다. 이 견적에서 생성되는 계약에 적용됩니다."
 generate = "견적 생성"
 indemnification = "향상된 IP 보호"
 indemnificationSub = "당사의 IP 방어를 특허 청구까지 확장합니다. 기본 저작권, 상표 및 영업비밀 면책은 무료로 포함됩니다."
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Enterprise 견적"
 paperFor = "대상"
 pdfSize = "PDF 크기"
@@ -10506,9 +10690,13 @@ posture_regulated = "규제됨"
 posture_regulatedSub = "모든 범주 — 규정 준수, 보존, 수집"
 qbr = "분기별 비즈니스 리뷰"
 qbrSub = "담당 SE가 매 분기 사용량과 로드맵을 검토합니다"
+raiseUsage = "Raise estimated usage"
 region = "주 / 지역"
 regionPlaceholder = "California"
-running = "{{annual}} / 년 · {{years}}년 {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "귀하의 팀과 매년 실행할 것으로 예상되는 PDFs입니다."
 s1Title = "얼마나 처리하시겠습니까?"
 s2Sub = "기간이 길수록 요금 할인이 적용되며, 서비스 수준에 따라 지원이 결정됩니다."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "예: 1,000,000"
 years_one = "{{count}}년"
 years_other = "{{count}}년"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Enterprise 계약서"
 agreementSub = "MSA, 주문서 및 DPA가 하나의 서명으로 제공됩니다."
@@ -10557,6 +10758,8 @@ invoice = "인보이스"
 invoiceSub = "첫 구독 인보이스입니다."
 laterInvoice = "수락 후 사용 가능"
 laterQuote = "견적이 발행되면 사용 가능"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "견적"
 quoteSub = "항목별 Enterprise 견적입니다."
 sla = "SLA 별첨"
@@ -10573,15 +10776,12 @@ title = "문제가 발생했습니다"
 [portal.procurement.hero]
 barAria = "{{total}}단계 중 {{current}}단계"
 ctaAgreement = "계약 검토 및 서명"
-ctaExploring = "평가판 설정"
 ctaQuote = "견적 검토"
 ctaReviewQuote = "견적 검토"
 ctaTrial = "견적 만들기"
-documents = "문서"
 eyebrow = "엔터프라이즈"
 eyebrowCompany = "{{company}} 엔터프라이즈"
 inviteTeammates = "팀원 초대"
-licenseKey = "라이선스 키"
 liveSub = "조직이 프로비저닝되었고 라이선스가 활성 상태입니다."
 liveTitle = "Stirling Enterprise에서 라이브 상태입니다"
 next = "다음: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "아직 오프라인 라이선스 파일을 생성할 수 없습
 downloadOffline = "오프라인 라이선스 다운로드(.lic)"
 hint = "이 키를 self-hosted 인스턴스에 붙여넣어 활성화하거나 기록용으로 보관하세요. 안전하게 보관하세요."
 label = "라이선스 키"
-subtitle = "이 키로 셀프 호스팅 인스턴스를 활성화하거나 기록용으로 보관하세요."
-title = "라이선스 키"
 trialFileHint = "이것은 평가판 라이선스 파일입니다. 계약이 완료되면 돌아와 다시 다운로드하세요 — 온라인 라이선스 키와 달리 .lic 파일은 자동으로 업데이트되지 않습니다."
 
 [portal.procurement.link]
 cta = "계정 연결"
 description = "조달은 연결된 Stirling 계정에서 실행됩니다. 이 계정으로 평가판을 프로비저닝하고, 견적 가격을 책정하며, 청구를 시작합니다. 시작하려면 계정을 연결하세요."
-eyebrow = "엔터프라이즈"
 title = "시작하려면 계정을 연결하세요"
 
 [portal.procurement.live]
 description = "구독이 활성화되었으며 라이선스가 발급되었습니다. 팀이 프로비저닝되었고 청구가 시작되었습니다."
-eyebrow = "라이브"
 title = "Stirling Enterprise에서 라이브 상태입니다"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "아직 견적 PDF를 다운로드할 수 없습니다. 잠시 �
 
 [portal.procurement.payment]
 description = "견적이 수락되었고 라이선스가 이미 활성화되어 팀이 바로 시작할 수 있습니다. 준비되면 첫 번째 송장을 결제하세요. 이메일 없이 여기에서 결제하거나 다운로드할 수 있습니다."
-downloadAgreement = "서명된 계약서 다운로드"
 downloadInvoice = "송장 다운로드"
-eyebrow = "결제"
-title = "구독 생성됨"
 viewInvoice = "송장 보기 및 결제"
 
 [portal.procurement.review]
 acceptCta = "견적 수락"
 annual = "연간 요금(1년 차)"
 downloadCta = "견적 다운로드"
+oneTime = "one-time"
 poNumber = "구매 주문: {{po}}"
 renewal = "기간 이후 {{amount}}/년으로 갱신(+{{pct}}% CPI)"
 tcv = "{{years}}년 기간, 선불 일시납: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "연장하면 7일이 추가되고 담당 솔루션 엔지니어에게 알림이 전송됩니다."
 bodyMaxed = "모든 연장 횟수를 사용했습니다. 시간이 더 필요하면 담당 솔루션 엔지니어에게 문의하세요."
-cancel = "평가판 취소"
 extend = "7일 연장"
 maxed = "한도 도달"
 subtitle = "무료 평가판은 {{date}}까지 진행됩니다. 카드가 필요하지 않습니다."
 title = "Enterprise 평가판"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "정책 실행 및 팀 편집기에서 주의가 필요한 모든 항목입니다."
@@ -11811,6 +12012,13 @@ title = "PDF 정리"
 [sanitizePdf]
 tags = "청소,보안,안전,위협-제거"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "크기 조정,조정,배율,페이지 크기,페이지 크기 조정,페이지 배율 조정,크기 변경,크기 조절,확대,페이지 축소,페이지에 맞춤,A4,letter size"
 title = "페이지 크기 조정"
@@ -11993,6 +12201,13 @@ apiKeys = "API 키"
 apiKeysDescription = "스크립트 및 통합에서 Stirling API를 호출하기 위한 개인 키입니다."
 title = "개발자"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "API 응답 자동 압축 해제"
 autoUnzipFileLimit = "자동 압축 해제 파일 제한"
@@ -12135,15 +12350,24 @@ title = "법적 문서"
 backendDescription = "이 서버에 번들로 포함된 backend 종속성의 라이선스입니다."
 backendLabel = "Backend 라이선스"
 backendTitle = "Backend 3rd Party 라이선스"
+clearSearch = "Clear search"
 empty = "종속성을 찾을 수 없습니다."
 frontendDescription = "릴리스 빌드에 번들로 포함된 frontend 종속성의 라이선스입니다."
 frontendLabel = "Frontend 라이선스"
 frontendTitle = "Frontend 3rd Party 라이선스"
 license = "라이선스"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "목록은 릴리스 번들 또는 backend 엔드포인트에서 UI에 직접 표시됩니다."
 listTitle = "번들 종속성"
 loadError = "타사 라이선스를 로드하지 못했습니다"
 module = "모듈"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "버전"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "대기 중"
 remove = "제거"
 roleColumn = "역할"
 title = "팀원"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "가운데"

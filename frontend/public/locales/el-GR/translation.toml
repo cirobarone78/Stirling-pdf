@@ -1328,6 +1328,10 @@ label = "Κατάλογοι παρακολουθούμενων φακέλων"
 description = "Η προεπιλεγμένη γλώσσα για νέους χρήστες (π.χ., en_US, es_ES)"
 label = "Προεπιλεγμένη γλώσσα/τοπικότητα"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "Μέγιστο μέγεθος μεταφόρτωσης αρχείου (π.χ., 100MB, 1GB)"
 label = "Όριο μεταφόρτωσης αρχείων"
@@ -2969,6 +2973,7 @@ loadError = "Αποτυχία φόρτωσης χρηστών"
 noTeam = "Χωρίς ομάδα"
 noUsers = "Δεν βρέθηκαν άλλοι χρήστες."
 placeholder = "Επιλέξτε χρήστες..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (Εσείς)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "Ρυθμίσεις"
 [extractPages.tooltip]
 description = "Εξάγει τις επιλεγμένες σελίδες σε νέο PDF, διατηρώντας τη σειρά."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "Άνοιγμα στον επεξεργαστή αρχείων"
 viewInViewer = "Προβολή στον προβολέα"
@@ -4657,7 +4673,6 @@ closeFile = "Κλείσιμο αρχείου"
 
 [fileEditor]
 closedFile = "Έκλεισε το {{name}}"
-couldNotSave = "Δεν ήταν δυνατή η αποθήκευση του {{name}}"
 filesReordered_one = "Το αρχείο αναδιατάχθηκε"
 filesReordered_other = "{{count}} αρχεία αναδιατάχθηκαν"
 loadedFromStorage_one = "Φορτώθηκε {{count}} αρχείο από τον χώρο αποθήκευσης"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "Επαναφορά αύριο"
 thisPeriod = "Αυτή η περίοδος χρέωσης"
 
 [payment]
+annually = "Annually"
 billingPeriod = "Περίοδος χρέωσης"
 cancelTeamChange = "Διατήρηση τρέχοντος προγράμματος"
 canCloseWindow = "Μπορείτε τώρα να κλείσετε αυτό το παράθυρο."
@@ -7157,11 +7173,14 @@ title = "Προσαρμογή προγράμματος Team"
 
 [payment.capacityStage]
 adjustmentNote = "Το Stripe θα εμφανίσει την ακριβή χρέωση, τυχόν αναλογικές χρεώσεις και την επόμενη ημερομηνία χρέωσης πριν επιβεβαιώσετε. Η αποθηκευμένη μέθοδος πληρωμής σας θα χρησιμοποιηθεί αν είναι διαθέσιμη."
+billingLabel = "Billing"
 continue = "Συνέχεια στην πληρωμή"
 currencyAtCheckout = "Το Stripe επιβεβαιώνει το τελικό ποσό και το νόμισμα πληρωμής κατά την ολοκλήρωση αγοράς."
+custom = "Custom"
 customLabel = "Αριθμός χρηστών"
 dueToday = "Οφειλή σήμερα"
 enterpriseQuote = "Λήψη προσφοράς enterprise"
+enterUsers = "Enter a number of users."
 estimatedTotal = "Εκτιμώμενο σύνολο"
 lineItem = "Team · {{price}}{{period}} ανά {{block}} χρήστες"
 minimumForCurrentUsers = "Έχετε {{users}} χρήστες, επομένως το πρόγραμμα πρέπει να καλύπτει τουλάχιστον {{minimum}}."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "Οι υπάρχοντες λογαριασμοί πα
 overCapacityTitle = "Ο διακομιστής σας έχει περισσότερους χρήστες από όσους καλύπτει το πρόγραμμά σας"
 perMonth = "/μήνα"
 perYear = "/έτος"
+planName = "Stirling Team"
 reductionNote = "Η χαμηλότερη χωρητικότητα ξεκινά στην επόμενη ανανέωσή σας. Μέχρι τότε, μπορείτε να χρησιμοποιείτε το τρέχον όριό σας. Οι υπάρχοντες χρήστες παραμένουν· οι νέοι χρήστες αποκλείονται αν είστε πάνω από τη χωρητικότητα όταν τεθεί σε ισχύ η αλλαγή."
 renewalNote = "Ανανεώνεται με {{total}}{{period}}. Ακύρωση οποιαδήποτε στιγμή στη Χρήση & Χρέωση."
 reviewChange = "Έλεγχος αλλαγής στο Stripe"
-roundsTo = "στρογγυλοποιείται σε {{users}}"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "Καλύπτει όλους όσους προσκαλείτε, σε πακέτα των {{users}} χρηστών."
 subheadingAdd = "Το πρόγραμμά σας καλύπτει {{current}} χρήστες σήμερα. Επιλέξτε το νέο σύνολο."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "Χρήστες"
 userTotal = "{{users}} χρήστες"
 
@@ -7261,12 +7284,15 @@ widget = "Πεδίο φόρμας - δεν είναι κείμενο σελίδ�
 
 [pdfTextEditor.commands]
 edit = "Επεξεργασία"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "Συγχώνευση {{count}} run σε παράγραφο"
 mergeRuns_other = "Συγχώνευση {{count}} runs σε παράγραφο"
 setColour = "Ορισμός χρώματος στο {{run}}"
 setOutline = "Ορισμός περιγράμματος στο {{run}}"
+tagPageContent = "Auto-tag page"
 typeInto = "Πληκτρολόγηση στο {{run}}"
 ungroupParagraph = "Κατάργηση ομαδοποίησης παραγράφου {{run}}"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "Αναδίπλωση {{run}}"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "Προσθήκη ετικέτας"
 artifactText = "Διακοσμητικό"
 cannotChange = "Δεν είναι δυνατή η αλλαγή της προσβασιμότητας αυτής της εικόνας."
 cannotRetag = "Δεν είναι δυνατή η αλλαγή της ετικέτας αυτού του κειμένου."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (προσαρμοσμένη ετικέτα)"
 decorativeInfo = "Οι αναγνώστες οθόνης παραλείπουν τις διακοσμητικές εικόνες. Χρησιμοποιήστε το για περιγράμματα, φόντα και άλλες εικόνες που δεν μεταφέρουν πληροφορίες."
 decorativeLabel = "Διακοσμητική εικόνα"
@@ -7430,22 +7457,31 @@ encrypted = "Δεν είναι δυνατή η επεξεργασία ετικε
 heading = "Προσβασιμότητα"
 innerTagLabel = "Ετικέτα {{number}}"
 innerTags = "Ετικέτες σε αυτό το κείμενο"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "Λείπουν περιγραφές"
 mixedContent = "Το σχήμα περιλαμβάνει άλλο περιεχόμενο"
+mixedTags = "Mixed"
 needsDescriptionBadge = "Χωρίς περιγραφή"
 nextImage = "Επόμενη εικόνα"
 notFigure = "Με ετικέτα ως μέρος του κειμένου"
 removeTag = "Αφαίρεση ετικέτας"
 saveFailed = "Δεν ήταν δυνατή η αποθήκευση των αλλαγών προσβασιμότητας, επομένως το αρχείο δεν αποθηκεύτηκε. Αναιρέστε τις και δοκιμάστε ξανά."
 selectedText = "Επιλεγμένο κείμενο"
+tagging = "Tagging pages"
 tagLabel = "Ετικέτα"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "Δεν μπορεί να διαβαστεί εδώ"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "Δεν είναι δυνατή η επεξεργασία των ετικετών αυτού του αρχείου"
 untaggableImages = "Δεν μπορεί να προστεθεί ετικέτα εδώ"
 untaggedBadge = "Χωρίς ετικέτα"
 untaggedDocument = "Το έγγραφο δεν έχει ετικέτες"
 untaggedImage = "Δεν μπορεί να προστεθεί ετικέτα εδώ"
 untaggedImages = "Εικόνες χωρίς ετικέτα"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "Επικεφαλίδα χωρίς κείμενο"
@@ -7504,6 +7540,23 @@ tableHead = "Κεφαλίδα πίνακα"
 tableHeader = "Επικεφαλίδα πίνακα"
 tableRow = "Γραμμή πίνακα"
 title = "Τίτλος"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Ενέργειες επεξεργαστή"
@@ -7935,8 +7988,6 @@ triggerImport = "Εκτελείται κατά την εισαγωγή"
 [policies.enforcement]
 applying = "Εφαρμογή {{names}}"
 applyingProgress = "Εφαρμογή {{names}} ({{done}} από {{total}})"
-exportFailureBody = "Δεν ήταν δυνατή η εφαρμογή των πολιτικών ασφαλείας. Τα αρχεία εξήχθησαν ως έχουν."
-exportFailureTitle = "Εξαγωγή χωρίς επιβολή"
 failureBody = "Δεν ήταν δυνατή η εφαρμογή ορισμένων πολιτικών σε {{failures}} από {{total}} αρχείο/α."
 failureTitle = "Εξαγωγή χωρίς πλήρη επιβολή"
 printPolicyAppliedBody = "Αυτό το PDF ενημερώθηκε για να συμμορφωθεί με μια πολιτική. Ελέγξτε τις αλλαγές και εκτυπώστε ξανά."
@@ -9142,6 +9193,130 @@ status = "Κατάσταση"
 time = "Ώρα"
 user = "Χρήστης"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "Αυτή η προβολή αντιμετώπισε ένα απρόσμενο σφάλμα. Δοκιμάστε ξανά ή επιλέξτε άλλη ενότητα από την πλευρική γραμμή."
 retry = "Δοκιμάστε ξανά"
@@ -9293,6 +9468,7 @@ title = "Τίποτα για έλεγχο"
 [portal.home.download]
 back = "Πίσω"
 body = "Κατεβάστε την εφαρμογή desktop ή φιλοξενήστε μόνοι σας τον server."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "Τέλος"
 guide = "Άνοιγμα του οδηγού {{name}}"
 openInBrowser = "Άνοιγμα στο browser αντί γι' αυτό"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "Λήψη email"
 
 [portal.procurement]
-subtitle = "Αξιολογήστε, συμβασιοποιήστε και εντάξτε την ομάδα σας. Κάθε έγγραφο σε ένα μέρος."
 title = "Προμήθειες"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "Δεν ήταν δυνατή η φόρτωση της συμφων�
 loading = "Φόρτωση της συμφωνίας..."
 ref = "Αναφ. {{ref}} · {{version}}"
 requestChanges = "Αίτημα αλλαγών"
-scrollHint = "Κάντε κύλιση για έλεγχο"
 signatory = "Όνομα υπογράφοντος"
 signatoryPlaceholder = "Πλήρες όνομα"
 signatoryTitle = "Τίτλος υπογράφοντος"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "π.χ. General Counsel"
 signError = "Δεν ήταν δυνατή η καταγραφή της υπογραφής σας. Δοκιμάστε ξανά."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "Πρόσθετα"
 addressLine1 = "Γραμμή διεύθυνσης 1"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "Γραμμή διεύθυνσης 2"
 addressLine2Placeholder = "Σουίτα, όροφος, κτίριο"
 back = "Πίσω"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "Επωνυμία επιχείρησης"
 businessNamePlaceholder = "Η εταιρεία σας"
 city = "Πόλη"
 cityPlaceholder = "San Francisco"
 completeRequired = "Συμπληρώστε τα απαιτούμενα πεδία (σημειωμένα με *) με έγκυρο email πριν δημιουργήσετε την προσφορά."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "Email επικοινωνίας"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "Όνομα επικοινωνίας"
 contactNamePlaceholder = "Jane Doe"
 continue = "Συνέχεια"
 done = "Τέλος"
+editUsage = "Edit usage"
 eula = "Έχω διαβάσει και συμφωνώ με το Stirling Enterprise EULA. Διέπει τη σύμβαση που δημιουργείται από αυτήν την προσφορά."
 generate = "Δημιουργία προσφοράς"
 indemnification = "Ενισχυμένη προστασία IP"
 indemnificationSub = "Επεκτείνει την άμυνα IP μας σε αξιώσεις πατεντών. Η βασική αποζημίωση για πνευματικά δικαιώματα, εμπορικά σήματα και εμπορικά απόρρητα περιλαμβάνεται δωρεάν."
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Enterprise προσφορά"
 paperFor = "Προετοιμάστηκε για"
 pdfSize = "Μέγεθος PDF"
@@ -10506,9 +10690,13 @@ posture_regulated = "Ρυθμιζόμενο"
 posture_regulatedSub = "Κάθε κατηγορία — Συμμόρφωση, Διατήρηση, Ingestion"
 qbr = "Τριμηνιαίες επιχειρηματικές ανασκοπήσεις"
 qbrSub = "Ο SE σας ανασκοπεί τη χρήση και τον οδικό χάρτη κάθε τρίμηνο"
+raiseUsage = "Raise estimated usage"
 region = "Πολιτεία / περιοχή"
 regionPlaceholder = "California"
-running = "{{annual}} / έτος · {{years}} έτη {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "Η ομάδα σας και τα PDF που αναμένετε να εκτελείτε κάθε χρόνο."
 s1Title = "Πόσο θα επεξεργάζεστε;"
 s2Sub = "Οι μεγαλύτερες διάρκειες μειώνουν την τιμή· το επίπεδο υπηρεσίας σας καθορίζει την υποστήριξη."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "π.χ. 1.000.000"
 years_one = "{{count}} έτος"
 years_other = "{{count}} έτη"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Συμφωνία Enterprise"
 agreementSub = "MSA, Order Form και DPA σε μία υπογραφή."
@@ -10557,6 +10758,8 @@ invoice = "Τιμολόγιο"
 invoiceSub = "Το πρώτο τιμολόγιο συνδρομής σας."
 laterInvoice = "Διαθέσιμο αφού αποδεχτείτε"
 laterQuote = "Διαθέσιμο μόλις εκδοθεί η προσφορά σας"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "Προσφορά"
 quoteSub = "Η αναλυτική enterprise προσφορά σας."
 sla = "Παράρτημα SLA"
@@ -10573,15 +10776,12 @@ title = "Κάτι πήγε στραβά"
 [portal.procurement.hero]
 barAria = "Στάδιο {{current}} από {{total}}"
 ctaAgreement = "Έλεγχος & υπογραφή σύμβασης"
-ctaExploring = "Ρύθμιση της δοκιμής σας"
 ctaQuote = "Ελέγξτε την προσφορά σας"
 ctaReviewQuote = "Έλεγχος προσφοράς"
 ctaTrial = "Δημιουργήστε την προσφορά σας"
-documents = "Έγγραφα"
 eyebrow = "Enterprise"
 eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Πρόσκληση συμπαικτών"
-licenseKey = "Κλειδί άδειας"
 liveSub = "Ο οργανισμός σας έχει provisioned και η άδειά σας είναι ενεργή."
 liveTitle = "Είστε live στο Stirling Enterprise"
 next = "Επόμενο: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "Δεν ήταν δυνατή η δημιουργία του off
 downloadOffline = "Λήψη offline άδειας (.lic)"
 hint = "Επικολλήστε αυτό το κλειδί σε μια self-hosted παρουσία για να την ενεργοποιήσετε ή κρατήστε το για τα αρχεία σας. Φυλάξτε το με ασφάλεια."
 label = "Το κλειδί άδειάς σας"
-subtitle = "Ενεργοποιήστε μια self-hosted εγκατάσταση με αυτό το κλειδί ή κρατήστε το για τα αρχεία σας."
-title = "Το κλειδί άδειάς σας"
 trialFileHint = "Αυτό είναι το αρχείο δοκιμαστικής άδειάς σας. Μόλις τεθεί σε ισχύ η συμφωνία σας, επιστρέψτε και κατεβάστε το ξανά — σε αντίθεση με το online κλειδί άδειας, το αρχείο .lic δεν θα ενημερωθεί μόνο του."
 
 [portal.procurement.link]
 cta = "Σύνδεση λογαριασμού"
 description = "Οι προμήθειες εκτελούνται στον συνδεδεμένο λογαριασμό Stirling σας: έτσι παρέχουμε τη δοκιμή, τιμολογούμε την προσφορά σας και ξεκινάμε τη χρέωση. Συνδέστε έναν λογαριασμό για να ξεκινήσετε."
-eyebrow = "Enterprise"
 title = "Συνδέστε τον λογαριασμό σας για να ξεκινήσετε"
 
 [portal.procurement.live]
 description = "Η συνδρομή σας είναι ενεργή και η άδειά σας έχει εκδοθεί. Η ομάδα σας έχει διατεθεί και η χρέωση έχει ξεκινήσει."
-eyebrow = "Live"
 title = "Είστε live στο Stirling Enterprise"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "Δεν ήταν δυνατή η λήψη του PDF προσφ�
 
 [portal.procurement.payment]
 description = "Η προσφορά σας έγινε αποδεκτή και η άδειά σας είναι ήδη ενεργή — η ομάδα σας μπορεί να ξεκινήσει αμέσως. Πληρώστε το πρώτο τιμολόγιο όταν είστε έτοιμοι· μπορείτε να το πληρώσετε ή να το κατεβάσετε εδώ, χωρίς να χρειάζεται email."
-downloadAgreement = "Λήψη υπογεγραμμένης συμφωνίας"
 downloadInvoice = "Λήψη τιμολογίου"
-eyebrow = "Πληρωμή"
-title = "Η συνδρομή δημιουργήθηκε"
 viewInvoice = "Προβολή & πληρωμή τιμολογίου"
 
 [portal.procurement.review]
 acceptCta = "Αποδοχή προσφοράς"
 annual = "Ετήσια χρέωση (έτος 1)"
 downloadCta = "Λήψη προσφοράς"
+oneTime = "one-time"
 poNumber = "Εντολή αγοράς: {{po}}"
 renewal = "Ανανεώνεται στα {{amount}}/έτος μετά τη διάρκεια (+{{pct}}% CPI)"
 tcv = "Διάρκεια {{years}} ετών, πλήρως προπληρωμένη: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "Η επέκταση προσθέτει 7 ημέρες και ειδοποιεί τον μηχανικό λύσεών σας."
 bodyMaxed = "Έχετε χρησιμοποιήσει όλες τις επεκτάσεις σας — μιλήστε με τον μηχανικό λύσεών σας αν χρειάζεστε περισσότερο χρόνο."
-cancel = "Ακύρωση δοκιμής"
 extend = "Επέκταση 7 ημέρες"
 maxed = "Εξαντλήθηκε"
 subtitle = "Η δωρεάν δοκιμή σας διαρκεί έως {{date}}. Δεν απαιτείται κάρτα."
 title = "Enterprise δοκιμή"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "Οτιδήποτε από τις εκτελέσεις πολιτικών σας και τους επεξεργαστές της ομάδας σας χρειάζεται την προσοχή σας."
@@ -11811,6 +12012,13 @@ title = "Εξυγίανση PDF"
 [sanitizePdf]
 tags = "καθαρισμός,ασφάλεια,ασφαλές,αφαίρεση-απειλών"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "αλλαγή μεγέθους,προσαρμογή,κλίμακα,μέγεθος σελίδας,αλλαγή μεγέθους σελίδας,κλιμάκωση σελίδας,αλλαγή μεγέθους,προσαρμογή μεγέθους,μεγέθυνση,σμίκρυνση σελίδας,προσαρμογή στη σελίδα,A4,letter size"
 title = "Προσαρμογή κλίμακας σελίδας"
@@ -11993,6 +12201,13 @@ apiKeys = "Κλειδιά API"
 apiKeysDescription = "Προσωπικά κλειδιά για κλήση του Stirling API από scripts και ενσωματώσεις."
 title = "Προγραμματιστής"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "Αυτόματη αποσυμπίεση αποκρίσεων API"
 autoUnzipFileLimit = "Όριο αρχείων αυτόματης αποσυμπίεσης"
@@ -12135,15 +12350,24 @@ title = "Νομικά έγγραφα"
 backendDescription = "Άδειες για backend εξαρτήσεις που περιλαμβάνονται σε αυτόν τον server."
 backendLabel = "Backend άδειες"
 backendTitle = "Backend άδειες τρίτων"
+clearSearch = "Clear search"
 empty = "Δεν βρέθηκαν εξαρτήσεις."
 frontendDescription = "Άδειες για frontend εξαρτήσεις που περιλαμβάνονται στο release build."
 frontendLabel = "Frontend άδειες"
 frontendTitle = "Frontend άδειες τρίτων"
 license = "Άδεια"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "Η λίστα εμφανίζεται απευθείας στο UI από το release bundle ή το backend endpoint."
 listTitle = "Πακέτα εξαρτήσεων"
 loadError = "Αποτυχία φόρτωσης αδειών τρίτων"
 module = "Module"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "Έκδοση"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "Σε εκκρεμότητα"
 remove = "Αφαίρεση"
 roleColumn = "Ρόλος"
 title = "Μέλη ομάδας"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "Κέντρο"

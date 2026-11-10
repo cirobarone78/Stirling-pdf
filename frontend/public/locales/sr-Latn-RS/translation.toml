@@ -1328,6 +1328,10 @@ label = "Direktorijumi nadgledanih fascikli"
 description = "Podrazumevani jezik za nove korisnike (npr., en_US, es_ES)"
 label = "Podrazumevani lokalitet"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "Maksimalna veličina za otpremanje datoteka (npr., 100MB, 1GB)"
 label = "Ograničenje otpremanja datoteka"
@@ -2969,6 +2973,7 @@ loadError = "Učitavanje korisnika nije uspelo"
 noTeam = "Nema tima"
 noUsers = "Nisu pronađeni drugi korisnici."
 placeholder = "Izaberite korisnike..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (Vi)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "Podešavanja"
 [extractPages.tooltip]
 description = "Izdvaja odabrane stranice u novi PDF, zadržavajući redosled."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "Otvori u uređivaču fajlova"
 viewInViewer = "Prikaži u pregledaču"
@@ -4657,7 +4673,6 @@ closeFile = "Zatvori fajl"
 
 [fileEditor]
 closedFile = "Zatvoreno {{name}}"
-couldNotSave = "Nije moguće sačuvati {{name}}"
 filesReordered_one = "Datoteka je preraspoređena"
 filesReordered_other = "{{count}} datoteka je preraspoređeno"
 loadedFromStorage_one = "Učitana je {{count}} datoteka iz skladišta"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "Resetuje se sutra"
 thisPeriod = "Ovaj obračunski period"
 
 [payment]
+annually = "Annually"
 billingPeriod = "Obračunski period"
 cancelTeamChange = "Zadrži trenutni plan"
 canCloseWindow = "Sada možete zatvoriti ovaj prozor."
@@ -7157,11 +7173,14 @@ title = "Prilagodi Team plan"
 
 [payment.capacityStage]
 adjustmentNote = "Stripe će prikazati tačan iznos, sva proporcionalna zaduženja i sledeći datum naplate pre nego što potvrdite. Vaš sačuvani način plaćanja biće korišćen ako je dostupan."
+billingLabel = "Billing"
 continue = "Nastavi na plaćanje"
 currencyAtCheckout = "Stripe potvrđuje konačan iznos i valutu plaćanja pri plaćanju."
+custom = "Custom"
 customLabel = "Broj korisnika"
 dueToday = "Dospeva danas"
 enterpriseQuote = "Zatraži enterprise ponudu"
+enterUsers = "Enter a number of users."
 estimatedTotal = "Procenjeni ukupan iznos"
 lineItem = "Team · {{price}}{{period}} po {{block}} korisnika"
 minimumForCurrentUsers = "Imate {{users}} korisnika, pa plan mora da pokrije najmanje {{minimum}}."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "Postojeći nalozi ostaju na mestu. Dodavanje ili pozi
 overCapacityTitle = "Vaš server ima više korisnika nego što vaš plan pokriva"
 perMonth = "/mes"
 perYear = "/god"
+planName = "Stirling Team"
 reductionNote = "Manji kapacitet počinje pri sledećoj obnovi. Do tada možete koristiti trenutnu kvotu. Postojeći korisnici ostaju; novi korisnici su blokirani ako ste preko kapaciteta kada promena stupi na snagu."
 renewalNote = "Obnavlja se po {{total}}{{period}}. Otkažite bilo kada u Korišćenje i naplata."
 reviewChange = "Pregledaj promenu u Stripe"
-roundsTo = "zaokružuje se na {{users}}"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "Pokriva sve koje pozovete, u blokovima od {{users}} korisnika."
 subheadingAdd = "Vaš plan danas pokriva {{current}} korisnika. Izaberite novi ukupan broj."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "Korisnici"
 userTotal = "{{users}} korisnika"
 
@@ -7261,12 +7284,15 @@ widget = "Polje obrasca - nije tekst stranice, pa se ovde ne može uređivati"
 
 [pdfTextEditor.commands]
 edit = "Uredi"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "Objedini {{count}} segment u pasus"
 mergeRuns_other = "Objedini {{count}} segmenata u pasus"
 setColour = "Podesi boju za {{run}}"
 setOutline = "Podesi konturu za {{run}}"
+tagPageContent = "Auto-tag page"
 typeInto = "Kucaj u {{run}}"
 ungroupParagraph = "Razgrupiši pasus {{run}}"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "Prelomi {{run}}"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "Dodaj oznaku"
 artifactText = "Dekorativno"
 cannotChange = "Pristupačnost ove slike ne može da se promeni."
 cannotRetag = "Oznaka ovog teksta ne može da se promeni."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (prilagođena oznaka)"
 decorativeInfo = "Čitači ekrana preskaču dekorativne slike. Koristite ovo za ivice, pozadine i druge slike koje ne nose informacije."
 decorativeLabel = "Dekorativna slika"
@@ -7430,22 +7457,31 @@ encrypted = "Oznake ne mogu da se uređuju u šifrovanoj datoteci"
 heading = "Pristupačnost"
 innerTagLabel = "Oznaka {{number}}"
 innerTags = "Oznake u ovom tekstu"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "Nedostaju opisi"
 mixedContent = "Figura sadrži drugi sadržaj"
+mixedTags = "Mixed"
 needsDescriptionBadge = "Nema opisa"
 nextImage = "Sledeća slika"
 notFigure = "Označeno kao deo teksta"
 removeTag = "Ukloni oznaku"
 saveFailed = "Vaše izmene pristupačnosti nisu mogle da budu sačuvane, pa datoteka nije sačuvana. Opozovite ih i pokušajte ponovo."
 selectedText = "Izabrani tekst"
+tagging = "Tagging pages"
 tagLabel = "Oznaka"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "Ne može se pročitati ovde"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "Oznake ove datoteke ne mogu da se uređuju"
 untaggableImages = "Ne mogu se označiti ovde"
 untaggedBadge = "Nije označeno"
 untaggedDocument = "Dokument nema oznake"
 untaggedImage = "Ne može se označiti ovde"
 untaggedImages = "Neoznačene slike"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "Naslov bez teksta"
@@ -7504,6 +7540,23 @@ tableHead = "Zaglavlje tabele"
 tableHeader = "Zaglavlje tabele"
 tableRow = "Red tabele"
 title = "Naslov"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Radnje uređivača"
@@ -7935,8 +7988,6 @@ triggerImport = "Pokreće se pri uvozu"
 [policies.enforcement]
 applying = "Primena {{names}}"
 applyingProgress = "Primena {{names}} ({{done}} od {{total}})"
-exportFailureBody = "Bezbednosne politike nije bilo moguće primeniti. Datoteke su izvezene onakve kakve jesu."
-exportFailureTitle = "Izvezeno bez primene"
 failureBody = "Obrada {{failures}} od {{total}} datoteka nije uspela, pa su izvezene onakve kakve jesu."
 failureTitle = "Izvezeno bez potpune primene"
 printPolicyAppliedBody = "Ovaj PDF je ažuriran da bi ispunio politiku. Pregledajte izmene, zatim ponovo odštampajte."
@@ -9142,6 +9193,130 @@ status = "Status"
 time = "Vreme"
 user = "Korisnik"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "Ovaj prikaz je naišao na neočekivanu grešku. Pokušajte ponovo ili izaberite drugi odeljak iz bočne trake."
 retry = "Pokušajte ponovo"
@@ -9293,6 +9468,7 @@ title = "Nema ničega za pregled"
 [portal.home.download]
 back = "Nazad"
 body = "Preuzmite desktop aplikaciju ili self-hostujte server."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "Gotovo"
 guide = "Otvori {{name}} vodič"
 openInBrowser = "Otvori u pregledaču umesto toga"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "Prijem email-a"
 
 [portal.procurement]
-subtitle = "Obavite procenu, ugovaranje i uvođenje tima. Svaki dokument na jednom mestu."
 title = "Nabavka"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "Nije moguće učitati ugovor. Pokušajte ponovo."
 loading = "Učitavanje ugovora..."
 ref = "Ref {{ref}} · {{version}}"
 requestChanges = "Zatraži izmene"
-scrollHint = "Pomerite da pregledate"
 signatory = "Ime potpisnika"
 signatoryPlaceholder = "Puno ime"
 signatoryTitle = "Funkcija potpisnika"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "npr. glavni pravni savetnik"
 signError = "Nije moguće zabeležiti vaš potpis. Pokušajte ponovo."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "Dodaci"
 addressLine1 = "Adresa, red 1"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "Adresa, red 2"
 addressLine2Placeholder = "Apartman, sprat, zgrada"
 back = "Nazad"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "Naziv preduzeća"
 businessNamePlaceholder = "Vaša kompanija"
 city = "Grad"
 cityPlaceholder = "San Francisco"
 completeRequired = "Popunite obavezna polja (označena *) važećim email-om pre generisanja ponude."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "Kontakt email"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "Ime kontakta"
 contactNamePlaceholder = "Jane Doe"
 continue = "Nastavi"
 done = "Gotovo"
+editUsage = "Edit usage"
 eula = "Pročitao/la sam i prihvatam Stirling Enterprise EULA. Ona uređuje ugovor generisan iz ove ponude."
 generate = "Generiši ponudu"
 indemnification = "IP obeštećenje"
 indemnificationSub = "Branimo kvalifikovane IP zahteve, prema EULA"
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Enterprise ponuda"
 paperFor = "Pripremljeno za"
 pdfSize = "Veličina PDF-a"
@@ -10506,9 +10690,13 @@ posture_regulated = "Regulisano"
 posture_regulatedSub = "Svaka kategorija — usklađenost, zadržavanje, unos"
 qbr = "Kvartalni poslovni pregledi"
 qbrSub = "Vaš SE pregleda korišćenje i roadmap svakog kvartala"
+raiseUsage = "Raise estimated usage"
 region = "Država / region"
 regionPlaceholder = "California"
-running = "{{annual}} / god · {{years}}-god {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "Vaš tim i PDF-ovi koje očekujete da obrađujete svake godine."
 s1Title = "Koliko ćete obrađivati?"
 s2Sub = "Duži rokovi smanjuju cenu; vaš nivo usluge određuje podršku."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "npr. 1.000.000"
 years_one = "{{count}} godina"
 years_other = "{{count}} godina"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Enterprise ugovor"
 agreementSub = "MSA, narudžbeni obrazac i DPA u jednom potpisu."
@@ -10557,6 +10758,8 @@ invoice = "Faktura"
 invoiceSub = "Vaša prva faktura za pretplatu."
 laterInvoice = "Dostupno nakon što prihvatite"
 laterQuote = "Dostupno kada vaša ponuda bude izdata"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "Ponuda"
 quoteSub = "Vaša detaljna enterprise ponuda."
 sla = "SLA prilog"
@@ -10573,15 +10776,12 @@ title = "Nešto je pošlo naopako"
 [portal.procurement.hero]
 barAria = "Faza {{current}} od {{total}}"
 ctaAgreement = "Pregledaj i potpiši ugovor"
-ctaExploring = "Podesite probni period"
 ctaQuote = "Pregledajte svoju ponudu"
 ctaReviewQuote = "Pregledaj ponudu"
 ctaTrial = "Napravite svoju ponudu"
-documents = "Dokumenti"
 eyebrow = "Enterprise nabavka"
 eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Pozovite članove tima"
-licenseKey = "Licencni ključ"
 liveSub = "Vaša organizacija je provisionirana i vaša licenca je aktivna."
 liveTitle = "Uživo ste na Stirling Enterprise"
 next = "Sledeće: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "Još nije moguće generisati offline licencnu datoteku — poku
 downloadOffline = "Preuzmi offline licencu (.lic)"
 hint = "Nalepite ovaj ključ u self-hosted instancu da biste je aktivirali ili ga sačuvajte za svoju evidenciju. Čuvajte ga na sigurnom."
 label = "Vaš licencni ključ"
-subtitle = "Aktivirajte self-hosted instancu ovim ključem ili ga sačuvajte za svoju evidenciju."
-title = "Vaš licencni ključ"
 trialFileHint = "Ovo je vaša probna licencna datoteka. Kada ugovor bude uspostavljen, vratite se i ponovo je preuzmite — za razliku od online licencnog ključa, .lic datoteka se neće sama ažurirati."
 
 [portal.procurement.link]
 cta = "Poveži nalog"
 description = "Nabavka radi na vašem povezanom Stirling nalogu: tako obezbeđujemo probni period, određujemo cenu ponude i pokrećemo naplatu. Povežite nalog za početak."
-eyebrow = "Enterprise"
 title = "Povežite svoj nalog da biste počeli"
 
 [portal.procurement.live]
 description = "Vaša pretplata je aktivna i licenca je izdata. Vaš tim je obezbeđen i naplata je počela."
-eyebrow = "Uživo"
 title = "Uživo ste na Stirling Enterprise"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "Još nije moguće preuzeti PDF ponude — pokušajte ponovo za 
 
 [portal.procurement.payment]
 description = "Vaša ponuda je prihvaćena i licenca je već aktivna — vaš tim može odmah da počne. Platite prvu fakturu kada budete spremni; možete je platiti ili preuzeti ovde, bez email-a."
-downloadAgreement = "Preuzmi potpisani ugovor"
 downloadInvoice = "Preuzmi fakturu"
-eyebrow = "Plaćanje"
-title = "Pretplata je kreirana"
 viewInvoice = "Prikaži i plati fakturu"
 
 [portal.procurement.review]
 acceptCta = "Prihvati ponudu"
 annual = "Godišnja naknada (1. godina)"
 downloadCta = "Preuzmi ponudu"
+oneTime = "one-time"
 poNumber = "Narudžbenica: {{po}}"
 renewal = "Obnavlja se po {{amount}}/godina nakon isteka perioda (+{{pct}}% CPI)"
 tcv = "Period od {{years}} godina, plaćeno u celosti unapred: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "Produženje dodaje 7 dana i obaveštava vašeg solutions engineer-a."
 bodyMaxed = "Iskoristili ste sva produženja — razgovarajte sa svojim solutions engineer-om ako vam treba više vremena."
-cancel = "Otkaži probni period"
 extend = "Produži 7 dana"
 maxed = "Maksimalno iskorišćeno"
 subtitle = "Vaš besplatni probni period traje do {{date}}. Kartica nije potrebna."
 title = "Enterprise probni period"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "Sve iz izvršavanja vaših politika i uređivača vašeg tima što zahteva vašu pažnju."
@@ -11811,6 +12012,13 @@ title = "Sanitizacija PDF-a"
 [sanitizePdf]
 tags = "čišćenje,bezbednost,bezbedno,ukloni-pretnje"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "promeni veličinu,podesi,skaliraj,veličina stranice,promeni veličinu stranice,skaliraj stranicu,promeni dimenzije,podesi veličinu,povećaj,smanji stranicu,uklopi u stranicu,A4,letter size"
 title = "Podesi razmeru stranica"
@@ -11993,6 +12201,13 @@ apiKeys = "API ključevi"
 apiKeysDescription = "Lični ključevi za pozivanje Stirling API-ja iz skripti i integracija."
 title = "Razvoj"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "Automatski raspakuj API odgovore"
 autoUnzipFileLimit = "Ograničenje za automatsko raspakivanje"
@@ -12135,15 +12350,24 @@ title = "Pravni dokumenti"
 backendDescription = "Licence za Backend zavisnosti uključene sa ovim serverom."
 backendLabel = "Backend licence"
 backendTitle = "Backend licence trećih strana"
+clearSearch = "Clear search"
 empty = "Nisu pronađene zavisnosti."
 frontendDescription = "Licence za Frontend zavisnosti uključene u release build."
 frontendLabel = "Frontend licence"
 frontendTitle = "Frontend licence trećih strana"
 license = "Licenca"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "Lista se prikazuje direktno u UI iz release bundle-a ili Backend endpoint-a."
 listTitle = "Uključene zavisnosti"
 loadError = "Učitavanje licenci trećih strana nije uspelo"
 module = "Modul"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "Verzija"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "Na čekanju"
 remove = "Ukloni"
 roleColumn = "Uloga"
 title = "Članovi tima"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "Centar"

@@ -1328,6 +1328,10 @@ label = "İzlenen Klasör Dizinleri"
 description = "Yeni kullanıcılar için varsayılan dil (örn., en_US, es_ES)"
 label = "Varsayılan Yerel Ayar"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "Maksimum dosya yükleme boyutu (örn., 100MB, 1GB)"
 label = "Dosya Yükleme Sınırı"
@@ -2969,6 +2973,7 @@ loadError = "Kullanıcılar yüklenemedi"
 noTeam = "Ekip Yok"
 noUsers = "Başka kullanıcı bulunamadı."
 placeholder = "Kullanıcı seçin..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (Siz)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "Ayarlar"
 [extractPages.tooltip]
 description = "Seçilen sayfaları sırası korunarak yeni bir PDF'ye çıkarır."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "Dosya Düzenleyicide aç"
 viewInViewer = "Görüntüleyicide görüntüle"
@@ -4657,7 +4673,6 @@ closeFile = "Dosyayı kapat"
 
 [fileEditor]
 closedFile = "{{name}} kapatıldı"
-couldNotSave = "{{name}} kaydedilemedi"
 filesReordered_one = "Dosya yeniden sıralandı"
 filesReordered_other = "{{count}} dosya yeniden sıralandı"
 loadedFromStorage_one = "Depolamadan {{count}} dosya yüklendi"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "Yarın sıfırlanır"
 thisPeriod = "Bu faturalandırma dönemi"
 
 [payment]
+annually = "Annually"
 billingPeriod = "Faturalandırma dönemi"
 cancelTeamChange = "Mevcut planı koru"
 canCloseWindow = "Bu pencereyi şimdi kapatabilirsiniz."
@@ -7157,11 +7173,14 @@ title = "Team planını ayarla"
 
 [payment.capacityStage]
 adjustmentNote = "Stripe, onaylamadan önce tam ücreti, varsa orantılı ücretleri ve bir sonraki faturalandırma tarihinizi gösterecek. Varsa kayıtlı ödeme yönteminiz kullanılacak."
+billingLabel = "Billing"
 continue = "Ödemeye devam et"
 currencyAtCheckout = "Stripe, son tutarı ve ödeme para birimini ödeme sırasında onaylar."
+custom = "Custom"
 customLabel = "Kullanıcı sayısı"
 dueToday = "Bugün ödenecek"
 enterpriseQuote = "Kurumsal teklif al"
+enterUsers = "Enter a number of users."
 estimatedTotal = "Tahmini toplam"
 lineItem = "Team · {{block}} kullanıcı başına {{price}}{{period}}"
 minimumForCurrentUsers = "{{users}} kullanıcınız var, bu yüzden plan en az {{minimum}} kişiyi kapsamalı."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "Mevcut hesaplar yerinde kalır. Kapasite ekleyene vey
 overCapacityTitle = "Sunucunuzda planınızın kapsadığından fazla kullanıcı var"
 perMonth = "/ay"
 perYear = "/yıl"
+planName = "Stirling Team"
 reductionNote = "Daha düşük kapasite bir sonraki yenilemenizde başlar. O zamana kadar mevcut hakkınızı kullanabilirsiniz. Mevcut kullanıcılar kalır; değişiklik yürürlüğe girdiğinde kapasitenin üzerindeyseniz yeni kullanıcılar engellenir."
 renewalNote = "{{total}}{{period}} olarak yenilenir. Usage & Billing bölümünden istediğiniz zaman iptal edin."
 reviewChange = "Değişikliği Stripe'da incele"
-roundsTo = "{{users}} kullanıcıya yuvarlanır"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "Davet ettiğiniz herkesi {{users}} kullanıcılık bloklar halinde kapsar."
 subheadingAdd = "Planınız bugün {{current}} kullanıcıyı kapsıyor. Yeni toplamı seçin."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "Kullanıcılar"
 userTotal = "{{users}} kullanıcı"
 
@@ -7261,12 +7284,15 @@ widget = "Form alanı - sayfa metni değildir, bu yüzden burada düzenlenemez"
 
 [pdfTextEditor.commands]
 edit = "Düzenle"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "{{count}} parçayı bir paragrafta birleştir"
 mergeRuns_other = "{{count}} parçayı bir paragrafta birleştir"
 setColour = "{{run}} üzerinde rengi ayarla"
 setOutline = "{{run}} üzerinde outline ayarla"
+tagPageContent = "Auto-tag page"
 typeInto = "{{run}} içine yaz"
 ungroupParagraph = "{{run}} paragrafının grubunu çöz"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "{{run}} kaydır"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "Etiket ekle"
 artifactText = "Dekoratif"
 cannotChange = "Bu görselin erişilebilirliği değiştirilemez."
 cannotRetag = "Bu metnin etiketi değiştirilemez."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (özel etiket)"
 decorativeInfo = "Ekran okuyucular dekoratif görselleri atlar. Bunu kenarlıklar, arka planlar ve bilgi taşımayan diğer görseller için kullanın."
 decorativeLabel = "Dekoratif görsel"
@@ -7430,22 +7457,31 @@ encrypted = "Şifrelenmiş bir dosyada etiketler düzenlenemez"
 heading = "Erişilebilirlik"
 innerTagLabel = "Etiket {{number}}"
 innerTags = "Bu metindeki etiketler"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "Eksik açıklamalar"
 mixedContent = "Şekil başka içerik içeriyor"
+mixedTags = "Mixed"
 needsDescriptionBadge = "Açıklama yok"
 nextImage = "Sonraki görsel"
 notFigure = "Metnin parçası olarak etiketlendi"
 removeTag = "Etiketi kaldır"
 saveFailed = "Erişilebilirlik değişiklikleriniz kaydedilemedi, bu nedenle dosya kaydedilmedi. Bunları geri alın ve tekrar deneyin."
 selectedText = "Seçili metin"
+tagging = "Tagging pages"
 tagLabel = "Etiket"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "Burada okunamaz"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "Bu dosyanın etiketleri düzenlenemez"
 untaggableImages = "Burada etiketlenemez"
 untaggedBadge = "Etiketlenmemiş"
 untaggedDocument = "Belgede etiket yok"
 untaggedImage = "Burada etiketlenemez"
 untaggedImages = "Etiketlenmemiş görseller"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "Metni olmayan başlık"
@@ -7504,6 +7540,23 @@ tableHead = "Tablo üst bilgisi"
 tableHeader = "Tablo başlığı"
 tableRow = "Tablo satırı"
 title = "Başlık"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Düzenleyici eylemleri"
@@ -7935,8 +7988,6 @@ triggerImport = "İçe aktarmada çalışır"
 [policies.enforcement]
 applying = "{{names}} uygulanıyor"
 applyingProgress = "{{names}} uygulanıyor ({{done}} / {{total}})"
-exportFailureBody = "Güvenlik politikaları uygulanamadı. Dosyalar olduğu gibi dışa aktarıldı."
-exportFailureTitle = "Uygulama olmadan dışa aktarıldı"
 failureBody = "Bazı politikalar {{total}} dosyanın {{failures}} tanesine uygulanamadı."
 failureTitle = "Tam uygulama olmadan dışa aktarıldı"
 printPolicyAppliedBody = "Bu PDF bir politikayı karşılamak için güncellendi. Değişiklikleri gözden geçirin, ardından yeniden yazdırın."
@@ -9142,6 +9193,130 @@ status = "Durum"
 time = "Zaman"
 user = "Kullanıcı"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "Bu görünüm beklenmeyen bir hatayla karşılaştı. Tekrar deneyin veya kenar çubuğundan başka bir bölüm seçin."
 retry = "Tekrar dene"
@@ -9293,6 +9468,7 @@ title = "İncelenecek bir şey yok"
 [portal.home.download]
 back = "Geri"
 body = "Masaüstü uygulamasını indirin veya sunucuyu kendi ortamınızda barındırın."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "Bitti"
 guide = "{{name}} kılavuzunu aç"
 openInBrowser = "Bunun yerine tarayıcıda aç"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "E-posta alımı"
 
 [portal.procurement]
-subtitle = "Ekibinizin değerlendirme, sözleşme ve katılım süreçlerini tamamlayın. Her belge tek yerde."
 title = "Satın alma"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "Sözleşme yüklenemedi. Lütfen tekrar deneyin."
 loading = "Sözleşme yükleniyor..."
 ref = "Ref {{ref}} · {{version}}"
 requestChanges = "Değişiklik iste"
-scrollHint = "İncelemek için kaydırın"
 signatory = "İmzalayan adı"
 signatoryPlaceholder = "Tam ad"
 signatoryTitle = "İmzalayan unvanı"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "örn. Genel Hukuk Müşaviri"
 signError = "İmzanız kaydedilemedi. Lütfen tekrar deneyin."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "Eklentiler"
 addressLine1 = "Adres satırı 1"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "Adres satırı 2"
 addressLine2Placeholder = "Daire, kat, bina"
 back = "Geri"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "İşletme adı"
 businessNamePlaceholder = "Şirketiniz"
 city = "Şehir"
 cityPlaceholder = "San Francisco"
 completeRequired = "Lütfen teklif oluşturmadan önce gerekli alanları (* ile işaretli) geçerli bir e-posta ile doldurun."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "İletişim e-postası"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "İletişim adı"
 contactNamePlaceholder = "Jane Doe"
 continue = "Devam"
 done = "Tamam"
+editUsage = "Edit usage"
 eula = "Stirling Enterprise EULA'yı okudum ve kabul ediyorum. Bu tekliften oluşturulan anlaşmayı yönetir."
 generate = "Teklif oluştur"
 indemnification = "Gelişmiş IP Koruması"
 indemnificationSub = "IP savunmamızı patent taleplerine genişletir. Temel telif hakkı, ticari marka ve ticari sır tazminatı ücretsiz olarak dahildir."
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Kurumsal teklif"
 paperFor = "Hazırlanan"
 pdfSize = "PDF boyutu"
@@ -10506,9 +10690,13 @@ posture_regulated = "Düzenlemeye tabi"
 posture_regulatedSub = "Her kategori — Uyumluluk, Saklama, Alım"
 qbr = "Üç aylık iş değerlendirmeleri"
 qbrSub = "SE'niz her çeyrek kullanım ve yol haritasını inceler"
+raiseUsage = "Raise estimated usage"
 region = "Eyalet / bölge"
 regionPlaceholder = "Kaliforniya"
-running = "{{annual}} / yıl · {{years}} yıllık {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "Ekibiniz ve her yıl çalıştırmayı beklediğiniz PDF'ler."
 s1Title = "Ne kadar işlem yapacaksınız?"
 s2Sub = "Daha uzun vadeler oranı düşürür; hizmet seviyeniz desteği belirler."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "örn. 1.000.000"
 years_one = "{{count}} yıl"
 years_other = "{{count}} yıl"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Kurumsal Sözleşme"
 agreementSub = "MSA, Sipariş Formu ve DPA tek imzada."
@@ -10557,6 +10758,8 @@ invoice = "Fatura"
 invoiceSub = "İlk abonelik faturanız."
 laterInvoice = "Kabul ettikten sonra kullanılabilir"
 laterQuote = "Teklifiniz düzenlendiğinde kullanılabilir"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "Teklif"
 quoteSub = "Kalemlere ayrılmış kurumsal teklifiniz."
 sla = "SLA Eki"
@@ -10573,15 +10776,12 @@ title = "Bir şeyler ters gitti"
 [portal.procurement.hero]
 barAria = "Aşama {{current}} / {{total}}"
 ctaAgreement = "Anlaşmayı incele ve imzala"
-ctaExploring = "Denemenizi kurun"
 ctaQuote = "Teklifinizi inceleyin"
 ctaReviewQuote = "Teklifi incele"
 ctaTrial = "Teklifinizi oluşturun"
-documents = "Belgeler"
 eyebrow = "Kurumsal"
 eyebrowCompany = "{{company}} Kurumsal"
 inviteTeammates = "Takım arkadaşlarını davet et"
-licenseKey = "Lisans anahtarı"
 liveSub = "Kuruluşunuz provision edildi ve lisansınız aktif."
 liveTitle = "Stirling Enterprise'ta canlıdasınız"
 next = "Sonraki: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "Çevrimdışı lisans dosyası henüz oluşturulamadı — lüt
 downloadOffline = "Çevrimdışı lisansı indir (.lic)"
 hint = "Etkinleştirmek için bu anahtarı kendi sunucunuzda barındırılan bir örneğe yapıştırın veya kayıtlarınız için saklayın. Güvende tutun."
 label = "Lisans anahtarınız"
-subtitle = "Kendi barındırdığınız bir instance'ı bu anahtarla etkinleştirin veya kayıtlarınız için saklayın."
-title = "Lisans anahtarınız"
 trialFileHint = "Bu, deneme lisans dosyanızdır. Sözleşmeniz yürürlüğe girdikten sonra geri dönüp tekrar indirin — çevrimiçi lisans anahtarının aksine, .lic dosyası kendiliğinden güncellenmez."
 
 [portal.procurement.link]
 cta = "Hesabı bağla"
 description = "Satın alma, bağlı Stirling hesabınızda çalışır: denemeyi hazırlama, teklifinizi fiyatlandırma ve faturalandırmayı başlatma şeklimiz budur. Başlamak için bir hesap bağlayın."
-eyebrow = "Kurumsal"
 title = "Başlamak için hesabınızı bağlayın"
 
 [portal.procurement.live]
 description = "Aboneliğiniz aktif ve lisansınız verildi. Ekibiniz hazırlandı ve faturalandırma başladı."
-eyebrow = "Canlı"
 title = "Stirling Enterprise'ta yayındasınız"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "Teklif PDF'si henüz indirilemedi — lütfen birazdan tekrar d
 
 [portal.procurement.payment]
 description = "Teklifiniz kabul edildi ve lisansınız zaten aktif — ekibiniz hemen başlayabilir. Hazır olduğunuzda ilk faturayı ödeyin; e-posta gerekmeden burada ödeyebilir veya indirebilirsiniz."
-downloadAgreement = "İmzalı sözleşmeyi indir"
 downloadInvoice = "Faturayı indir"
-eyebrow = "Ödeme"
-title = "Abonelik oluşturuldu"
 viewInvoice = "Faturayı görüntüle ve öde"
 
 [portal.procurement.review]
 acceptCta = "Teklifi kabul et"
 annual = "Yıllık ücret (1. yıl)"
 downloadCta = "Teklifi indir"
+oneTime = "one-time"
 poNumber = "Satın alma siparişi: {{po}}"
 renewal = "Dönemden sonra {{amount}}/yıl üzerinden yenilenir (+{{pct}}% CPI)"
 tcv = "{{years}} yıllık dönem, peşin tam ödemeli: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "Uzatma 7 gün ekler ve çözüm mühendisinizi bilgilendirir."
 bodyMaxed = "Tüm uzatmalarınızı kullandınız — daha fazla zamana ihtiyacınız varsa çözüm mühendisinizle görüşün."
-cancel = "Denemeyi iptal et"
 extend = "7 gün uzat"
 maxed = "Sınıra ulaşıldı"
 subtitle = "Ücretsiz denemeniz {{date}} tarihine kadar sürer. Kart gerekmez."
 title = "Enterprise denemesi"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "Politika çalıştırmalarınızdan ve ekibinizin düzenleyicilerinden dikkatinizi gerektiren her şey."
@@ -11811,6 +12012,13 @@ title = "PDF'i Temizle"
 [sanitizePdf]
 tags = "temizle,güvende,korunaklı,tehditleri-kaldır"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "yeniden boyutlandır,ayarla,ölçekle,sayfa boyutu,sayfayı yeniden boyutlandır,sayfayı ölçekle,boyutu değiştir,boyutu ayarla,büyüt,sayfayı küçült,sayfaya sığdır,A4,letter size"
 title = "Sayfa Ölçeğini Ayarla"
@@ -11993,6 +12201,13 @@ apiKeys = "API Anahtarları"
 apiKeysDescription = "Stirling API’yi script’lerden ve entegrasyonlardan çağırmak için kişisel anahtarlar."
 title = "Geliştirici"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "API yanıtlarını otomatik ZIP'ten çıkar"
 autoUnzipFileLimit = "Otomatik zip açma dosya sınırı"
@@ -12135,15 +12350,24 @@ title = "Yasal Belgeler"
 backendDescription = "Bu sunucuyla paketlenen backend bağımlılıkları için lisanslar."
 backendLabel = "Backend Lisansları"
 backendTitle = "Backend 3. Taraf Lisansları"
+clearSearch = "Clear search"
 empty = "Bağımlılık bulunamadı."
 frontendDescription = "Sürüm derlemesine paketlenen frontend bağımlılıkları için lisanslar."
 frontendLabel = "Frontend Lisansları"
 frontendTitle = "Frontend 3. Taraf Lisansları"
 license = "Lisans"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "Liste, sürüm paketinden veya backend endpoint'inden doğrudan UI içinde gösterilir."
 listTitle = "Paketlenmiş bağımlılıklar"
 loadError = "Üçüncü taraf lisansları yüklenemedi"
 module = "Modül"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "Sürüm"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "Beklemede"
 remove = "Kaldır"
 roleColumn = "Rol"
 title = "Takım Üyeleri"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "Orta"

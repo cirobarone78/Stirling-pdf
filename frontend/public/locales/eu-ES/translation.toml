@@ -1328,6 +1328,10 @@ label = "Monitorizatutako karpeten direktorioak"
 description = "Erabiltzaile berrientzako hizkuntza lehenetsia (adib., en_US, es_ES)"
 label = "Hizkuntza lehenetsia"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "Fitxategiak igotzeko gehienezko tamaina (adib., 100MB, 1GB)"
 label = "Fitxategi-igoeraren muga"
@@ -2969,6 +2973,7 @@ loadError = "Ezin izan da erabiltzaileak kargatu"
 noTeam = "Talderik ez"
 noUsers = "Ez da beste erabiltzailerik aurkitu."
 placeholder = "Hautatu erabiltzaileak..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (Zu)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "Ezarpenak"
 [extractPages.tooltip]
 description = "Hautatutako orrialdeak PDF berri batean erauzten ditu, ordena mantenduz."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "Ireki Fitxategi-editorean"
 viewInViewer = "Ikusi Ikustailean"
@@ -4657,7 +4673,6 @@ closeFile = "Itxi fitxategia"
 
 [fileEditor]
 closedFile = "{{name}} itxita"
-couldNotSave = "Ezin izan da {{name}} gorde"
 filesReordered_one = "Fitxategia berrordenatu da"
 filesReordered_other = "{{count}} fitxategi berrordenatu dira"
 loadedFromStorage_one = "Fitxategi {{count}} biltegiratzetik kargatu da"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "Bihar berrezartzen da"
 thisPeriod = "Fakturazio-aldi hau"
 
 [payment]
+annually = "Annually"
 billingPeriod = "Fakturazio-aldia"
 cancelTeamChange = "Mantendu uneko plana"
 canCloseWindow = "Orain leiho hau itxi dezakezu."
@@ -7157,11 +7173,14 @@ title = "Doitu Team plana"
 
 [payment.capacityStage]
 adjustmentNote = "Stripe-k kargu zehatza, hainbanaketak eta hurrengo fakturazio-data erakutsiko ditu baieztatu aurretik. Gordetako ordainketa-metodoa erabiliko da erabilgarri badago."
+billingLabel = "Billing"
 continue = "Jarraitu ordainketara"
 currencyAtCheckout = "Stripe-k azken zenbatekoa eta ordainketaren moneta baieztatzen ditu ordainketa amaitzean."
+custom = "Custom"
 customLabel = "Erabiltzaile kopurua"
 dueToday = "Gaur ordaindu beharrekoa"
 enterpriseQuote = "Eskatu enpresa-aurrekontua"
+enterUsers = "Enter a number of users."
 estimatedTotal = "Zenbatetsitako guztizkoa"
 lineItem = "Team · {{price}}{{period}} {{block}} erabiltzaileko"
 minimumForCurrentUsers = "{{users}} erabiltzaile dituzu; beraz, planak gutxienez {{minimum}} estali behar ditu."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "Lehendik dauden kontuak bere horretan geratuko dira. 
 overCapacityTitle = "Zure zerbitzariak zure planak estaltzen duena baino erabiltzaile gehiago ditu"
 perMonth = "/hil"
 perYear = "/urte"
+planName = "Stirling Team"
 reductionNote = "Edukiera txikiagoa hurrengo berritzean hasiko da. Ordura arte, zure uneko muga erabil dezakezu. Lehendik dauden erabiltzaileak geratuko dira; erabiltzaile berriak blokeatuko dira aldaketa indarrean sartzean edukieratik gora bazaude."
 renewalNote = "{{total}}{{period}} prezioan berrituko da. Edonoiz bertan behera utzi Erabilera eta fakturazioa atalean."
 reviewChange = "Berrikusi aldaketa Stripe-n"
-roundsTo = "{{users}} erabiltzailetara biribiltzen da"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "Gonbidatzen dituzun guztiak estaltzen ditu, {{users}} erabiltzaileko bloketan."
 subheadingAdd = "Zure planak {{current}} erabiltzaile estaltzen ditu gaur. Aukeratu guztizko berria."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "Erabiltzaileak"
 userTotal = "{{users}} erabiltzaile"
 
@@ -7261,12 +7284,15 @@ widget = "Inprimaki-eremua - ez da orri-testua, beraz ezin da hemen editatu"
 
 [pdfTextEditor.commands]
 edit = "Editatu"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "Bateratu {{count}} run paragrafo batean"
 mergeRuns_other = "Bateratu {{count}} run paragrafo batean"
 setColour = "Ezarri kolorea {{run}}-n"
 setOutline = "Ezarri outline {{run}}-n"
+tagPageContent = "Auto-tag page"
 typeInto = "Idatzi {{run}}-n"
 ungroupParagraph = "Desmultzokatu {{run}} paragrafoa"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "Egokitu {{run}}"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "Gehitu etiketa"
 artifactText = "Apaingarria"
 cannotChange = "Irudi honen irisgarritasuna ezin da aldatu."
 cannotRetag = "Testu honen etiketa ezin da aldatu."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (etiketa pertsonalizatua)"
 decorativeInfo = "Pantaila-irakurgailuek irudi apaingarriak saltatzen dituzte. Erabili ertzetarako, atzeko planoetarako eta informaziorik ematen ez duten beste irudietarako."
 decorativeLabel = "Irudi apaingarria"
@@ -7430,22 +7457,31 @@ encrypted = "Etiketak ezin dira editatu fitxategi zifratu batean"
 heading = "Irisgarritasuna"
 innerTagLabel = "{{number}} etiketa"
 innerTags = "Testu honetako etiketak"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "Deskribapenak falta dira"
 mixedContent = "Irudiak beste eduki bat dauka"
+mixedTags = "Mixed"
 needsDescriptionBadge = "Deskribapenik gabe"
 nextImage = "Hurrengo irudia"
 notFigure = "Testuaren zati gisa etiketatuta"
 removeTag = "Kendu etiketa"
 saveFailed = "Zure irisgarritasun-aldaketak ezin izan dira gorde; beraz, fitxategia ez da gorde. Desegin aldaketak eta saiatu berriro."
 selectedText = "Hautatutako testua"
+tagging = "Tagging pages"
 tagLabel = "Etiketa"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "Ezin da hemen irakurri"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "Fitxategi honen etiketak ezin dira editatu"
 untaggableImages = "Ezin da hemen etiketatu"
 untaggedBadge = "Etiketatu gabe"
 untaggedDocument = "Dokumentuak ez du etiketarik"
 untaggedImage = "Ezin da hemen etiketatu"
 untaggedImages = "Etiketatu gabeko irudiak"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "Testurik gabeko izenburua"
@@ -7504,6 +7540,23 @@ tableHead = "Taularen goiburua"
 tableHeader = "Taulako goiburua"
 tableRow = "Taulako errenkada"
 title = "Titulua"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Editorearen ekintzak"
@@ -7935,8 +7988,6 @@ triggerImport = "Inportatzean exekutatzen da"
 [policies.enforcement]
 applying = "{{names}} aplikatzen"
 applyingProgress = "{{names}} aplikatzen ({{done}}/{{total}})"
-exportFailureBody = "Segurtasun-politikak ezin izan dira aplikatu. Fitxategiak dauden bezala esportatu dira."
-exportFailureTitle = "Betearazi gabe esportatuta"
 failureBody = "Politika batzuk ezin izan zaizkie aplikatu {{failures}} / {{total}} fitxategiri."
 failureTitle = "Betearazpen osorik gabe esportatuta"
 printPolicyAppliedBody = "PDF hau politika bat betetzeko eguneratu da. Aldaketak berrikusi eta, ondoren, inprimatu berriro."
@@ -9142,6 +9193,130 @@ status = "Egoera"
 time = "Ordua"
 user = "Erabiltzailea"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "Ikuspegi honek ustekabeko errore bat izan du. Saiatu berriro, edo aukeratu alboko barrako beste atal bat."
 retry = "Saiatu berriro"
@@ -9293,6 +9468,7 @@ title = "Ez dago berrikusteko ezer"
 [portal.home.download]
 back = "Atzera"
 body = "Deskargatu mahaigaineko aplikazioa edo egin zerbitzaria self-hosted."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "Eginda"
 guide = "Ireki {{name}} gida"
 openInBrowser = "Ireki arakatzailean ordez"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "Email sarrera"
 
 [portal.procurement]
-subtitle = "Lortu zure taldea ebaluatzea, kontratatzea eta martxan jartzea. Dokumentu guztiak leku bakarrean."
 title = "Erosketa"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "Ezin izan da akordioa kargatu. Saiatu berriro."
 loading = "Akordioa kargatzen..."
 ref = "Erref. {{ref}} · {{version}}"
 requestChanges = "Eskatu aldaketak"
-scrollHint = "Korritu berrikusteko"
 signatory = "Sinatzailearen izena"
 signatoryPlaceholder = "Izen-abizenak"
 signatoryTitle = "Sinatzailearen kargua"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "adib. Aholkulari juridiko nagusia"
 signError = "Ezin izan da zure sinadura erregistratu. Saiatu berriro."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "Gehigarriak"
 addressLine1 = "Helbidearen 1. lerroa"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "Helbidearen 2. lerroa"
 addressLine2Placeholder = "Suitea, solairua, eraikina"
 back = "Atzera"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "Enpresaren izena"
 businessNamePlaceholder = "Zure enpresa"
 city = "Hiria"
 cityPlaceholder = "San Francisco"
 completeRequired = "Osatu derrigorrezko eremuak (* markatuta) baliozko email batekin aurrekontua sortu aurretik."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "Harremanetarako emaila"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "Harremanetarako izena"
 contactNamePlaceholder = "Jane Doe"
 continue = "Jarraitu"
 done = "Eginda"
+editUsage = "Edit usage"
 eula = "Stirling Enterprise EULA irakurri dut eta ados nago. Aurrekontu honetatik sortutako akordioa arautzen du."
 generate = "Sortu aurrekontua"
 indemnification = "IP babes hobetua"
 indemnificationSub = "Gure IP defentsa patente-erreklamazioetara zabaltzen du. Oinarrizko copyright, marka komertzial eta merkataritza-sekretuen kalte-ordaina doan sartzen da."
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Enterprise aurrekontua"
 paperFor = "Honentzat prestatua"
 pdfSize = "PDF tamaina"
@@ -10506,9 +10690,13 @@ posture_regulated = "Arautua"
 posture_regulatedSub = "Kategoria guztiak — Betetzea, Atxikipena, Ingestioa"
 qbr = "Hiruhileko negozio-berrikuspenak"
 qbrSub = "Zure SEk erabilera eta roadmap-a berrikusten ditu hiruhileko bakoitzean"
+raiseUsage = "Raise estimated usage"
 region = "Estatua / eskualdea"
 regionPlaceholder = "California"
-running = "{{annual}} / urte · {{years}} urteko {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "Zure taldea eta urtero exekutatzea espero dituzun PDFak."
 s1Title = "Zenbat prozesatuko duzu?"
 s2Sub = "Epe luzeagoek tarifa deskontatzen dute; zure zerbitzu-mailak euskarria ezartzen du."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "adib. 1.000.000"
 years_one = "{{count}} urte"
 years_other = "{{count}} urte"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Enterprise akordioa"
 agreementSub = "MSA, Order Form eta DPA sinadura bakarrean."
@@ -10557,6 +10758,8 @@ invoice = "Faktura"
 invoiceSub = "Zure lehen harpidetza-faktura."
 laterInvoice = "Onartu ondoren eskuragarri"
 laterQuote = "Zure aurrekontua jaulki ondoren eskuragarri"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "Aurrekontua"
 quoteSub = "Zure enterprise aurrekontu xehatua."
 sla = "SLA eranskina"
@@ -10573,15 +10776,12 @@ title = "Zerbait gaizki joan da"
 [portal.procurement.hero]
 barAria = "{{current}}. etapa {{total}}(e)tik"
 ctaAgreement = "Berrikusi eta sinatu akordioa"
-ctaExploring = "Konfiguratu zure proba"
 ctaQuote = "Berrikusi zure aurrekontua"
 ctaReviewQuote = "Berrikusi aurrekontua"
 ctaTrial = "Eraiki zure aurrekontua"
-documents = "Dokumentuak"
 eyebrow = "Enterprise"
 eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Gonbidatu taldekideak"
-licenseKey = "Lizentzia-gakoa"
 liveSub = "Zure erakundea hornituta dago eta zure lizentzia aktibo dago."
 liveTitle = "Stirling Enterprise martxan duzu"
 next = "Hurrengoa: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "Oraindik ezin izan da offline lizentzia-fitxategia sortu — sa
 downloadOffline = "Deskargatu offline lizentzia (.lic)"
 hint = "Itsatsi gako hau self-hosted instantzia batean aktibatzeko, edo gorde zure erregistroetarako. Gorde seguru."
 label = "Zure lizentzia-gakoa"
-subtitle = "Aktibatu autoostatatutako instantzia bat gako honekin, edo gorde zure erregistroetarako."
-title = "Zure lizentzia-gakoa"
 trialFileHint = "Hau zure proba-lizentziaren fitxategia da. Zure akordioa indarrean dagoenean, itzuli eta deskargatu berriro — online lizentzia-gakoa ez bezala, .lic fitxategia ez da berez eguneratuko."
 
 [portal.procurement.link]
 cta = "Lotu kontua"
 description = "Erosketa zure lotutako Stirling kontuan exekutatzen da: horrela hornitzen dugu probaldia, aurrekontuaren prezioa kalkulatzen dugu eta fakturazioa hasten dugu. Lotu kontu bat hasteko."
-eyebrow = "Enterprise"
 title = "Lotu zure kontua hasteko"
 
 [portal.procurement.live]
 description = "Zure harpidetza aktibo dago eta zure lizentzia jaulkita dago. Zure taldea hornituta dago eta fakturazioa hasi da."
-eyebrow = "Martxan"
 title = "Stirling Enterprise-n martxan zaude"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "Oraindik ezin izan da aurrekontuaren PDFa deskargatu — saiatu
 
 [portal.procurement.payment]
 description = "Zure aurrekontua onartuta dago eta zure lizentzia dagoeneko aktibo dago — zure taldea berehala has daiteke. Ordaindu lehen faktura prest zaudenean; hemen ordaindu edo deskarga dezakezu, emailik behar gabe."
-downloadAgreement = "Deskargatu sinatutako akordioa"
 downloadInvoice = "Deskargatu faktura"
-eyebrow = "Ordainketa"
-title = "Harpidetza sortuta"
 viewInvoice = "Ikusi eta ordaindu faktura"
 
 [portal.procurement.review]
 acceptCta = "Onartu aurrekontua"
 annual = "Urteko kuota (1. urtea)"
 downloadCta = "Deskargatu aurrekontua"
+oneTime = "one-time"
 poNumber = "Erosketa-agindua: {{po}}"
 renewal = "{{amount}}/urtean berritzen da epearen ondoren (+{{pct}}% CPI)"
 tcv = "{{years}} urteko epea, osorik aurrez ordaindua: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "Luzatzeak 7 egun gehitzen ditu eta zure solutions engineer-i jakinarazten dio."
 bodyMaxed = "Luzapen guztiak erabili dituzu — hitz egin zure solutions engineer-ekin denbora gehiago behar baduzu."
-cancel = "Utzi probaldia"
 extend = "Luzatu 7 egun"
 maxed = "Mugara iritsita"
 subtitle = "Zure doako probaldia {{date}} arte doa. Ez da txartelik behar."
 title = "Enterprise probaldia"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "Zure politikaren exekuzioetatik eta zure taldeko editoreetatik zure arreta behar duen guztia."
@@ -11811,6 +12012,13 @@ title = "PDF-a desinfektatu"
 [sanitizePdf]
 tags = "garbitu,seguru,segurtasuna,mehatxuak-kendu"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "tamaina aldatu,doitu,eskalatu,orri-tamaina,aldatu orriaren tamaina,eskalatu orria,aldatu tamaina,doitu tamaina,handitu,txikitu orria,egokitu orrira,A4,letter tamaina"
 title = "Doitu orrialdearen eskala"
@@ -11993,6 +12201,13 @@ apiKeys = "API gakoak"
 apiKeysDescription = "Stirling API scriptetatik eta integrazioetatik deitzeko gako pertsonalak."
 title = "Garatzailea"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "Automatikoki deskonprimitu API erantzunak"
 autoUnzipFileLimit = "Auto-deskonprimitze fitxategi-muga"
@@ -12135,15 +12350,24 @@ title = "Lege-dokumentuak"
 backendDescription = "Zerbitzari honekin batera bildutako backend mendekotasunen lizentziak."
 backendLabel = "Backend lizentziak"
 backendTitle = "Backend-eko 3rd Party lizentziak"
+clearSearch = "Clear search"
 empty = "Ez da mendekotasunik aurkitu."
 frontendDescription = "Release build-ean bildutako frontend mendekotasunen lizentziak."
 frontendLabel = "Frontend lizentziak"
 frontendTitle = "Frontend-eko 3rd Party lizentziak"
 license = "Lizentzia"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "Zerrenda zuzenean UIan erakusten da release bundle-tik edo backend endpoint-etik."
 listTitle = "Bildutako mendekotasunak"
 loadError = "Ezin izan dira hirugarrenen lizentziak kargatu"
 module = "Modulua"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "Bertsioa"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "Zain"
 remove = "Kendu"
 roleColumn = "Rola"
 title = "Taldekideak"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "Erdira"

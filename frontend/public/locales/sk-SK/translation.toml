@@ -1328,6 +1328,10 @@ label = "Adresáre sledovaných priečinkov"
 description = "Predvolený jazyk pre nových používateľov (napr. en_US, es_ES)"
 label = "Predvolená lokalizácia"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "Maximálna veľkosť nahrávaného súboru (napr. 100MB, 1GB)"
 label = "Limit nahrávania súborov"
@@ -2969,6 +2973,7 @@ loadError = "Nepodarilo sa načítať používateľov"
 noTeam = "Bez tímu"
 noUsers = "Nenašli sa žiadni ďalší používatelia."
 placeholder = "Vybrať používateľov..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (Vy)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "Nastavenia"
 [extractPages.tooltip]
 description = "Extrahuje vybrané strany do nového PDF so zachovaním poradia."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "Otvoriť v editore súborov"
 viewInViewer = "Zobraziť v prehliadači"
@@ -4657,7 +4673,6 @@ closeFile = "Zavrieť súbor"
 
 [fileEditor]
 closedFile = "Zatvorené {{name}}"
-couldNotSave = "Nepodarilo sa uložiť {{name}}"
 filesReordered_one = "Súbor bol presunutý"
 filesReordered_other = "Presunutých {{count}} súborov"
 loadedFromStorage_one = "Načítaný {{count}} súbor z úložiska"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "Obnoví sa zajtra"
 thisPeriod = "Toto fakturačné obdobie"
 
 [payment]
+annually = "Annually"
 billingPeriod = "Fakturačné obdobie"
 cancelTeamChange = "Ponechať aktuálny plán"
 canCloseWindow = "Teraz môžete toto okno zavrieť."
@@ -7157,11 +7173,14 @@ title = "Upraviť plán Team"
 
 [payment.capacityStage]
 adjustmentNote = "Stripe pred potvrdením zobrazí presný poplatok, prípadné pomerné úpravy a dátum vašej ďalšej fakturácie. Ak je dostupný uložený spôsob platby, použije sa."
+billingLabel = "Billing"
 continue = "Pokračovať k platbe"
 currencyAtCheckout = "Stripe potvrdí konečnú sumu a menu platby pri pokladni."
+custom = "Custom"
 customLabel = "Počet používateľov"
 dueToday = "Splatné dnes"
 enterpriseQuote = "Získať cenovú ponuku pre enterprise"
+enterUsers = "Enter a number of users."
 estimatedTotal = "Odhadovaný celkový súčet"
 lineItem = "Team · {{price}}{{period}} za {{block}} používateľov"
 minimumForCurrentUsers = "Máte {{users}} používateľov, takže plán musí pokryť aspoň {{minimum}}."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "Existujúce účty zostanú na mieste. Pridávanie al
 overCapacityTitle = "Váš server má viac používateľov, než pokrýva váš plán"
 perMonth = "/mes."
 perYear = "/rok"
+planName = "Stirling Team"
 reductionNote = "Nižšia kapacita začne platiť pri vašom ďalšom obnovení. Dovtedy môžete používať aktuálny limit. Existujúci používatelia zostanú; noví používatelia budú zablokovaní, ak budete pri nadobudnutí účinnosti zmeny nad kapacitou."
 renewalNote = "Obnovuje sa za {{total}}{{period}}. Zrušiť môžete kedykoľvek v Používanie a fakturácia."
 reviewChange = "Skontrolovať zmenu v Stripe"
-roundsTo = "zaokrúhľuje sa na {{users}}"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "Pokrýva všetkých, ktorých pozvete, v blokoch po {{users}} používateľoch."
 subheadingAdd = "Váš plán dnes pokrýva {{current}} používateľov. Vyberte nový celkový počet."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "Používatelia"
 userTotal = "{{users}} používateľov"
 
@@ -7261,12 +7284,15 @@ widget = "Pole formulára – nie text stránky, preto ho tu nemožno upraviť"
 
 [pdfTextEditor.commands]
 edit = "Upraviť"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "Zlúčiť {{count}} úsek do odseku"
 mergeRuns_other = "Zlúčiť {{count}} úsekov do odseku"
 setColour = "Nastaviť farbu pre {{run}}"
 setOutline = "Nastaviť obrys pre {{run}}"
+tagPageContent = "Auto-tag page"
 typeInto = "Písať do {{run}}"
 ungroupParagraph = "Zrušiť zoskupenie odseku {{run}}"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "Zalomiť {{run}}"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "Pridať značku"
 artifactText = "Dekoratívne"
 cannotChange = "Prístupnosť tohto obrázka nemožno zmeniť."
 cannotRetag = "Značku tohto textu nemožno zmeniť."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (vlastná značka)"
 decorativeInfo = "Čítačky obrazovky preskakujú dekoratívne obrázky. Použite to pre okraje, pozadia a iné obrázky, ktoré nenesú žiadne informácie."
 decorativeLabel = "Dekoratívny obrázok"
@@ -7430,22 +7457,31 @@ encrypted = "Značky nemožno upravovať v šifrovanom súbore"
 heading = "Prístupnosť"
 innerTagLabel = "Značka {{number}}"
 innerTags = "Značky v tomto texte"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "Chýbajúce popisy"
 mixedContent = "Obrázok obsahuje iný obsah"
+mixedTags = "Mixed"
 needsDescriptionBadge = "Bez popisu"
 nextImage = "Ďalší obrázok"
 notFigure = "Označené ako súčasť textu"
 removeTag = "Odstrániť značku"
 saveFailed = "Vaše zmeny prístupnosti sa nepodarilo uložiť, preto súbor nebol uložený. Vráťte ich späť a skúste to znova."
 selectedText = "Vybraný text"
+tagging = "Tagging pages"
 tagLabel = "Značka"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "Tu sa nedá prečítať"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "Značky tohto súboru nemožno upravovať"
 untaggableImages = "Tu nemožno označiť značkou"
 untaggedBadge = "Bez značky"
 untaggedDocument = "Dokument nemá žiadne značky"
 untaggedImage = "Tu nemožno označiť značkou"
 untaggedImages = "Obrázky bez značiek"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "Nadpis bez textu"
@@ -7504,6 +7540,23 @@ tableHead = "Hlavičková časť tabuľky"
 tableHeader = "Hlavičková bunka tabuľky"
 tableRow = "Riadok tabuľky"
 title = "Názov"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Akcie editora"
@@ -7935,8 +7988,6 @@ triggerImport = "Spúšťa sa pri importe"
 [policies.enforcement]
 applying = "Uplatňuje sa {{names}}"
 applyingProgress = "Uplatňuje sa {{names}} ({{done}} z {{total}})"
-exportFailureBody = "Zásady zabezpečenia sa nepodarilo uplatniť. Súbory boli exportované tak, ako sú."
-exportFailureTitle = "Exportované bez vynucovania"
 failureBody = "Niektoré politiky sa nepodarilo použiť na {{failures}} z {{total}} súborov."
 failureTitle = "Exportované bez úplného vynucovania"
 printPolicyAppliedBody = "Tento PDF súbor bol upravený, aby spĺňal zásadu. Skontrolujte zmeny a potom vytlačte znova."
@@ -9142,6 +9193,130 @@ status = "Stav"
 time = "Čas"
 user = "Používateľ"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "V tomto zobrazení nastala neočakávaná chyba. Skúste to znova alebo vyberte inú sekciu z bočného panela."
 retry = "Skúsiť znova"
@@ -9293,6 +9468,7 @@ title = "Nič na kontrolu"
 [portal.home.download]
 back = "Späť"
 body = "Stiahnite si desktopovú aplikáciu alebo self-hostujte server."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "Hotovo"
 guide = "Otvoriť príručku {{name}}"
 openInBrowser = "Namiesto toho otvoriť v prehliadači"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "Príjem emailov"
 
 [portal.procurement]
-subtitle = "Nechajte svoj tím vyhodnotiť, zazmluvniť a zaučiť. Každý dokument na jednom mieste."
 title = "Obstarávanie"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "Nepodarilo sa načítať zmluvu. Skúste to znova."
 loading = "Načítava sa zmluva..."
 ref = "Ref. {{ref}} · {{version}}"
 requestChanges = "Požiadať o zmeny"
-scrollHint = "Posuňte na kontrolu"
 signatory = "Meno podpisujúceho"
 signatoryPlaceholder = "Celé meno"
 signatoryTitle = "Funkcia podpisujúceho"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "napr. hlavný právnik"
 signError = "Nepodarilo sa zaznamenať váš podpis. Skúste to znova."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "Doplnky"
 addressLine1 = "Riadok adresy 1"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "Riadok adresy 2"
 addressLine2Placeholder = "Apartmán, poschodie, budova"
 back = "Späť"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "Názov firmy"
 businessNamePlaceholder = "Vaša spoločnosť"
 city = "Mesto"
 cityPlaceholder = "San Francisco"
 completeRequired = "Pred vygenerovaním cenovej ponuky vyplňte povinné polia (označené *) platným emailom."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "Kontaktný email"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "Kontaktné meno"
 contactNamePlaceholder = "Jane Doe"
 continue = "Pokračovať"
 done = "Hotovo"
+editUsage = "Edit usage"
 eula = "Prečítal/-a som si Stirling Enterprise EULA a súhlasím s ňou. Riadi zmluvu vygenerovanú z tejto ponuky."
 generate = "Vygenerovať ponuku"
 indemnification = "Rozšírená ochrana IP"
 indemnificationSub = "Rozširuje našu obranu IP na patentové nároky. Základné odškodnenie za autorské práva, ochranné známky a obchodné tajomstvá je zahrnuté bezplatne."
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Enterprise cenová ponuka"
 paperFor = "Pripravené pre"
 pdfSize = "Veľkosť PDF"
@@ -10506,9 +10690,13 @@ posture_regulated = "Regulované"
 posture_regulatedSub = "Každá kategória — Compliance, Uchovávanie, Ingestion"
 qbr = "Štvrťročné obchodné hodnotenia"
 qbrSub = "Váš SE každý štvrťrok prehodnotí používanie a plán rozvoja"
+raiseUsage = "Raise estimated usage"
 region = "Štát / región"
 regionPlaceholder = "California"
-running = "{{annual}} / rok · {{years}}-ročné {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "Váš tím a PDF, ktoré očakávate spracovať každý rok."
 s1Title = "Koľko budete spracúvať?"
 s2Sub = "Dlhšie obdobia znižujú sadzbu; úroveň služby určuje podporu."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "napr. 1 000 000"
 years_one = "{{count}} rok"
 years_other = "{{count}} roky"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Podniková zmluva"
 agreementSub = "MSA, Order Form a DPA v jednom podpise."
@@ -10557,6 +10758,8 @@ invoice = "Faktúra"
 invoiceSub = "Vaša prvá faktúra za predplatné."
 laterInvoice = "Dostupné po prijatí"
 laterQuote = "Dostupné po vystavení vašej cenovej ponuky"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "Cenová ponuka"
 quoteSub = "Vaša položková enterprise cenová ponuka."
 sla = "Príloha SLA"
@@ -10573,15 +10776,12 @@ title = "Niečo sa pokazilo"
 [portal.procurement.hero]
 barAria = "Fáza {{current}} z {{total}}"
 ctaAgreement = "Skontrolovať a podpísať zmluvu"
-ctaExploring = "Nastaviť skúšobnú verziu"
 ctaQuote = "Skontrolovať ponuku"
 ctaReviewQuote = "Skontrolovať cenovú ponuku"
 ctaTrial = "Vytvoriť ponuku"
-documents = "Dokumenty"
 eyebrow = "Enterprise"
 eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Pozvať spoluhráčov"
-licenseKey = "Licenčný kľúč"
 liveSub = "Vaša organizácia je zriadená a vaša licencia je aktívna."
 liveTitle = "Ste naživo na Stirling Enterprise"
 next = "Ďalej: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "Offline licenčný súbor zatiaľ nebolo možné vygenerovať �
 downloadOffline = "Stiahnuť offline licenciu (.lic)"
 hint = "Vložte tento kľúč do self-hosted inštancie na jej aktiváciu alebo si ho ponechajte pre svoje záznamy. Uchovajte ho bezpečne."
 label = "Váš licenčný kľúč"
-subtitle = "Aktivujte self-hosted inštanciu týmto kľúčom alebo si ho ponechajte pre svoje záznamy."
-title = "Váš licenčný kľúč"
 trialFileHint = "Toto je váš súbor skúšobnej licencie. Keď bude vaša zmluva uzavretá, vráťte sa a stiahnite si ho znova — na rozdiel od online licenčného kľúča sa súbor .lic neaktualizuje sám."
 
 [portal.procurement.link]
 cta = "Prepojiť účet"
 description = "Obstarávanie beží na vašom prepojenom účte Stirling: takto zriaďujeme skúšobnú verziu, oceňujeme ponuku a spúšťame fakturáciu. Prepojte účet a začnite."
-eyebrow = "Enterprise"
 title = "Prepojte svoj účet a začnite"
 
 [portal.procurement.live]
 description = "Vaše predplatné je aktívne a licencia je vydaná. Váš tím je zriadený a fakturácia sa začala."
-eyebrow = "Live"
 title = "Ste live na Stirling Enterprise"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "PDF ponuky sa zatiaľ nepodarilo stiahnuť — skúste to znova
 
 [portal.procurement.payment]
 description = "Vaša ponuka je prijatá a licencia je už aktívna — váš tím môže začať hneď. Zaplaťte prvú faktúru, keď budete pripravení; môžete ju zaplatiť alebo stiahnuť tu, bez potreby emailu."
-downloadAgreement = "Stiahnuť podpísanú zmluvu"
 downloadInvoice = "Stiahnuť faktúru"
-eyebrow = "Platba"
-title = "Predplatné vytvorené"
 viewInvoice = "Zobraziť a zaplatiť faktúru"
 
 [portal.procurement.review]
 acceptCta = "Prijať cenovú ponuku"
 annual = "Ročný poplatok (rok 1)"
 downloadCta = "Stiahnuť cenovú ponuku"
+oneTime = "one-time"
 poNumber = "Objednávka: {{po}}"
 renewal = "Obnovuje sa za {{amount}}/rok po skončení obdobia (+{{pct}}% CPI)"
 tcv = "{{years}}-ročné obdobie, zaplatené celé vopred: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "Predĺženie pridá 7 dní a upozorní vášho solutions engineer."
 bodyMaxed = "Využili ste všetky predĺženia — ak potrebujete viac času, kontaktujte svojho solutions engineer."
-cancel = "Zrušiť skúšobnú verziu"
 extend = "Predĺžiť o 7 dní"
 maxed = "Maximum dosiahnuté"
 subtitle = "Vaša bezplatná skúšobná verzia trvá do {{date}}. Karta nie je potrebná."
 title = "Enterprise skúšobná verzia"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "Všetko z behov vašich politík a editorov vášho tímu, čo vyžaduje vašu pozornosť."
@@ -11811,6 +12012,13 @@ title = "Vyčistiť PDF"
 [sanitizePdf]
 tags = "čistiť, zabezpečiť, bezpečné, odstrániť hrozby"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "zmeniť veľkosť,upraviť,škálovať,veľkosť strany,zmeniť veľkosť strany,škálovať stranu,zmeniť veľkosť,upraviť veľkosť,zväčšiť,zmenšiť stranu,prispôsobiť strane,A4,letter size"
 title = "Upraviť mierku stránky"
@@ -11993,6 +12201,13 @@ apiKeys = "API kľúče"
 apiKeysDescription = "Osobné kľúče na volanie Stirling API zo skriptov a integrácií."
 title = "Vývojár"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "Automaticky rozbaliť odpovede API"
 autoUnzipFileLimit = "Limit automatického rozbalenia súborov"
@@ -12135,15 +12350,24 @@ title = "Právne dokumenty"
 backendDescription = "Licencie pre backend závislosti pribalené k tomuto serveru."
 backendLabel = "Backend licencie"
 backendTitle = "Licencie backend tretích strán"
+clearSearch = "Clear search"
 empty = "Nenašli sa žiadne závislosti."
 frontendDescription = "Licencie pre frontend závislosti pribalené do release buildu."
 frontendLabel = "Frontend licencie"
 frontendTitle = "Licencie frontend tretích strán"
 license = "Licencia"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "Zoznam sa zobrazuje priamo v UI z release balíka alebo backend endpointu."
 listTitle = "Pribalené závislosti"
 loadError = "Licencie tretích strán sa nepodarilo načítať"
 module = "Modul"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "Verzia"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "Čakajúce"
 remove = "Odstrániť"
 roleColumn = "Rola"
 title = "Členovia tímu"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "Na stred"

@@ -1328,6 +1328,10 @@ label = "Каталоги відстежуваних папок"
 description = "Мова за замовчуванням для нових користувачів (наприклад, en_US, es_ES)"
 label = "Мова за замовчуванням"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "Максимальний розмір завантаження файлу (наприклад, 100MB, 1GB)"
 label = "Обмеження завантаження файлів"
@@ -2969,6 +2973,7 @@ loadError = "Не вдалося завантажити користувачів
 noTeam = "Без команди"
 noUsers = "Інших користувачів не знайдено."
 placeholder = "Виберіть користувачів..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (Ви)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "Налаштування"
 [extractPages.tooltip]
 description = "Витягує вибрані сторінки в новий PDF, зберігаючи порядок."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "Відкрити в редакторі файлів"
 viewInViewer = "Переглянути у переглядачі"
@@ -4657,7 +4673,6 @@ closeFile = "Закрити файл"
 
 [fileEditor]
 closedFile = "Закрито {{name}}"
-couldNotSave = "Не вдалося зберегти {{name}}"
 filesReordered_one = "Файл перевпорядковано"
 filesReordered_other = "{{count}} файлів перевпорядковано"
 loadedFromStorage_one = "Завантажено {{count}} файл зі сховища"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "Скидання завтра"
 thisPeriod = "Цей billing period"
 
 [payment]
+annually = "Annually"
 billingPeriod = "Платіжний період"
 cancelTeamChange = "Зберегти поточний план"
 canCloseWindow = "Можете закрити це вікно."
@@ -7157,11 +7173,14 @@ title = "Налаштувати план Team"
 
 [payment.capacityStage]
 adjustmentNote = "Stripe покаже точну суму, будь-які пропорційні перерахунки та дату наступного платежу перед підтвердженням. Якщо доступний збережений спосіб оплати, його буде використано."
+billingLabel = "Billing"
 continue = "Перейти до оплати"
 currencyAtCheckout = "Stripe підтверджує остаточну суму та валюту платежу під час оформлення."
+custom = "Custom"
 customLabel = "Кількість користувачів"
 dueToday = "До сплати сьогодні"
 enterpriseQuote = "Отримати корпоративну пропозицію"
+enterUsers = "Enter a number of users."
 estimatedTotal = "Орієнтовна сума"
 lineItem = "Team · {{price}}{{period}} за {{block}} користувачів"
 minimumForCurrentUsers = "У вас {{users}} користувачів, тому план має покривати щонайменше {{minimum}}."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "Наявні облікові записи залиш
 overCapacityTitle = "На вашому сервері більше користувачів, ніж покриває ваш план"
 perMonth = "/міс."
 perYear = "/рік"
+planName = "Stirling Team"
 reductionNote = "Менша місткість почнеться з наступного поновлення. До того часу ви можете використовувати поточний ліміт. Наявні користувачі залишаються; нові користувачі блокуються, якщо на момент набуття чинності зміни ви перевищуєте місткість."
 renewalNote = "Поновлюється за {{total}}{{period}}. Скасувати можна будь-коли в Usage & Billing."
 reviewChange = "Переглянути зміну в Stripe"
-roundsTo = "округлюється до {{users}}"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "Покриває всіх, кого ви запрошуєте, блоками по {{users}} користувачів."
 subheadingAdd = "Сьогодні ваш план покриває {{current}} користувачів. Виберіть нову загальну кількість."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "Користувачі"
 userTotal = "{{users}} користувачів"
 
@@ -7261,12 +7284,15 @@ widget = "Поле форми — не текст сторінки, тому й�
 
 [pdfTextEditor.commands]
 edit = "Редагувати"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "Об’єднати {{count}} фрагмент в абзац"
 mergeRuns_other = "Об’єднати {{count}} фрагментів в абзац"
 setColour = "Установити колір для {{run}}"
 setOutline = "Установити контур для {{run}}"
+tagPageContent = "Auto-tag page"
 typeInto = "Ввести в {{run}}"
 ungroupParagraph = "Розгрупувати абзац {{run}}"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "Перенести {{run}}"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "Додати тег"
 artifactText = "Декоративне"
 cannotChange = "Доступність цього зображення не можна змінити."
 cannotRetag = "Тег цього тексту не можна змінити."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (користувацький тег)"
 decorativeInfo = "Програми зчитування з екрана пропускають декоративні зображення. Використовуйте це для рамок, фонів та інших зображень, які не несуть інформації."
 decorativeLabel = "Декоративне зображення"
@@ -7430,22 +7457,31 @@ encrypted = "Теги не можна редагувати в зашифрова
 heading = "Доступність"
 innerTagLabel = "Тег {{number}}"
 innerTags = "Теги в цьому тексті"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "Відсутні описи"
 mixedContent = "Рисунок містить інший вміст"
+mixedTags = "Mixed"
 needsDescriptionBadge = "Немає опису"
 nextImage = "Наступне зображення"
 notFigure = "Позначено тегом як частину тексту"
 removeTag = "Видалити тег"
 saveFailed = "Не вдалося зберегти зміни доступності, тому файл не було збережено. Скасуйте їх і спробуйте ще раз."
 selectedText = "Вибраний текст"
+tagging = "Tagging pages"
 tagLabel = "Тег"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "Не можна прочитати тут"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "Теги цього файлу не можна редагувати"
 untaggableImages = "Тут не можна додати теги"
 untaggedBadge = "Без тегу"
 untaggedDocument = "Документ не має тегів"
 untaggedImage = "Тут не можна додати тег"
 untaggedImages = "Зображення без тегів"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "Заголовок без тексту"
@@ -7504,6 +7540,23 @@ tableHead = "Верхня частина таблиці"
 tableHeader = "Заголовок таблиці"
 tableRow = "Рядок таблиці"
 title = "Назва"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Дії редактора"
@@ -7935,8 +7988,6 @@ triggerImport = "Запускається під час імпорту"
 [policies.enforcement]
 applying = "Застосовуємо {{names}}"
 applyingProgress = "Застосовуємо {{names}} ({{done}} з {{total}})"
-exportFailureBody = "Не вдалося застосувати політики безпеки. Файли експортовано як є."
-exportFailureTitle = "Експорт без застосування"
 failureBody = "Деякі політики не вдалося застосувати до {{failures}} з {{total}} файлів."
 failureTitle = "Експорт без повного застосування"
 printPolicyAppliedBody = "Цей PDF оновлено відповідно до політики. Перегляньте зміни, потім надрукуйте ще раз."
@@ -9142,6 +9193,130 @@ status = "Статус"
 time = "Час"
 user = "Користувач"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "У цьому поданні сталася неочікувана помилка. Спробуйте ще раз або виберіть інший розділ на бічній панелі."
 retry = "Спробувати ще раз"
@@ -9293,6 +9468,7 @@ title = "Немає нічого для перегляду"
 [portal.home.download]
 back = "Назад"
 body = "Завантажте desktop app або self-host сервер."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "Готово"
 guide = "Відкрити посібник {{name}}"
 openInBrowser = "Відкрити в браузері замість цього"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "Приймання email"
 
 [portal.procurement]
-subtitle = "Оцініть, укладіть контракт і підключіть свою команду. Кожен документ в одному місці."
 title = "Закупівля"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "Не вдалося завантажити угоду. Спробу
 loading = "Завантаження угоди..."
 ref = "Реф. {{ref}} · {{version}}"
 requestChanges = "Запросити зміни"
-scrollHint = "Прокрутіть, щоб переглянути"
 signatory = "Ім'я підписанта"
 signatoryPlaceholder = "Повне ім'я"
 signatoryTitle = "Посада підписанта"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "наприклад, General Counsel"
 signError = "Не вдалося записати ваш підпис. Спробуйте ще раз."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "Додатки"
 addressLine1 = "Адреса, рядок 1"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "Адреса, рядок 2"
 addressLine2Placeholder = "Офіс, поверх, будівля"
 back = "Назад"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "Назва компанії"
 businessNamePlaceholder = "Ваша компанія"
 city = "Місто"
 cityPlaceholder = "San Francisco"
 completeRequired = "Заповніть обов'язкові поля (позначені *) дійсним email перед створенням комерційної пропозиції."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "Контактний email"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "Ім'я контактної особи"
 contactNamePlaceholder = "Jane Doe"
 continue = "Продовжити"
 done = "Готово"
+editUsage = "Edit usage"
 eula = "Я прочитав(-ла) і погоджуюся зі Stirling Enterprise EULA. Вона регулює угоду, створену з цієї пропозиції."
 generate = "Створити пропозицію"
 indemnification = "Розширений захист IP"
 indemnificationSub = "Поширює наш захист IP на патентні претензії. Базове відшкодування щодо авторських прав, торговельних марок і комерційної таємниці включено безкоштовно."
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Enterprise пропозиція"
 paperFor = "Підготовлено для"
 pdfSize = "Розмір PDF"
@@ -10506,9 +10690,13 @@ posture_regulated = "Регульований"
 posture_regulatedSub = "Кожна категорія — відповідність, зберігання, приймання"
 qbr = "Щоквартальні бізнес-огляди"
 qbrSub = "Ваш SE щокварталу переглядає використання та roadmap"
+raiseUsage = "Raise estimated usage"
 region = "Штат / регіон"
 regionPlaceholder = "California"
-running = "{{annual}} / рік · {{years}}-річний {{tcv}}"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "Ваша команда та PDF, які ви плануєте обробляти щороку."
 s1Title = "Скільки ви оброблятимете?"
 s2Sub = "Довші терміни знижують тариф; ваш рівень сервісу визначає підтримку."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "наприклад, 1,000,000"
 years_one = "{{count}} рік"
 years_other = "{{count}} років"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Корпоративна угода"
 agreementSub = "MSA, Order Form і DPA в одному підписі."
@@ -10557,6 +10758,8 @@ invoice = "Рахунок"
 invoiceSub = "Ваш перший рахунок за підписку."
 laterInvoice = "Доступно після прийняття"
 laterQuote = "Доступно після випуску вашої пропозиції"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "Комерційна пропозиція"
 quoteSub = "Ваша деталізована Enterprise пропозиція."
 sla = "Додаток SLA"
@@ -10573,15 +10776,12 @@ title = "Щось пішло не так"
 [portal.procurement.hero]
 barAria = "Етап {{current}} з {{total}}"
 ctaAgreement = "Переглянути й підписати угоду"
-ctaExploring = "Налаштувати пробний період"
 ctaQuote = "Переглянути вашу пропозицію"
 ctaReviewQuote = "Переглянути пропозицію"
 ctaTrial = "Створити пропозицію"
-documents = "Документи"
 eyebrow = "Enterprise"
 eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Запросити колег"
-licenseKey = "Ліцензійний ключ"
 liveSub = "Вашу організацію підготовлено, і ваша ліцензія активна."
 liveTitle = "Ви працюєте на Stirling Enterprise"
 next = "Далі: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "Поки що не вдалося створити офлайн
 downloadOffline = "Завантажити офлайн-ліцензію (.lic)"
 hint = "Вставте цей ключ у self-hosted екземпляр, щоб активувати його, або збережіть для своїх записів. Зберігайте його безпечно."
 label = "Ваш ліцензійний ключ"
-subtitle = "Активуйте self-hosted інстанс цим ключем або збережіть його для своїх записів."
-title = "Ваш ліцензійний ключ"
 trialFileHint = "Це ваш пробний файл ліцензії. Коли угоду буде укладено, поверніться та завантажте його знову — на відміну від онлайн-ліцензійного ключа, файл .lic не оновлюється самостійно."
 
 [portal.procurement.link]
 cta = "Прив’язати обліковий запис"
 description = "Закупівля працює через ваш прив’язаний обліковий запис Stirling: так ми надаємо trial, оцінюємо вашу пропозицію та запускаємо білінг. Прив’яжіть обліковий запис, щоб почати."
-eyebrow = "Enterprise"
 title = "Прив’яжіть ваш обліковий запис, щоб почати"
 
 [portal.procurement.live]
 description = "Ваша підписка активна, і ліцензію видано. Вашу команду підготовлено, і білінг розпочато."
-eyebrow = "Наживо"
 title = "Ви вже працюєте в Stirling Enterprise"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "Поки що не вдалося завантажити PDF п
 
 [portal.procurement.payment]
 description = "Вашу пропозицію прийнято, і ваша ліцензія вже активна — ваша команда може почати одразу. Сплатіть перший рахунок, коли будете готові; ви можете сплатити або завантажити його тут, без email."
-downloadAgreement = "Завантажити підписану угоду"
 downloadInvoice = "Завантажити рахунок"
-eyebrow = "Оплата"
-title = "Підписку створено"
 viewInvoice = "Переглянути й сплатити рахунок"
 
 [portal.procurement.review]
 acceptCta = "Прийняти пропозицію"
 annual = "Річна плата (рік 1)"
 downloadCta = "Завантажити пропозицію"
+oneTime = "one-time"
 poNumber = "Замовлення на купівлю: {{po}}"
 renewal = "Поновлюється за {{amount}}/рік після строку (+{{pct}}% CPI)"
 tcv = "{{years}}-річний строк, повна передоплата: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "you@company.com"
 [portal.procurement.trial]
 body = "Продовження додає 7 днів і повідомляє вашого solutions engineer."
 bodyMaxed = "Ви використали всі продовження — зверніться до вашого solutions engineer, якщо вам потрібно більше часу."
-cancel = "Скасувати trial"
 extend = "Продовжити на 7 днів"
 maxed = "Ліміт вичерпано"
 subtitle = "Ваш безкоштовний trial триває до {{date}}. Картка не потрібна."
 title = "Enterprise-пробний період"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "Усе з запусків ваших політик і редакторів вашої команди, що потребує вашої уваги."
@@ -11811,6 +12012,13 @@ title = "Дезінфекція PDF"
 [sanitizePdf]
 tags = "чистка,безпека,безпечні,віддалення загроз"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "змінити розмір,налаштувати,масштабувати,розмір сторінки,змінити розмір сторінки,масштаб сторінки,змінити розмір,налаштувати розмір,збільшити,зменшити сторінку,підігнати до сторінки,A4,letter size"
 title = "Відрегулювати масштаб сторінки"
@@ -11993,6 +12201,13 @@ apiKeys = "Ключі API"
 apiKeysDescription = "Особисті ключі для виклику Stirling API зі скриптів та інтеграцій."
 title = "Розробка"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "Автоматично розпаковувати відповіді API"
 autoUnzipFileLimit = "Ліміт авторозпакування файлів"
@@ -12135,15 +12350,24 @@ title = "Юридичні документи"
 backendDescription = "Ліцензії для залежностей backend, включених до цього сервера."
 backendLabel = "Ліцензії Backend"
 backendTitle = "Ліцензії сторонніх компонентів Backend"
+clearSearch = "Clear search"
 empty = "Залежностей не знайдено."
 frontendDescription = "Ліцензії для залежностей frontend, включених у release build."
 frontendLabel = "Ліцензії Frontend"
 frontendTitle = "Ліцензії сторонніх компонентів Frontend"
 license = "Ліцензія"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "Список показується безпосередньо в UI з release bundle або endpoint backend."
 listTitle = "Включені залежності"
 loadError = "Не вдалося завантажити ліцензії сторонніх компонентів"
 module = "Модуль"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "Версія"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "В очікуванні"
 remove = "Видалити"
 roleColumn = "Роль"
 title = "Учасники команди"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "По центру"

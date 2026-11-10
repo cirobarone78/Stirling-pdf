@@ -1328,6 +1328,10 @@ label = "Directorios de cartafoles vixiados"
 description = "O idioma predeterminado para os novos usuarios (p. ex., en_US, es_ES)"
 label = "Configuración rexional predeterminada"
 
+[admin.settings.general.enableFeedback]
+description = "Let users send feedback to the Stirling team"
+label = "Enable Feedback"
+
 [admin.settings.general.fileUploadLimit]
 description = "Tamaño máximo de carga de ficheiros (p. ex., 100MB, 1GB)"
 label = "Límite de carga de ficheiros"
@@ -2969,6 +2973,7 @@ loadError = "Non se puideron cargar os usuarios"
 noTeam = "Sen equipo"
 noUsers = "Non se atoparon outros usuarios."
 placeholder = "Seleccionar usuarios..."
+signInRequired = "Sign in to request signatures from other people."
 you = "{{name}} (ti)"
 
 [certSign.device]
@@ -4648,6 +4653,17 @@ title = "Configuración"
 [extractPages.tooltip]
 description = "Extrae as páxinas seleccionadas nun novo PDF, conservando a orde."
 
+[feedback.page]
+open = "Send feedback"
+sendMore = "Send more feedback"
+sent = "Thanks for your feedback"
+title = "Help us improve Stirling"
+unavailable = "Feedback is unavailable"
+
+[feedback.tag]
+dismiss = "Hide the feedback button"
+label = "Feedback"
+
 [fileCard]
 openInFileEditor = "Abrir no editor de ficheiros"
 viewInViewer = "Ver no visor"
@@ -4657,7 +4673,6 @@ closeFile = "Pechar ficheiro"
 
 [fileEditor]
 closedFile = "Pechouse {{name}}"
-couldNotSave = "Non se puido gardar {{name}}"
 filesReordered_one = "Ficheiro reordenado"
 filesReordered_other = "{{count}} ficheiros reordenados"
 loadedFromStorage_one = "Cargouse {{count}} ficheiro desde o almacenamento"
@@ -7110,6 +7125,7 @@ resetsTomorrow = "Restablécese mañá"
 thisPeriod = "Este período de facturación"
 
 [payment]
+annually = "Annually"
 billingPeriod = "Período de facturación"
 cancelTeamChange = "Manter o plan actual"
 canCloseWindow = "Xa podes pechar esta xanela."
@@ -7157,11 +7173,14 @@ title = "Axustar o plan Team"
 
 [payment.capacityStage]
 adjustmentNote = "Stripe amosará o cargo exacto, os posibles prorrateos e a túa próxima data de facturación antes de que confirmes. Usarase o teu método de pagamento gardado se está dispoñible."
+billingLabel = "Billing"
 continue = "Continuar ao pagamento"
 currencyAtCheckout = "Stripe confirma o importe final e a moeda do pagamento ao pagar."
+custom = "Custom"
 customLabel = "Número de usuarios"
 dueToday = "A pagar hoxe"
 enterpriseQuote = "Solicitar un orzamento empresarial"
+enterUsers = "Enter a number of users."
 estimatedTotal = "Total estimado"
 lineItem = "Team · {{price}}{{period}} por cada {{block}} usuarios"
 minimumForCurrentUsers = "Tes {{users}} usuarios, así que o plan debe cubrir polo menos {{minimum}}."
@@ -7173,12 +7192,16 @@ overCapacityConsequence = "As contas existentes mantéñense. Engadir ou convida
 overCapacityTitle = "O teu servidor ten máis usuarios dos que cobre o teu plan"
 perMonth = "/mes"
 perYear = "/ano"
+planName = "Stirling Team"
 reductionNote = "A capacidade inferior comeza na túa próxima renovación. Ata entón, podes usar a túa asignación actual. Os usuarios existentes mantéñense; os novos usuarios bloquéanse se superas a capacidade cando o cambio entre en vigor."
 renewalNote = "Renóvase por {{total}}{{period}}. Cancela cando queiras en Uso e facturación."
 reviewChange = "Revisar o cambio en Stripe"
-roundsTo = "arredondase a {{users}}"
+roundsUp = "Rounds up to {{users}} users."
+selfServeLimit = "Up to {{users}} users here."
 subheading = "Cobre a todas as persoas que convides, en bloques de {{users}} usuarios."
 subheadingAdd = "O teu plan cobre hoxe {{current}} usuarios. Escolle o novo total."
+talkToEnterprise = "For more, talk to us about Enterprise."
+usersCovered = "users covered"
 usersLabel = "Usuarios"
 userTotal = "{{users}} usuarios"
 
@@ -7261,12 +7284,15 @@ widget = "Campo de formulario: non é texto da páxina, así que non se pode edi
 
 [pdfTextEditor.commands]
 edit = "Editar"
+markTagged = "Mark as fully tagged"
 mergeRuns_one = "Combinar {{count}} fragmento nun parágrafo"
 mergeRuns_other = "Combinar {{count}} fragmentos nun parágrafo"
 setColour = "Definir a cor en {{run}}"
 setOutline = "Definir o contorno en {{run}}"
+tagPageContent = "Auto-tag page"
 typeInto = "Escribir en {{run}}"
 ungroupParagraph = "Desagrupar o parágrafo {{run}}"
+unmarkTagged = "Mark as not fully tagged"
 wrap = "Axustar {{run}}"
 
 [pdfTextEditor.discard]
@@ -7421,6 +7447,7 @@ addTag = "Engadir etiqueta"
 artifactText = "Decorativo"
 cannotChange = "Non se pode cambiar a accesibilidade desta imaxe."
 cannotRetag = "Non se pode cambiar a etiqueta deste texto."
+cannotTagPage = "This page's content can't be tagged."
 customTag = "{{role}} (etiqueta personalizada)"
 decorativeInfo = "Os lectores de pantalla omiten as imaxes decorativas. Úsaa para bordos, fondos e outras imaxes que non conteñen información."
 decorativeLabel = "Imaxe decorativa"
@@ -7430,22 +7457,31 @@ encrypted = "Non se poden editar as etiquetas nun ficheiro cifrado"
 heading = "Accesibilidade"
 innerTagLabel = "Etiqueta {{number}}"
 innerTags = "Etiquetas neste texto"
+markedTagged = "Document is fully tagged"
+markedTaggedHint = "Tells PDF readers to use the accessibility tags. Tick it once everything is tagged."
+markedWithUntagged = "Some content has no tags, so screen readers may skip it."
 missingDescriptions = "Descricións que faltan"
 mixedContent = "A figura inclúe outro contido"
+mixedTags = "Mixed"
 needsDescriptionBadge = "Sen descrición"
 nextImage = "Imaxe seguinte"
 notFigure = "Etiquetado como parte do texto"
 removeTag = "Eliminar etiqueta"
 saveFailed = "Non se puideron gardar os cambios de accesibilidade, polo que o ficheiro non se gardou. Desfainos e téntao de novo."
 selectedText = "Texto seleccionado"
+tagging = "Tagging pages"
 tagLabel = "Etiqueta"
+tagUntagged = "Auto-tag document"
+tagUntaggedHint = "Automatically adds accessibility tags throughout the document. The result is rough: check headings, lists and reading order afterwards."
 unknownTag = "Non se pode ler aquí"
+unmarkedWithTags = "Some PDF viewers will use the tags anyway and may skip content without them."
 unreadable = "Non se poden editar as etiquetas deste ficheiro"
 untaggableImages = "Non se pode etiquetar aquí"
 untaggedBadge = "Sen etiquetar"
 untaggedDocument = "O documento non ten etiquetas"
 untaggedImage = "Non se pode etiquetar aquí"
 untaggedImages = "Imaxes sen etiquetar"
+untaggedPages = "Pages to tag"
 
 [pdfTextEditor.inspector.accessibility.outline]
 empty = "Título sen texto"
@@ -7504,6 +7540,23 @@ tableHead = "Cabeceira da táboa"
 tableHeader = "Cabeceira de táboa"
 tableRow = "Fila da táboa"
 title = "Título"
+
+[pdfTextEditor.inspector.language]
+allLanguages = "All languages"
+cannotSetDocument = "This document's language can't be changed."
+cannotSetText = "This text's language can't be changed."
+documentHint = "The language screen readers use unless a part of the text sets its own."
+documentLabel = "Language"
+documentLocked = "An encrypted document's language can't be changed here."
+inDocument = "In this document"
+innerLabel = "Tag {{number}} language"
+label = "Language"
+missing = "No language set. Screen readers will guess, and may read the whole document in the wrong voice."
+mixed = "Mixed"
+noMatch = "No matching language. Type its code instead, such as mt or en-IE."
+placeholder = "Select language"
+selectedText = "Selected text language"
+textHint = "Screen readers switch voice and pronunciation to this language."
 
 [pdfTextEditor.mobile]
 actions = "Accións do editor"
@@ -7935,8 +7988,6 @@ triggerImport = "Execútase ao importar"
 [policies.enforcement]
 applying = "Aplicando {{names}}"
 applyingProgress = "Aplicando {{names}} ({{done}} de {{total}})"
-exportFailureBody = "Non se puideron aplicar as políticas de seguranza. Os ficheiros exportáronse tal como estaban."
-exportFailureTitle = "Exportado sen aplicar as políticas"
 failureBody = "Non se puideron aplicar algunhas políticas a {{failures}} de {{total}} ficheiro(s)."
 failureTitle = "Exportado sen aplicar completamente as políticas"
 printPolicyAppliedBody = "Este PDF actualizouse para cumprir unha política. Revisa os cambios e despois imprime de novo."
@@ -9142,6 +9193,130 @@ status = "Estado"
 time = "Hora"
 user = "Usuario"
 
+[portal.enterprise]
+backTo = "Back to {{stage}}"
+brandTag = "Enterprise"
+callInfo = "A 15-minute call. Bring your questions on pricing, deployment or security, or plan your rollout together."
+callTitle = "Talk to a solutions engineer"
+deployment = "Deployment"
+footer = "Questions about Stirling Enterprise?"
+home = "Go to Stirling"
+member = "Your team leader runs the Enterprise deal. Once it starts, you can follow its progress here."
+memberDeal = "Your team leader runs this deal. You can follow its progress here."
+quotePanel = "Your quote"
+signIn = "Sign in"
+signInToStart = "Sign in to start your trial"
+stage = "Stage {{current}} of {{total}}"
+stagesLabel = "Progress"
+
+[portal.enterprise.connect]
+ownerOnly = "Only this server’s owner can connect it. Ask them to open this page."
+unavailable = "Connecting to a Stirling account is turned off on this server. Book a call and we’ll set up your trial with you."
+
+[portal.enterprise.landing]
+lede = "Try it free for 14 days, then build your quote and sign your agreement here. No card required."
+tickAgreement = "One agreement covering the MSA, order form, EULA and DPA"
+tickCompliance = "SCIM, data residency and uptime SLAs"
+tickDeploy = "Run it on Stirling Cloud, your own servers, or fully air-gapped"
+title = "Stirling Enterprise"
+
+[portal.enterprise.options.airgap]
+more = "Offline licence docs"
+point1 = "Activated with a licence file that works offline, not a key checked online"
+point2 = "Installs like self-hosted, from an image you bring across"
+point3 = "Sign-in stays inside your network"
+tagline = "Self-hosted on a network with no internet access."
+
+[portal.enterprise.options.cloud]
+more = "Stirling Cloud docs"
+point1 = "Your team signs in at stirling.com/app"
+point2 = "Runs on AWS, with stored files encrypted at rest"
+point3 = "Single sign-on through your own identity provider needs self-hosting"
+tagline = "Hosted for you, with nothing to install."
+
+[portal.enterprise.options.selfhost]
+more = "Self-hosting docs"
+point1 = "Install with Docker, or the Helm chart on Kubernetes"
+point2 = "Documents are processed on your own infrastructure"
+point3 = "OAuth2, OIDC or SAML single sign-on"
+tagline = "On your own servers, on-premises or in your own cloud."
+
+[portal.enterprise.review]
+back = "Return to {{stage}}"
+company = "Company"
+completed = "Completed"
+extensions = "Extensions used"
+paid = "Paid. Your invoice stays available here."
+people = "People"
+started = "Started"
+trialEnds = "Trial end date"
+trialTitle = "Your trial"
+version = "Version"
+viewInvoice = "View invoice"
+
+[portal.enterprise.setup]
+copied = "Copied"
+copy = "Copy"
+markDone = "Mark “{{step}}” done"
+progress = "{{done}} of {{total}} done"
+subtitle = "Make the most of your trial by trying it the way you'll run it."
+subtitleLive = "The steps to finish before you roll out to everyone."
+title = "Get set up"
+titleLive = "Go-live checklist"
+
+[portal.enterprise.setup.firstDocument]
+body = "Upload a PDF your team works with and try the tools you'd use day to day, such as redact, compress or OCR."
+title = "Run your first document"
+
+[portal.enterprise.setup.getApp]
+body = "Install the desktop app for Windows, Mac or Linux and sign in with the account you just made, or use it straight from your browser."
+title = "Get Stirling"
+
+[portal.enterprise.setup.install]
+body = "Run this on your server. It starts Stirling with your licence applied, and the image includes OCR and office conversion. For larger teams, use Kubernetes."
+title = "Install and start Stirling"
+
+[portal.enterprise.setup.invite]
+body = "Bring in the people who'll use it, so the trial reflects real work."
+title = "Invite your team"
+
+[portal.enterprise.setup.licence]
+body = "Open <code>http://your-server:8080/settings/adminPlan</code>, where your Enterprise licence should show as active. Installed another way? Add the key under <code>premium.key</code> in <code>settings.yml</code> and restart."
+title = "Check your licence is active"
+
+[portal.enterprise.setup.links]
+browser = "Use it in your browser"
+docker = "Docker guide"
+download = "Download the app"
+downloadForTeam = "Get the app for your team"
+downloading = "Downloading..."
+downloadLicence = "Download licence file"
+invite = "Invite teammates"
+kubernetes = "Kubernetes guide"
+licence = "Licence activation"
+ocr = "OCR languages"
+openApp = "Open Stirling"
+samlGuide = "SAML guide"
+ssoGuide = "SSO guide"
+
+[portal.enterprise.setup.offlineInstall]
+body = "Pull the full image on a connected machine, carry it and the licence file across, then load and start it. The full image adds the fonts an offline server can't download."
+title = "Bring Stirling across and start it"
+
+[portal.enterprise.setup.offlineLicence]
+body = "An air-gapped server can't reach our licence service, so it checks this signed file instead. Keep it with the image you carry across."
+title = "Download your offline licence"
+
+[portal.enterprise.setup.people]
+bodyAirgap = "Create accounts at <code>/settings/people</code>, or point Stirling at your internal identity provider so sign-in never leaves your network."
+bodySelfHosted = "Create accounts at <code>/settings/people</code>, or connect your identity provider so your team signs in with their work accounts. They use Stirling in the browser at your server's address, or in the desktop app pointed at it."
+title = "Add your people"
+
+[portal.enterprise.setup.signIn]
+body = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>. You'll be asked to choose a new password straight away."
+bodyAirgap = "Open <code>http://your-server:8080</code> and sign in with <code>admin</code> / <code>stirling</code>, choose a new password, then check <code>/settings/adminPlan</code> shows your licence as active."
+title = "Sign in as the admin"
+
 [portal.errorBoundary]
 description = "Esta vista atopou un erro inesperado. Téntao de novo ou escolle outra sección da barra lateral."
 retry = "Tentar de novo"
@@ -9293,6 +9468,7 @@ title = "Nada que revisar"
 [portal.home.download]
 back = "Atrás"
 body = "Descarga a aplicación de escritorio ou autoaloxa o servidor."
+bodyDesktop = "Download the desktop app, then sign in with your Stirling account."
 done = "Feito"
 guide = "Abrir a guía de {{name}}"
 openInBrowser = "Abrir no navegador"
@@ -10442,7 +10618,6 @@ cloud = "Drive · Box · S3"
 email = "Recepción por correo electrónico"
 
 [portal.procurement]
-subtitle = "Consegue que o teu equipo sexa avaliado, contratado e incorporado. Todos os documentos nun só lugar."
 title = "Adquisicións"
 
 [portal.procurement.agreement]
@@ -10460,7 +10635,6 @@ loadError = "Non se puido cargar o acordo. Téntao de novo."
 loading = "Cargando o acordo..."
 ref = "Ref. {{ref}} · {{version}}"
 requestChanges = "Solicitar cambios"
-scrollHint = "Despraza para revisar"
 signatory = "Nome do asinante"
 signatoryPlaceholder = "Nome completo"
 signatoryTitle = "Cargo do asinante"
@@ -10468,27 +10642,37 @@ signatoryTitlePlaceholder = "p. ex. Asesor xurídico xeral"
 signError = "Non se puido rexistrar a túa sinatura. Téntao de novo."
 
 [portal.procurement.builder]
+addonOneTime = "{{amount}} one-time"
+addonPerYear = "+{{amount}}/yr"
 addons = "Complementos"
 addressLine1 = "Liña de enderezo 1"
 addressLine1Placeholder = "500 Howard St"
 addressLine2 = "Liña de enderezo 2"
 addressLine2Placeholder = "Oficina, andar, edificio"
 back = "Volver"
+belowMinimum = "This quote is below the minimum size for an Enterprise deal."
 businessName = "Nome da empresa"
 businessNamePlaceholder = "A túa empresa"
 city = "Cidade"
 cityPlaceholder = "San Francisco"
 completeRequired = "Completa os campos obrigatorios (marcados con *) cun correo electrónico válido antes de xerar o orzamento."
+conflict = "This deal has changed since you opened it. Close the builder and reload the page to see where it stands."
 contactEmail = "Correo electrónico de contacto"
 contactEmailPlaceholder = "jane@acme.com"
 contactName = "Nome de contacto"
 contactNamePlaceholder = "Jane Doe"
 continue = "Continuar"
 done = "Feito"
+editUsage = "Edit usage"
 eula = "Lin e acepto o EULA de Stirling Enterprise. Rexe o acordo xerado a partir deste orzamento."
 generate = "Xerar o orzamento"
 indemnification = "Protección de PI ampliada"
 indemnificationSub = "Amplía a nosa defensa da PI ás reclamacións de patentes. A indemnización básica por dereitos de autor, marcas e segredos comerciais inclúese de balde."
+minimum = "Enterprise requires a minimum yearly spend of {{min}}."
+minimumBelow = "This quote comes to {{annual}} a year. If you expect to use more, raise your estimated usage; otherwise the Team plan is likely a better fit."
+minimumNear = "Enterprise requires a minimum yearly spend of {{min}}. Raise your estimated usage to reach it, or talk it through with us."
+minimumNearTitle = "You're {{gap}} a year short of Enterprise."
+paperBrand = "Stirling PDF"
 paperEyebrow = "Orzamento Enterprise"
 paperFor = "Preparado para"
 pdfSize = "Tamaño dos PDF"
@@ -10506,9 +10690,13 @@ posture_regulated = "Regulado"
 posture_regulatedSub = "Todas as categorías: Cumprimento normativo, Retención, Inxestión"
 qbr = "Revisións de negocio trimestrais"
 qbrSub = "O teu SE revisa o uso e a folla de ruta cada trimestre"
+raiseUsage = "Raise estimated usage"
 region = "Estado / rexión"
 regionPlaceholder = "California"
-running = "{{annual}} / ano · {{tcv}} en {{years}} anos"
+runningLabel = "Estimated price"
+runningLabelIssued = "Quoted price"
+runningOneYear = "{{annual}} a year"
+runningTotal = "{{tcv}} total over {{years}} years"
 s1Sub = "O teu equipo e os PDF que prevés procesar cada ano."
 s1Title = "Canto vas procesar?"
 s2Sub = "Os prazos máis longos rebaixan a tarifa; o teu nivel de servizo determina a asistencia."
@@ -10547,6 +10735,19 @@ volumePlaceholder = "p. ex. 1.000.000"
 years_one = "{{count}} ano"
 years_other = "{{count}} anos"
 
+[portal.procurement.builder.line]
+deployment = "{{deployment}} deployment"
+indemnification = "IP indemnification"
+multiYear_one = "{{count}}-year commitment"
+multiYear_other = "{{count}}-year commitment"
+qbr = "Quarterly business reviews"
+seats_one = "{{users}} agreed user + SSO / RBAC / audit"
+seats_other = "{{users}} agreed users + SSO / RBAC / audit"
+seatsUnset = "Users + SSO / RBAC / audit"
+support = "Dedicated SE / CSM"
+training = "Onboarding & training"
+usage = "PDF processing — {{volume}} PDFs/yr at {{rate}}/PDF ({{posture}} automation)"
+
 [portal.procurement.documents]
 agreement = "Acordo Enterprise"
 agreementSub = "MSA, formulario de pedido e DPA nunha única sinatura."
@@ -10557,6 +10758,8 @@ invoice = "Factura"
 invoiceSub = "A túa primeira factura da subscrición."
 laterInvoice = "Dispoñible despois de aceptar"
 laterQuote = "Dispoñible cando se emita o teu orzamento"
+laterSigning = "Available once the agreement is signed"
+laterTitle = "Later in your deal"
 quote = "Orzamento"
 quoteSub = "O teu orzamento Enterprise detallado."
 sla = "Anexo de SLA"
@@ -10573,15 +10776,12 @@ title = "Algo saíu mal"
 [portal.procurement.hero]
 barAria = "Etapa {{current}} de {{total}}"
 ctaAgreement = "Revisar e asinar o acordo"
-ctaExploring = "Configura a túa proba"
 ctaQuote = "Revisa o teu orzamento"
 ctaReviewQuote = "Revisar o orzamento"
 ctaTrial = "Crea o teu orzamento"
-documents = "Documentos"
 eyebrow = "Enterprise"
 eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Convidar compañeiros"
-licenseKey = "Clave de licenza"
 liveSub = "A túa organización está aprovisionada e a túa licenza está activa."
 liveTitle = "Xa estás en produción con Stirling Enterprise"
 next = "Seguinte: {{stage}}"
@@ -10630,19 +10830,15 @@ downloadError = "Aínda non se puido xerar o ficheiro de licenza sen conexión; 
 downloadOffline = "Descargar a licenza sen conexión (.lic)"
 hint = "Pega esta clave nunha instancia autoaloxada para activala ou consérvaa para os teus rexistros. Gárdaa nun lugar seguro."
 label = "A túa clave de licenza"
-subtitle = "Activa unha instancia autoaloxada con esta clave ou consérvaa para os teus rexistros."
-title = "A túa clave de licenza"
 trialFileHint = "Este é o teu ficheiro de licenza de proba. Unha vez que o teu acordo estea en vigor, volve e descárgao de novo; ao contrario que a clave de licenza en liña, o ficheiro .lic non se actualiza por si só."
 
 [portal.procurement.link]
 cta = "Vincular a conta"
 description = "As adquisicións funcionan coa túa conta de Stirling vinculada: é como aprovisionamos a proba, calculamos o prezo do teu orzamento e iniciamos a facturación. Vincula unha conta para comezar."
-eyebrow = "Enterprise"
 title = "Vincula a túa conta para comezar"
 
 [portal.procurement.live]
 description = "A túa subscrición está activa e a túa licenza emitida. O teu equipo está aprovisionado e a facturación comezou."
-eyebrow = "En produción"
 title = "Xa estás en produción con Stirling Enterprise"
 
 [portal.procurement.milestone]
@@ -10650,16 +10846,14 @@ downloadError = "Aínda non se puido descargar o PDF do orzamento; téntao de no
 
 [portal.procurement.payment]
 description = "O teu orzamento está aceptado e a túa licenza xa está activa: o teu equipo pode comezar xa. Paga a primeira factura cando esteas listo; podes pagala ou descargala aquí, sen necesidade de correo electrónico."
-downloadAgreement = "Descargar o acordo asinado"
 downloadInvoice = "Descargar a factura"
-eyebrow = "Pagamento"
-title = "Subscrición creada"
 viewInvoice = "Ver e pagar a factura"
 
 [portal.procurement.review]
 acceptCta = "Aceptar o orzamento"
 annual = "Cota anual (ano 1)"
 downloadCta = "Descargar o orzamento"
+oneTime = "one-time"
 poNumber = "Pedido de compra: {{po}}"
 renewal = "Renóvase a {{amount}}/ano despois do prazo (+{{pct}}% IPC)"
 tcv = "Prazo de {{years}} anos, pagado integramente por adiantado: {{tcv}}"
@@ -10705,11 +10899,18 @@ workEmailPlaceholder = "ti@empresa.com"
 [portal.procurement.trial]
 body = "Ampliar engade 7 días e notifícao ao teu enxeñeiro de solucións."
 bodyMaxed = "Usaches todas as túas ampliacións; fala co teu enxeñeiro de solucións se precisas máis tempo."
-cancel = "Cancelar a proba"
 extend = "Ampliar 7 días"
 maxed = "Límite alcanzado"
 subtitle = "A túa proba gratuíta dura ata o {{date}}. Sen tarxeta."
 title = "Proba Enterprise"
+
+[portal.procurement.validation]
+confirm = "Confirm you're authorized to sign for the organization."
+email = "Enter a valid email address."
+eula = "Agree to the EULA to continue."
+required = "This field is required."
+seats = "Enter how many people will trial it."
+volume = "Enter how many PDFs you expect to process a year."
 
 [portal.review]
 subtitle = "Todo o que require a túa atención das execucións das túas políticas e dos editores do teu equipo."
@@ -11811,6 +12012,13 @@ title = "Sanitizar PDF"
 [sanitizePdf]
 tags = "limpar,seguro,seguridade,quitar ameazas"
 
+[saveFile.menu]
+more = "More save options"
+saveCopy = "Save a copy..."
+
+[saveFile.toolbar]
+mixed = "Save all"
+
 [scalePages]
 tags = "redimensionar,axustar,escalar,tamaño de páxina,redimensionar páxina,escalar páxina,cambiar tamaño,axustar tamaño,ampliar,reducir páxina,axustar á páxina,A4,tamaño carta"
 title = "Axustar a escala da páxina"
@@ -11993,6 +12201,13 @@ apiKeys = "Chaves da API"
 apiKeysDescription = "Chaves persoais para chamar á API de Stirling desde scripts e integracións."
 title = "Programador"
 
+[settings.feedback]
+label = "Feedback"
+
+[settings.feedback.send]
+description = "Report a problem or suggest an improvement to the Stirling team."
+label = "Send feedback"
+
 [settings.general]
 autoUnzip = "Descomprimir automaticamente as respostas da API"
 autoUnzipFileLimit = "Límite de ficheiros para descomprimir automaticamente"
@@ -12135,15 +12350,24 @@ title = "Documentos legais"
 backendDescription = "Licenzas das dependencias do backend incluídas neste servidor."
 backendLabel = "Licenzas do backend"
 backendTitle = "Licenzas de terceiros do backend"
+clearSearch = "Clear search"
 empty = "Non se atoparon dependencias."
 frontendDescription = "Licenzas das dependencias do frontend incluídas na compilación da versión."
 frontendLabel = "Licenzas do frontend"
 frontendTitle = "Licenzas de terceiros do frontend"
 license = "Licenza"
+licenseAbout = "About"
+licenseAboutCompound = "About {{short}}"
+licenseAboutTitle = "About {{short}}"
 listDescription = "A lista móstrase directamente na interface a partir do paquete da versión ou do endpoint do backend."
 listTitle = "Dependencias incluídas"
 loadError = "Non se puideron cargar as licenzas de terceiros"
 module = "Módulo"
+noMatch = "No matching dependencies."
+searchPlaceholder = "Search dependencies"
+showingCount = "{{count}} dependencies"
+showingCount_one = "{{count}} dependency"
+showingCount_other = "{{count}} dependencies"
 version = "Versión"
 
 [settings.licensingAnalytics]
@@ -13248,6 +13472,11 @@ pending = "Pendente"
 remove = "Quitar"
 roleColumn = "Rol"
 title = "Membros do equipo"
+
+[teamWelcome]
+invite = "Invite people"
+message = "Invite your team so they can start working with you."
+title = "Your Team plan is active."
 
 [textAlign]
 center = "Centro"
