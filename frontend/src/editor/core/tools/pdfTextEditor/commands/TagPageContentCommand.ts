@@ -8,41 +8,49 @@ import {
   collectContainersByPtr,
   collectMemberPtrs,
 } from "@editor/tools/pdfTextEditor/commands/editTextHelpers";
+import {
+  furnitureKind,
+  type Furniture,
+} from "@editor/tools/pdfTextEditor/model/artifactKind";
 import type { EditorDocument } from "@editor/tools/pdfTextEditor/model/EditorDocument";
 import type { Page } from "@editor/tools/pdfTextEditor/model/Page";
 import type { PageStructure } from "@editor/tools/pdfTextEditor/model/PageStructure";
 import type { StructureType } from "@editor/tools/pdfTextEditor/model/structureTypes";
 import {
   ARTIFACT_TAG,
-  addTagMark,
   highestMcid,
   innermostMcid,
   readTagMarks,
-  removeTagMark,
   type TagMark,
 } from "@editor/tools/pdfTextEditor/pdfium/PdfiumTagMarks";
+import {
+  restoreObject,
+  retagObject,
+  type ObjectRetag,
+} from "@editor/tools/pdfTextEditor/commands/retagObjects";
 
 const FPDF_PAGEOBJ_PATH = 2;
 const FPDF_PAGEOBJ_SHADING = 4;
 const TEXT_TAG: StructureType = "P";
 const IMAGE_TAG: StructureType = "Figure";
 
-/** An object to retag, and the marks it loses: an MCID no element owns. */
-interface Retag {
-  ptr: number;
-  dropped: TagMark[];
-}
-
 type Step =
   | {
       kind: "text";
       runId: string;
       mcid: number;
-      objects: Retag[];
+      objects: ObjectRetag[];
       runMarks: readonly TagMark[];
     }
-  | { kind: "image"; imageId: string; mcid: number; object: Retag }
-  | { kind: "artifact"; object: Retag };
+  | {
+      kind: "furniture";
+      runId: string;
+      tag: TagMark;
+      objects: ObjectRetag[];
+      runMarks: readonly TagMark[];
+    }
+  | { kind: "image"; imageId: string; mcid: number; object: ObjectRetag }
+  | { kind: "artifact"; object: ObjectRetag };
 
 interface Plan {
   steps: Step[];
@@ -52,7 +60,8 @@ interface Plan {
 
 /**
  * Tag the untagged content drawn directly by a page, as a starting point the
- * user then corrects: each text block a P, each image a Figure, every other
+ * user then corrects: each text block a P, or an artifact when `furniture`
+ * names it (by run id) as page furniture, each image a Figure, every other
  * object an artifact, the new elements read in content order. Content already
  * tagged or marked an artifact is left alone. Content marked with an MCID no
  * element owns counts as untagged, losing that mark. Content in a form
@@ -62,11 +71,16 @@ interface Plan {
 export class TagPageContentCommand implements Command {
   readonly type = "tag-page-content";
   readonly pageIndex: number;
+  private readonly furniture: ReadonlyMap<string, Furniture>;
   /** Chosen on first apply, so a redo reuses its MCIDs. */
   private plan: Plan | null = null;
 
-  constructor(opts: { pageIndex: number }) {
+  constructor(opts: {
+    pageIndex: number;
+    furniture?: ReadonlyMap<string, Furniture>;
+  }) {
     this.pageIndex = opts.pageIndex;
+    this.furniture = opts.furniture ?? new Map();
   }
 
   apply(doc: EditorDocument): void {
@@ -82,7 +96,7 @@ export class TagPageContentCommand implements Command {
         ),
       );
     }
-    this.plan ??= planTagging(doc, page, structure);
+    this.plan ??= planTagging(doc, page, structure, this.furniture);
     const done: Step[] = [];
     try {
       for (const step of this.plan.steps) {
@@ -120,7 +134,9 @@ export function hasUntaggedContent(
 ): boolean {
   const structure = doc.structure(pageIndex);
   if (structure.cannotAddElement() !== null) return false;
-  return planTagging(doc, doc.page(pageIndex), structure).steps.length > 0;
+  return (
+    planTagging(doc, doc.page(pageIndex), structure, new Map()).steps.length > 0
+  );
 }
 
 /** The untagged content as steps, and where each new element reads. */
@@ -128,6 +144,7 @@ function planTagging(
   doc: EditorDocument,
   page: Page,
   structure: PageStructure,
+  furniture: ReadonlyMap<string, Furniture>,
 ): Plan {
   const m = doc.module;
   const marks = new Map<number, TagMark[]>();
@@ -166,15 +183,26 @@ function planTagging(
       return dropped ? [{ ptr, dropped }] : [];
     });
     if (objects.length === 0) continue;
+    const at = Math.min(
+      ...objects.map(({ ptr }) => order.get(ptr) ?? Infinity),
+    );
+    const runMarks = run.tagMarks;
+    const kind = furniture.get(run.id);
     located.push({
-      at: Math.min(...objects.map(({ ptr }) => order.get(ptr) ?? Infinity)),
-      step: {
-        kind: "text",
-        runId: run.id,
-        mcid: nextMcid++,
-        objects,
-        runMarks: run.tagMarks,
-      },
+      at,
+      step: kind
+        ? {
+            kind: "furniture",
+            runId: run.id,
+            tag: {
+              name: ARTIFACT_TAG,
+              mcid: null,
+              artifact: furnitureKind(kind),
+            },
+            objects,
+            runMarks,
+          }
+        : { kind: "text", runId: run.id, mcid: nextMcid++, objects, runMarks },
     });
   }
 
@@ -230,7 +258,9 @@ function readingChain(
     if (mcid !== null) tagged.push({ at, mcid });
   }
   for (const { at, step } of located) {
-    if (step.kind !== "artifact") tagged.push({ at, mcid: step.mcid });
+    if (step.kind === "text" || step.kind === "image") {
+      tagged.push({ at, mcid: step.mcid });
+    }
   }
   tagged.sort((a, b) => a.at - b.at);
 
@@ -238,7 +268,7 @@ function readingChain(
   let previous: number | null = null;
   const added = new Set(
     located.flatMap(({ step }) =>
-      step.kind === "artifact" ? [] : [step.mcid],
+      step.kind === "text" || step.kind === "image" ? [step.mcid] : [],
     ),
   );
   for (const { mcid } of tagged) {
@@ -278,21 +308,28 @@ function applyStep(
       const run = page.runs.find((r) => r.id === step.runId);
       if (!run) throw new Error(`no run ${step.runId}`);
       const tag = { name: TEXT_TAG, mcid: step.mcid };
-      for (const object of step.objects) retag(doc, object, tag);
+      for (const object of step.objects) retagObject(doc, object, tag);
       run.tagMarks = [tag];
       structure.addElement(step.mcid, TEXT_TAG, follows.get(step.mcid));
+      return;
+    }
+    case "furniture": {
+      const run = page.runs.find((r) => r.id === step.runId);
+      if (!run) throw new Error(`no run ${step.runId}`);
+      for (const object of step.objects) retagObject(doc, object, step.tag);
+      run.tagMarks = [step.tag];
       return;
     }
     case "image": {
       const image = page.findImage(step.imageId);
       if (!image) throw new Error(`no image ${step.imageId}`);
-      retag(doc, step.object, { name: IMAGE_TAG, mcid: step.mcid });
+      retagObject(doc, step.object, { name: IMAGE_TAG, mcid: step.mcid });
       image.mcid = step.mcid;
       structure.addElement(step.mcid, IMAGE_TAG, follows.get(step.mcid));
       return;
     }
     case "artifact":
-      retag(doc, step.object, { name: ARTIFACT_TAG, mcid: null });
+      retagObject(doc, step.object, { name: ARTIFACT_TAG, mcid: null });
   }
 }
 
@@ -305,38 +342,28 @@ function revertStep(
 ): void {
   switch (step.kind) {
     case "text": {
-      for (const object of step.objects) restore(doc, object, TEXT_TAG);
+      for (const object of step.objects) restoreObject(doc, object, TEXT_TAG);
       const run = page.runs.find((r) => r.id === step.runId);
       if (run) run.tagMarks = step.runMarks;
       structure.removeElement(step.mcid);
       return;
     }
+    case "furniture": {
+      for (const object of step.objects) {
+        restoreObject(doc, object, ARTIFACT_TAG);
+      }
+      const run = page.runs.find((r) => r.id === step.runId);
+      if (run) run.tagMarks = step.runMarks;
+      return;
+    }
     case "image": {
-      restore(doc, step.object, IMAGE_TAG);
+      restoreObject(doc, step.object, IMAGE_TAG);
       const image = page.findImage(step.imageId);
       if (image) image.mcid = innermostMcid(step.object.dropped);
       structure.removeElement(step.mcid);
       return;
     }
     case "artifact":
-      restore(doc, step.object, ARTIFACT_TAG);
-  }
-}
-
-function retag(doc: EditorDocument, object: Retag, tag: TagMark): void {
-  for (const dropped of [...object.dropped].reverse()) {
-    if (!removeTagMark(doc.module, object.ptr, dropped.name)) {
-      throw new Error("PDFium could not remove a tag");
-    }
-  }
-  if (!addTagMark(doc.module, doc.docPtr, object.ptr, tag)) {
-    throw new Error("PDFium could not tag the content");
-  }
-}
-
-function restore(doc: EditorDocument, object: Retag, name: string): void {
-  removeTagMark(doc.module, object.ptr, name);
-  for (const dropped of object.dropped) {
-    addTagMark(doc.module, doc.docPtr, object.ptr, dropped);
+      restoreObject(doc, step.object, ARTIFACT_TAG);
   }
 }
