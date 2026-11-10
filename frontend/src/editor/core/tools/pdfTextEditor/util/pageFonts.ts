@@ -1,5 +1,7 @@
 import type { PageSnapshot } from "@editor/tools/pdfTextEditor/types";
 import { getCachedFontGlyphMap } from "@editor/tools/pdfTextEditor/charcode/CmapResolver";
+import { familyOf } from "@editor/tools/pdfTextEditor/util/fontFamily";
+import { deviceFontCoverage } from "@editor/tools/pdfTextEditor/util/deviceFontEmbed";
 
 // Editability status of a font as the PDF text editor can determine it purely
 // client-side (from PDFium), without the backend JSON font model.
@@ -40,6 +42,10 @@ export function missingAlnumFromCmap(cmap: Map<number, number>): string[] {
   return out;
 }
 
+export function isDeviceFontId(fontId: string): boolean {
+  return fontId.startsWith("device:");
+}
+
 /** Parse the live PDFium font handle out of a `pdf:<ptr>:<family>` fontId. */
 function fontHandleOf(fontId: string): number {
   if (!fontId.startsWith("pdf:")) return 0;
@@ -51,6 +57,12 @@ function fontHandleOf(fontId: string): number {
 function coverageFor(fontId: string, status: FontStatus): GlyphCoverage {
   // Base-14 fonts carry the whole standard set - always full, no cmap needed.
   if (status === "standard") return { known: true, missing: [] };
+  if (isDeviceFontId(fontId)) {
+    const coverage = deviceFontCoverage(familyOf(fontId));
+    return coverage
+      ? { known: true, missing: missingAlnumFromCmap(coverage) }
+      : { known: false, missing: [] };
+  }
   const handle = fontHandleOf(fontId);
   if (!handle) return { known: false, missing: [] };
   const cmap = getCachedFontGlyphMap(handle);
@@ -73,13 +85,6 @@ const STANDARD_14 = [
 // Style suffixes a genuine base-14 family may carry once separators are stripped
 // (e.g. "Helvetica-BoldOblique", "ArialMT", "Times-Roman").
 const BASE14_STYLE_SUFFIX = /^(bold|italic|oblique|regular|roman|mt|ps)+$/;
-
-/** Pull the readable family from a fontId (`pdf:<ptr>:<family>` or `base14:<name>`). */
-function familyOf(fontId: string): string {
-  if (fontId.startsWith("base14:")) return fontId.slice("base14:".length);
-  const parts = fontId.split(":");
-  return parts.length >= 3 ? parts.slice(2).join(":") : fontId;
-}
 
 /** Subset fonts carry a 6-letter "ABCDEF+" tag; strip it for display. */
 function stripSubsetTag(name: string): string {
@@ -130,7 +135,10 @@ export function analyzePageFonts(pages: PageSnapshot[]): PageFont[] {
     for (const run of page.runs) {
       const name = stripSubsetTag(familyOf(run.fontId)) || "Unknown font";
       let status: FontStatus;
-      if (run.fontId.startsWith("base14:") || isStandard14(run.fontId)) {
+      if (
+        run.fontId.startsWith("base14:") ||
+        (!isDeviceFontId(run.fontId) && isStandard14(run.fontId))
+      ) {
         status = "standard";
       } else if (run.fontSubset) {
         status = "subset";
